@@ -15,6 +15,10 @@
   <div><%= f.label :password_confirmation %><br />
   <%= f.password_field :password_confirmation %></div>
 
+  <div><%= f.label :skill_level %><br />
+  <%= f.select(:skill_level, options_for_select(['Beginner', 'Intermediate', 'Advanced'])) %></div>
+
+  <br />
   <div><%= f.submit "Sign up" %></div>
 <% end %>
 
