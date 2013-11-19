@@ -6,6 +6,8 @@ class ProjectsController < ApplicationController
   def index
     @projects = Project.all
 
+    @rec_projects = Project.joins(:user).where("users.skill_level = ? OR users.skill_level = ?", current_user.skill_level, current_user.lower_tier)
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @projects }

@@ -1,27 +1,24 @@
 <h1>Mentor a Project</h1>
+<p>
+  To mentor a project, view the Google Doc corresponding to the project, and <strong>make a comment on the mentee's most recent entry</strong> using the following form:
+</p>
+<ul>
+  <li>Example stuff</li>
+</ul>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>User</th>
-    <th>Url</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#recommended" data-toggle="tab">Recommended</a></li>
+  <li><a href="#all" data-toggle="tab">All</a></li>
+</ul>
 
-<% @projects.each do |project| %>
-  <tr>
-    <td><%= project.title %></td>
-    <td><%= project.user_id %></td>
-    <td><%= project.url %></td>
-    <td><%= link_to 'Show', project %></td>
-    <td><%= link_to 'Edit', edit_project_path(project) %></td>
-    <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+<div class="tab-content">
+  <div class="tab-pane active" id="recommended">
+    <p>Because you are a <strong><%= current_user.skill_level %></strong> user, we recommend you mentor projects by <strong><%= current_user.skill_level %></strong> and <strong><%= current_user.lower_tier %></strong> users.</p>
 
-<br />
+    <%= render "project_list", projects: @rec_projects %>
+  </div>
 
-<%= link_to 'New Project', new_project_path %>
+  <div class="tab-pane" id="all">
+    <%= render "project_list", projects: @projects %>
+  </div>
+</div>

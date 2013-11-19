@@ -4,12 +4,12 @@
   </div>
   <div class="collapse navbar-collapse">
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="#">About</a></li>
-      <li><a href="#">Schedule</a></li>
+      <li><%= link_to "About", about_path %></li>
+      <li><%= link_to "Schedule", schedule_path %></li>
       <li><%= link_to "Post Project", new_project_path %></li>
       <li><%= link_to "Mentor a Project", projects_path %></li>
       <% if user_signed_in? %>
-        <li><%= link_to "Your Projects", "#" %></li>
+        <li><%= link_to "Your Projects", users_manage_path %></li>
         <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
       <% else %>
         <li><%= link_to "Login", new_user_session_path %></li>

@@ -1,0 +1,24 @@
+<h1>Hello, <%= current_user.username %>!</h2>
+<p>
+  You've created <strong><%= pluralize @projects.count, "project" %>.</strong>
+</p>
+
+<table class="table table-striped">
+  <% @projects.each do |project| %>
+    <tr>
+      <td>
+        <strong><%= link_to project.title, project.url %></strong>
+      </td>
+      <td>created on <%= project.created_at.strftime("%m-%d-%Y %I:%M%p") %></td>
+      <td>
+        <%= link_to "View", project.url %>
+      </td>
+      <td>
+        <%= link_to "Update", edit_project_path(project) %>
+      </td>
+      <td>
+        <%= link_to "Delete", project_path(project), :method => :delete, :confirm => "Are you sure you want to delete this project? You cannot undo this." %>
+      </td>
+    </tr>
+  <% end %>
+</table>
