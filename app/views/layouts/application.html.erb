@@ -3,12 +3,20 @@
 <head>
   <title>Atelier</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
   <%= javascript_include_tag "application" %>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
   <%= csrf_meta_tags %>
 </head>
 <body>
+<%= render "nav" %>
 
-<%= yield %>
+<div class="container">
+  <% flash.each do |name, msg| %>
+    <%= content_tag :div, msg, :class => "alert alert-info", :id => "flash_#{name}" if msg.is_a?(String) %>
+  <% end %>  
+  <%= yield %>
+</div>
 
 </body>
 </html>
