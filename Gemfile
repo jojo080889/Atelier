@@ -25,7 +25,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
-
+gem 'google-analytics-rails'
 gem 'devise'
 
 # To use ActiveModel has_secure_password

@@ -67,4 +67,7 @@ Atelier::Application.configure do
   
   # For Devise
   config.action_mailer.default_url_options = { :host => 'atelier-stanford.herokuapp.com' }
+
+  # Google Analytics
+  GA.tracker = "UA-45891308-1"
 end
