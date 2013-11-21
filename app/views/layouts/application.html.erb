@@ -17,6 +17,20 @@
     <%= content_tag :div, msg, :class => "alert alert-info", :id => "flash_#{name}" if msg.is_a?(String) %>
   <% end %>  
   <%= yield %>
+
+  <footer>
+    <hr />
+    <div class="pull-left">
+      <%= fa_icon "bullhorn" %>
+      <a href="mailto:atelier@cs.stanford.edu?subject=Atelier Bug">Found a bug?</a>
+    </div>
+
+    <div class="pull-right">
+      <a href="http://hci.stanford.edu">
+        <%= image_tag "stanford_hci.png" %>
+      </a>
+    </div>
+  </footer>
 </div>
 
 </body>
