@@ -1,5 +1,6 @@
 class Project < ActiveRecord::Base
   belongs_to :user
+  has_many :critiques
   attr_accessible :title, :url, :user_id
   before_validation :smart_add_url_protocol
 
