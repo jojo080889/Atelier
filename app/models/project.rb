@@ -4,6 +4,8 @@ class Project < ActiveRecord::Base
   attr_accessible :title, :url, :user_id
   before_validation :smart_add_url_protocol
 
+  acts_as_votable
+
   protected
 
   def smart_add_url_protocol
