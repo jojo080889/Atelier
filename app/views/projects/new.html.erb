@@ -1,11 +1,23 @@
 <h1>Post a Project</h1>
 
 <p>
-Receive mentoring by creating projects you want help with. This could range from skill-related things like "Learn how to draw cats" to more "meta" projects like "Prepare for a tabling at a conference".
+Receive mentoring by creating projects you want help with. A project should represent a learning goal that you want to achieve. This could range from skill-related things like "Learn how to draw cats" to more "meta" projects like "Prepare for a tabling at a conference".
 </p>
+<% if current_user.skill_level == "Beginner" %>
+<p>
+  Here's some suggested <strong>Beginner</strong> drawing projects:    
+</p>
+<ul>
+  <li>Draw simple objects from life -- some suggestions are mugs, boxes, balls, wrinkled paper bags, soup cans...</li>
+  <li>Draw a self-portrait.</li>
+  <li>Practice shading a simple object (like a ball) under light sources of different strengths/direction.</li>
+</ul>
+<% end %>
+<h3>Instructions</h3>
 <ol>
   <li>Create a new Google Doc using <a href="https://docs.google.com/document/d/1bLkfMrFDs1rYiHiXlRb8VLcalVewtLgWwsWKdk4q180/edit#">this template</a>. <strong>Make sure to <a href="https://support.google.com/drive/answer/2494822?hl=en">share the document</a> to "Anyone with the link".</strong></li>
   <li>Fill out the form below, pasting the URL for the Google Doc you just created.</li>
+  <li>Make a first attempt at your project. If you use a traditional medium, take a photo or scan it. Include your first attempt in your Google Doc along with any other comments or information you'd like to provide to your potential mentors.</li>
 </ol>
 
 <%= render 'form' %>
