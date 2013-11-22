@@ -2,7 +2,6 @@ Atelier::Application.routes.draw do
   resources :projects
 
   devise_for :users
-  get "/users/manage", to: "users#manage"
   resources :users
 
   get "/about", to: "pages#about"
