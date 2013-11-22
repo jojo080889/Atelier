@@ -1,0 +1,58 @@
+<h1><%= @user.username %></h2>
+<p>
+  <strong>Points</strong> 
+  <span class="tooltip-element" data-toggle="tooltip" title="Number of projects rated highly by others">
+    <%= @user.projects_likes.count %> <%= fa_icon "star" %>
+  </span>  
+  | 
+  <span class="tooltip-element" data-toggle="tooltip" title="Number of critiques rated highly by others">
+    <%= @user.critiques_likes.count %> <%= fa_icon "thumbs-up" %>
+  </span>
+</p>
+
+<ul class="nav nav-tabs">
+  <li class="active">
+  <a href="#projects" data-toggle="tab"><%= pluralize @user.projects.count, "Project" %></a>
+  </li>
+  <li>
+  <a href="#critiques" data-toggle="tab"><%= pluralize @user.critiques.count, "Critique" %> Written</a>
+  </li>
+  <li>
+  <a href="#rec_critiques" data-toggle="tab"><%= pluralize @user.critiques_received.count, "Critique" %> Received</a>
+  </li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="projects">
+    <table class="table table-striped">
+      <% @user.projects.each do |project| %>
+        <tr>
+          <td><strong><%= link_to project.title, project.url %></strong></td>
+          <td>created <%= time_ago_in_words project.created_at %> ago</td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+  <div class="tab-pane" id="critiques">
+    <% @user.critiques.each do |crit| %>
+      <table class="table table-striped">
+        <tr>
+          <td>On <%= link_to crit.project.title, crit.project.url %> by <%= link_to crit.project.user.username, crit.project.user %></td>
+          <td><%= link_to "View critique", crit.url %></td>
+          <td>created <%= time_ago_in_words crit.created_at %> ago</td>
+        </tr>
+      </table>
+    <% end %>
+  </div>
+  <div class="tab-pane" id="rec_critiques">
+    <% @user.critiques_received.each do |crit| %>
+      <table class="table table-striped">
+        <tr>
+          <td>From <%= link_to crit.user.username, crit.user %> on <%= link_to crit.project.title, crit.project.url %></td>
+          <td><%= link_to "View critique", crit.url %></td>
+          <td>created <%= time_ago_in_words crit.created_at %> ago</td>
+        </tr>
+      </table>
+    <% end %>
+  </div>
+</div>

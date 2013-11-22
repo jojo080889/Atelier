@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  has_many :projects
+  has_many :critiques
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -22,5 +25,25 @@ class User < ActiveRecord::Base
     else
       "Beginner"
     end
+  end
+
+  def critiques_received
+    Critique.joins(:project).where("projects.user_id = ?", self.id)
+  end
+
+  def projects_likes
+    likes = []
+    self.projects.each do |p|
+      likes = likes + p.likes
+    end
+    likes
+  end
+
+  def critiques_likes
+    likes = []
+    self.critiques.each do |c|
+      likes = likes + c.likes
+    end
+    likes
   end
 end

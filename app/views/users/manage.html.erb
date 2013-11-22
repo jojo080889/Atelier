@@ -9,7 +9,7 @@
       <td>
         <strong><%= link_to project.title, project.url %></strong>
       </td>
-      <td>created on <%= project.created_at.strftime("%m-%d-%Y %I:%M%p") %></td>
+      <td>created <%= time_ago_in_words project.created_at %> ago</td>
       <td>
         <%= link_to "View", project.url %>
       </td>

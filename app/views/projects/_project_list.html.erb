@@ -4,8 +4,8 @@
     <tr>
       <td><strong><%= link_to project.title, project.url %></strong></td>
       <td><%= link_to "View project", project.url %></td>
-      <td>created on <%= project.created_at.strftime("%m-%d-%Y %I:%M%p") %></td>
-      <td>by <%= project.user.username %> <%= skill_level_badge(project.user.skill_level) %></td>
+      <td>created <%= time_ago_in_words project.created_at %> ago</td>
+      <td>by <%= link_to project.user.username, project.user %> <%= skill_level_badge(project.user.skill_level) %></td>
     </tr>
   <% end %>
 </table>

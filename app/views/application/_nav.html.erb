@@ -10,6 +10,7 @@
       <li><%= link_to "Mentor a Project", projects_path %></li>
       <% if user_signed_in? %>
         <li><%= link_to "Your Projects", users_manage_path %></li>
+        <li><%= link_to "Profile", user_path(current_user) %></li>
         <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
       <% else %>
         <li><%= link_to "Login", new_user_session_path %></li>

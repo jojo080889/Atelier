@@ -3,6 +3,7 @@ Atelier::Application.routes.draw do
 
   devise_for :users
   get "/users/manage", to: "users#manage"
+  resources :users
 
   get "/about", to: "pages#about"
   get "/schedule", to: "pages#schedule"

@@ -6,6 +6,10 @@ class Project < ActiveRecord::Base
 
   acts_as_votable
 
+  def created_at_formatted
+    self.created_at.strftime("%m-%d-%Y %I:%M%p")
+  end
+
   protected
 
   def smart_add_url_protocol
