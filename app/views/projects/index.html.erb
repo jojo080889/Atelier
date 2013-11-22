@@ -5,6 +5,7 @@ To mentor a project, view the Google Doc corresponding to the project, and <stro
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#recommended" data-toggle="tab">Recommended</a></li>
+  <li><a href="#mentoring" data-toggle="tab">Projects You're Mentoring</a></li>
   <li><a href="#all" data-toggle="tab">All</a></li>
 </ul>
 
@@ -13,6 +14,10 @@ To mentor a project, view the Google Doc corresponding to the project, and <stro
     <p>Because you are a <strong><%= current_user.skill_level %></strong> user, we recommend you mentor projects by <strong><%= current_user.skill_level %></strong> <% if current_user.skill_level != "Beginner" %>and <strong><%= current_user.lower_tier %></strong><% end %> users.</p>
 
     <%= render "project_list", projects: @rec_projects %>
+  </div>
+
+  <div class="tab-pane" id="mentoring">
+    <%= render "project_list", projects: @mentoring_projects %>
   </div>
 
   <div class="tab-pane" id="all">

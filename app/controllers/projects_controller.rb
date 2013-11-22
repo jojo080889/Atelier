@@ -5,6 +5,8 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     @projects = Project.all
+  
+    @mentoring_projects = Project.joins(:critiques).where("critiques.user_id = ?", current_user)
 
     @rec_projects = Project.joins(:user).where("users.skill_level = ? OR users.skill_level = ?", current_user.skill_level, current_user.lower_tier)
 
