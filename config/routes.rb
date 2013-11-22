@@ -5,7 +5,6 @@ Atelier::Application.routes.draw do
   resources :users
 
   get "/about", to: "pages#about"
-  get "/schedule", to: "pages#schedule"
 
   root :to => "projects#index"
 
