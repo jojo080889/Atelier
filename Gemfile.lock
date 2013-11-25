@@ -31,6 +31,8 @@ GEM
     acts_as_votable (0.8.0)
     arel (3.0.3)
     bcrypt-ruby (3.0.1)
+    bootstrap-sass (3.0.2.1)
+      sass (~> 3.2)
     builder (3.0.4)
     cancan (1.6.10)
     coffee-rails (3.2.2)
@@ -83,6 +85,7 @@ GEM
       activesupport (= 3.2.13)
       bundler (~> 1.0)
       railties (= 3.2.13)
+    rails-bootstrap-markdown (1.0.0)
     rails_12factor (0.0.2)
       rails_serve_static_assets
       rails_stdout_logging
@@ -98,6 +101,7 @@ GEM
     rake (10.1.0)
     rdoc (3.12.2)
       json (~> 1.4)
+    redcarpet (2.3.0)
     sass (3.2.12)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -125,6 +129,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_votable (~> 0.8.0)
+  bootstrap-sass
   cancan
   coffee-rails (~> 3.2.1)
   devise
@@ -135,6 +140,8 @@ DEPENDENCIES
   pg
   postmark
   rails (= 3.2.13)
+  rails-bootstrap-markdown
   rails_12factor
+  redcarpet
   sass-rails (~> 3.2.3)
   uglifier (>= 1.0.3)

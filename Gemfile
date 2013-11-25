@@ -16,6 +16,7 @@ end
 # in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
+  gem 'bootstrap-sass'
   gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
@@ -32,6 +33,8 @@ gem 'acts_as_votable', '~> 0.8.0'
 gem 'mail'
 gem 'postmark'
 gem "cancan"
+gem 'rails-bootstrap-markdown'
+gem 'redcarpet'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

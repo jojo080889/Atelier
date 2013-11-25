@@ -13,7 +13,7 @@
     <% end %>
 
     <div class="field">
-      <%= f.text_area :text, size: "20x6", placeholder: "Write your critique for this project here..." %>
+      <%= f.text_area :text, size: "20x6", placeholder: "Write your critique for this project here...", data: {provide: "markdown"} %>
     </div>
     <div class="actions">
       <%= f.submit "Post" %>

@@ -1,2 +1,3 @@
 $("#critique_<%= @critique.id %>").hide();
 $("#critique_<%= @critique.id %>").after('<%= escape_javascript(render "critiques/form") %>');
+$("#edit_critique_<%= @critique.id %> textarea").markdown();

@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap-markdown
 //= require_tree .
 
 /* Initialize tooltips */

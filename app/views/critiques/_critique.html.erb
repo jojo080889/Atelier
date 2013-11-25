@@ -8,7 +8,7 @@
     </div>
   </div>
   <div class="critique-body">
-    <%= critique.text %>
+    <%= Format.markdown critique.text %>
   </div>
   <div class="critique-actions">
     <% if can? :manage, critique %>
