@@ -45,25 +45,25 @@
     </table>
   </div>
   <div class="tab-pane" id="critiques">
-    <% @user.critiques.each do |crit| %>
-      <table class="table table-striped">
+    <table class="table table-striped">
+      <% @user.critiques.each do |crit| %>
         <tr>
-          <td>On <%= link_to crit.project.title, crit.project.url %> by <%= link_to crit.project.user.username, crit.project.user %></td>
-          <td><%= link_to "View critique", crit.url %></td>
+          <td>On <%= link_to crit.project.title, crit.project %> by <%= link_to crit.project.user.username, crit.project.user %></td>
+          <td><%= link_to "View critique", crit.project %></td>
           <td>created <%= time_ago_in_words crit.created_at %> ago</td>
         </tr>
-      </table>
-    <% end %>
+      <% end %>
+    </table>
   </div>
   <div class="tab-pane" id="rec_critiques">
-    <% @user.critiques_received.each do |crit| %>
-      <table class="table table-striped">
+    <table class="table table-striped">
+      <% @user.critiques_received.each do |crit| %>
         <tr>
-          <td>From <%= link_to crit.user.username, crit.user %> on <%= link_to crit.project.title, crit.project.url %></td>
-          <td><%= link_to "View critique", crit.url %></td>
+          <td>From <%= link_to crit.user.username, crit.user %> on <%= link_to crit.project.title, crit.project %></td>
+          <td><%= link_to "View critique", crit.project %></td>
           <td>created <%= time_ago_in_words crit.created_at %> ago</td>
         </tr>
-      </table>
-    <% end %>
+      <% end %>
+    </table>
   </div>
 </div>

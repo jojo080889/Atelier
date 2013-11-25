@@ -31,6 +31,7 @@ gem 'devise'
 gem 'acts_as_votable', '~> 0.8.0'
 gem 'mail'
 gem 'postmark'
+gem "cancan"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

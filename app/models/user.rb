@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   has_many :projects
   has_many :critiques
 
+  acts_as_voter
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable

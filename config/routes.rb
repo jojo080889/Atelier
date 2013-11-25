@@ -1,6 +1,12 @@
 Atelier::Application.routes.draw do
   resources :projects do
-    resources :critiques
+    resources :critiques do
+      post "/like" => "critiques#like", :as => "like"
+      post "/unlike" => "critiques#unlike", :as => "unlike"
+    end
+
+    post "/like" => "projects#like", :as => "like"
+    post "/unlike" => "projects#unlike", :as => "unlike"
   end
   devise_for :users
   resources :users

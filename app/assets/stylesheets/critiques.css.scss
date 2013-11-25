@@ -3,12 +3,18 @@
   border-radius: 5px;
   margin: 10px 0;
 
-  .critique-header {
-    background: #eee;
+  & > div {
     padding: 5px;
   }
-  
-  .critique-body {
+
+  .critique-header {
+    background: #eee;
+  }
+}
+
+.new_critique, .edit_critique {
+  textarea {
+    width: 100%;
     padding: 5px;
   }
 }
