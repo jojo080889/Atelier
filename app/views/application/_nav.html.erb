@@ -1,3 +1,20 @@
+<div class="metanav">
+  <% if user_signed_in? %>
+    <%= link_to current_user do %> 
+      <%= current_user.username %>
+      <%= current_user.projects_likes.count %>
+      <%= fa_icon "star" %>
+      |
+      <%= current_user.critiques_likes.count %>
+      <%= fa_icon "thumbs-up" %>
+    <% end %>
+    <%= link_to "Logout", destroy_user_session_path, :method => :delete %>
+  <% else %>
+    <%= link_to "Login", new_user_session_path %> 
+    <%= link_to "Register", new_user_registration_path %>
+  <% end %>
+</div>
+  
 <nav class="navbar navbar-default" role="navigation">
   <div class="navbar-header">
     <a class="navbar-brand" href="/">atelier</a>
@@ -7,13 +24,6 @@
       <li><%= link_to "About", about_path %></li>
       <li><%= link_to "Post Project", new_project_path %></li>
       <li><%= link_to "Mentor a Project", projects_path %></li>
-      <% if user_signed_in? %>
-        <li><%= link_to "Profile", user_path(current_user) %></li>
-        <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
-      <% else %>
-        <li><%= link_to "Login", new_user_session_path %></li>
-        <li><%= link_to "Register", new_user_registration_path %></li>
-      <% end %>
     </ul>
   </div>
 </nav>

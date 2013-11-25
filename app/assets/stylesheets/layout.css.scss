@@ -9,6 +9,16 @@
 * html .clearfix { zoom: 1; }
 *:first-child+html .clearfix { zoom: 1; }
 
+.metanav {
+  text-align: right;
+  padding: 5px 15px;
+
+  a {
+    display: block-inline;
+    margin-left: 20px;
+  }
+}
+
 footer {
   line-height: 50px;
   
