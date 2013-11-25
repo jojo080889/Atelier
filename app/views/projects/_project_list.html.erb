@@ -2,8 +2,8 @@
 <table class="table table-striped">
   <% projects.each do |project| %>
     <tr>
-      <td><strong><%= link_to project.title, project.url %></strong></td>
-      <td><%= link_to "View project", project.url %></td>
+      <td><strong><%= link_to project.title, project %></strong></td>
+      <td><%= link_to "View project", project %></td>
       <td>created <%= time_ago_in_words project.created_at %> ago</td>
       <td>by <%= link_to project.user.username, project.user %> <%= skill_level_badge(project.user.skill_level) %></td>
     </tr>

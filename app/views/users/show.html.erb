@@ -27,11 +27,11 @@
     <table class="table table-striped">
       <% @user.projects.each do |project| %>
         <tr>
-          <td><strong><%= link_to project.title, project.url %></strong></td>
+          <td><strong><%= link_to project.title, project %></strong></td>
           <td>created <%= time_ago_in_words project.created_at %> ago</td>
           <% if @user.id == current_user.id %>
           <td>
-            <%= link_to "View", project.url %>
+            <%= link_to "View", project %>
           </td>
           <td>
             <%= link_to "Update", edit_project_path(project) %>
@@ -49,7 +49,7 @@
       <% @user.critiques.each do |crit| %>
         <tr>
           <td>On <%= link_to crit.project.title, crit.project %> by <%= link_to crit.project.user.username, crit.project.user %></td>
-          <td><%= link_to "View critique", crit.project %></td>
+          <td><%= link_to "View critique", project_path(crit.project, anchor: "critique_#{crit.id}") %></td>
           <td>created <%= time_ago_in_words crit.created_at %> ago</td>
         </tr>
       <% end %>
@@ -60,7 +60,7 @@
       <% @user.critiques_received.each do |crit| %>
         <tr>
           <td>From <%= link_to crit.user.username, crit.user %> on <%= link_to crit.project.title, crit.project %></td>
-          <td><%= link_to "View critique", crit.project %></td>
+          <td><%= link_to "View critique", project_path(crit.project, anchor: "critique_#{crit.id}") %></td>
           <td>created <%= time_ago_in_words crit.created_at %> ago</td>
         </tr>
       <% end %>
