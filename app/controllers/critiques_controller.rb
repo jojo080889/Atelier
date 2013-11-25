@@ -9,6 +9,14 @@ class CritiquesController < ApplicationController
     respond_to do |format|
       if @critique.save
         NotificationMailer.critique_received_email(@project).deliver
+
+        # check for likes
+        if (!current_user.voted_up_on?(@project) && params[:like] == "1")
+          @project.liked_by current_user
+        elsif (params[:like] == "0")
+          @project.unliked_by current_user
+        end
+
         format.html { redirect_to project_path(@project), notice: 'Critique was successfully created.' }
       else
         format.html { render action: "new" }

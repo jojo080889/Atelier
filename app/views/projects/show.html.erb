@@ -15,9 +15,6 @@
 
 <div class="project-actions pull-right">
   <%= link_to "View in new window", @project.url, target: "_new", class: "btn btn-default" %> 
-  <% if current_user.can_critique? @project %>
-    <%= project_like_button(@project) %>
-  <% end %>
 </div>
 
 <iframe src="<%= @project.url %>"></iframe>

@@ -23,8 +23,26 @@
 }
 
 .new_critique, .edit_critique {
-  textarea {
-    width: 100%;
-    padding: 5px;
+  .text {
+    margin-bottom: 0;
+
+    textarea {
+      width: 100%;
+      padding: 5px;
+    }
+  }
+
+  .nominate {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 0 0 5px 5px;
+    cursor: pointer;
+
+    &.starred {
+      background: #f0ad4e;
+      border-color: #eea236;
+      font-weight: bold;
+      color: #fff;
+    }
   }
 }

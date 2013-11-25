@@ -12,9 +12,10 @@
       </div>
     <% end %>
 
-    <div class="field">
+    <div class="field text">
       <%= f.text_area :text, size: "20x6", placeholder: "Write your critique for this project here...", data: {provide: "markdown"} %>
     </div>
+    <%= project_like_button(@project, current_user.voted_up_on?(@project)) %>
     <div class="actions">
       <%= f.submit "Post" %>
     </div>
@@ -24,3 +25,13 @@
     You are not yet at a high enough skill level (or too high of a skill level) to critique this project.
   </div>
 <% end %>
+
+<script>
+  $(".edit_critique .nominate, .new_critique .nominate").click(function() {
+    if ($(this).hasClass("starred")) {
+      $(this).replaceWith("<%= escape_javascript(project_like_button(@project, false)) %>");
+    } else {
+      $(this).replaceWith("<%= escape_javascript(project_like_button(@project, true)) %>");
+    }
+  });
+</script>
