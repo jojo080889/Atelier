@@ -4,23 +4,28 @@
       <%= link_to critique.user.username, critique.user %> <%= skill_level_badge(critique.user.skill_level) %>
     </div>
     <div class="pull-right">
-      posted <%= time_ago_in_words critique.created_at %> ago
+      <%= critique_like_link(critique) %>
+      &middot;
+      <span class="critique-likes" id="critique_<%= critique.id %>_likes_count">
+        <%= critique.likes.count %>
+      </span> 
+    <%= fa_icon "thumbs-up" %>
     </div>
   </div>
   <div class="critique-body">
     <%= Format.markdown critique.text %>
   </div>
-  <div class="critique-actions">
-    <% if can? :manage, critique %>
-      <%= link_to "Edit", edit_project_critique_path(critique.project, critique), remote: true %> | 
-      <%= link_to "Delete", project_critique_path(critique.project, critique), confirm: "Are you sure you want to delete your critique? You cannot undo this action.", method: :delete %>
-    <% else %>
-      <%= critique_like_link(critique) %>
-    <% end %>
-    | 
-    <span class="critique-likes" id="critique_<%= critique.id %>_likes_count">
-      <%= critique.likes.count %>
-    </span> 
-    <%= fa_icon "thumbs-up" %>
+  <hr />
+  <div class="critique-actions clearfix">
+    <div class="pull-left">
+      <% if can? :manage, critique %>
+        <%= link_to "Edit", edit_project_critique_path(critique.project, critique), remote: true %>
+        &middot;
+        <%= link_to "Delete", project_critique_path(critique.project, critique), confirm: "Are you sure you want to delete your critique? You cannot undo this action.", method: :delete %>
+      <% end %>
+    </div> 
+    <div class="pull-right">
+      posted <%= time_ago_in_words critique.created_at %> ago
+    </div>
   </div>
 </div>
