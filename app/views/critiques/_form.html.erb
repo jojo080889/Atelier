@@ -1,4 +1,4 @@
-<% if current_user.can_critique @project %>
+<% if current_user.can_critique? @project %>
   <%= form_for [@project, @critique] do |f| %>
     <% if @critique.errors.any? %>
       <div id="error_explanation">

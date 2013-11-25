@@ -1,15 +1,18 @@
 module CritiquesHelper
   
   def critique_like_link(critique)
+    html = ""
     if current_user.voted_up_on? critique
       link_to project_critique_unlike_path(critique.project, critique), class: "unlike-link", method: :post, remote: true do
-        fa_icon "thumbs-up"
-        "Liked"
+        html += fa_icon "thumbs-up"
+        html += " Liked"
+        html.html_safe
       end
     else
       link_to project_critique_like_path(critique.project, critique), class: "like-link", method: :post, remote: true do
-        fa_icon "thumbs-up" 
-        "Like this critique"  
+        html += fa_icon "thumbs-up" 
+        html += " Like this critique"  
+        html.html_safe
       end
     end
   end

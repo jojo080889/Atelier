@@ -88,4 +88,22 @@ class ProjectsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def like
+    @project = Project.find(params[:project_id])
+    @project.liked_by current_user
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def unlike
+    @project = Project.find(params[:project_id])
+    @project.unliked_by current_user
+
+    respond_to do |format|
+      format.js
+    end
+  end
 end

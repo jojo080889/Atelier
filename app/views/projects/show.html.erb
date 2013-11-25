@@ -1,7 +1,15 @@
-<h1><%= @project.title %></h1>
-<p>
-  by <%= link_to @project.user.username, @project.user %> <%= skill_level_badge(@project.user.skill_level) %>
-</p>
+<div class="project-info pull-left">
+  <h1><%= @project.title %></h1>
+  <p>
+    by <%= link_to @project.user.username, @project.user %> <%= skill_level_badge(@project.user.skill_level) %>
+  </p>
+</div>
+
+<div class="project-actions pull-right">
+  <% if current_user.can_critique? @project %>
+    <%= project_like_button(@project) %>
+  <% end %>
+</div>
 
 <iframe src="<%= @project.url %>"></iframe>
 
