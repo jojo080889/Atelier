@@ -8,6 +8,7 @@ class CritiquesController < ApplicationController
 
     respond_to do |format|
       if @critique.save
+        NotificationMailer.critique_received_email(@project).deliver
         format.html { redirect_to project_path(@project), notice: 'Critique was successfully created.' }
       else
         format.html { render action: "new" }
