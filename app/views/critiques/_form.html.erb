@@ -21,6 +21,6 @@
   <% end %>
 <% elsif current_user.id != @project.user.id %>
   <div class="alert alert-info">
-    You are not yet at a high enough skill level to critique this project.
+    You are not yet at a high enough skill level (or too high of a skill level) to critique this project.
   </div>
 <% end %>
