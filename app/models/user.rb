@@ -14,6 +14,10 @@ class User < ActiveRecord::Base
   attr_accessible :username, :skill_level, :email, :password, :password_confirmation, :remember_me
   # attr_accessible :title, :body
   
+  def can_critique(project)
+    self.id != project.user.id && (self.skill_level == project.user.skill_level || self.lower_tier == project.user.skill_level)
+  end
+
   def lower_tier
     case self.skill_level
     when "Beginner"

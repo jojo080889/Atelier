@@ -1,20 +1,12 @@
-<p id="notice"><%= notice %></p>
-
+<h1><%= @project.title %></h1>
 <p>
-  <b>Title:</b>
-  <%= @project.title %>
+  by <%= link_to @project.user.username, @project.user %> <%= skill_level_badge(@project.user.skill_level) %>
 </p>
 
-<p>
-  <b>User:</b>
-  <%= @project.user_id %>
-</p>
+<iframe src="<%= @project.url %>"></iframe>
 
-<p>
-  <b>Url:</b>
-  <%= @project.url %>
-</p>
+<h3><%= pluralize @project.critiques.count, "Critique" %></h3>
 
+<%= render partial: "critiques/critique", collection: @project.critiques %>
 
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
+<%= render "critiques/form" %>

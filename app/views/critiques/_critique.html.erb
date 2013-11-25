@@ -1,0 +1,8 @@
+<div class="critique">
+  <div class="critique-header">
+    <%= link_to critique.user.username, critique.user %> <%= skill_level_badge(critique.user.skill_level) %>
+  </div>
+  <div class="critique-body">
+    <%= critique.text %>
+  </div>
+</div>

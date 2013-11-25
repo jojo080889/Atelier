@@ -1,0 +1,26 @@
+<% if current_user.can_critique @project %>
+  <%= form_for [@project, @critique] do |f| %>
+    <% if @critique.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@critique.errors.count, "error") %> prohibited this critique from being saved:</h2>
+
+        <ul>
+        <% @critique.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.text_area :text, size: "20x6", placeholder: "Write your critique for this project here..." %>
+    </div>
+    <div class="actions">
+      <%= f.submit "Post" %>
+    </div>
+  <% end %>
+<% elsif current_user.id != @project.user.id %>
+  <div class="alert alert-info">
+    You are not yet at a high enough skill level to critique this project.
+  </div>
+<% end %>

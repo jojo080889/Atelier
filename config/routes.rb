@@ -1,6 +1,7 @@
 Atelier::Application.routes.draw do
-  resources :projects
-
+  resources :projects do
+    resources :critiques
+  end
   devise_for :users
   resources :users
 
