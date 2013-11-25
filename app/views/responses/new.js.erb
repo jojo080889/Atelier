@@ -1,0 +1,2 @@
+$("#critique_<%= @critique.id %>_container").append("<%= escape_javascript(render "responses/form") %>");
+$("#critique_<%= @critique.id %>_container .new_response textarea").markdown();

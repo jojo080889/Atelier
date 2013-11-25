@@ -1,0 +1,21 @@
+<div class="response" id="response_<%= response.id %>">
+  <div class="response-header">
+    <%= link_to response.user.username, response.user %> <%= skill_level_badge(response.user.skill_level) %>
+  </div>
+  <div class="response-body">
+    <%= Format.markdown response.text %>
+  </div>
+  <hr />
+  <div class="response-actions clearfix">
+    <div class="pull-left">
+      <% if can? :manage, response %>
+        <%= link_to "Edit", edit_project_critique_response_path(response.critique.project, response.critique, response), remote: true %>
+        &middot;
+        <%= link_to "Delete", project_critique_response_path(response.critique.project, response.critique, response), confirm: "Are you sure you want to delete your reply? You cannot undo this action.", method: :delete %>
+      <% end %>
+    </div>
+    <div class="pull-right">
+      posted <%= time_ago_in_words response.created_at %> ago
+    </div>
+  </div>
+</div>

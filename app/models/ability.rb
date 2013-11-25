@@ -12,6 +12,9 @@ class Ability
 
       # Owners of critiques can...
       can :manage, Critique, :user_id => user.id
+
+      # Owners of responses can...
+      can :manage, Response, :user_id => user.id
     end
   end
 end

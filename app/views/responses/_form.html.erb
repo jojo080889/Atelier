@@ -1,0 +1,24 @@
+<% if current_user.id == @project.user.id || current_user.id == @critique.user.id %>
+  <%= form_for [@project, @critique, @response] do |f| %>
+    <% if @response.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@response.errors.count, "error") %> prohibited this response from being saved:</h2>
+
+        <ul>
+        <% @response.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field text">
+      <%= f.text_area :text, size: "20x3", placeholder: "Write your critique response here...", data: {provide: "markdown"} %>
+    </div>
+    <div class="actions">
+      <%= f.submit "Post" %>
+    </div>
+  <% end %>
+<% end %>
+
+

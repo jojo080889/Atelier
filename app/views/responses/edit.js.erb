@@ -1,0 +1,3 @@
+$("#response_<%= @response.id %>").hide();
+$("#response_<%= @response.id %>").after('<%= escape_javascript(render "responses/form") %>');
+$("#edit_response_<%= @response.id %> textarea").markdown();

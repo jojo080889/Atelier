@@ -3,6 +3,7 @@ Atelier::Application.routes.draw do
     resources :critiques do
       post "/like" => "critiques#like", :as => "like"
       post "/unlike" => "critiques#unlike", :as => "unlike"
+      resources :responses 
     end
 
     post "/like" => "projects#like", :as => "like"
