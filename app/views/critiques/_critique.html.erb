@@ -9,9 +9,14 @@
       <span class="critique-likes" id="critique_<%= critique.id %>_likes_count">
         <%= critique.likes.count %>
       </span> 
-    <%= fa_icon "thumbs-up" %>
+      <%= fa_icon "thumbs-up" %>
     </div>
   </div>
+  <% if critique.user.voted_up_on? critique.project %>
+    <div class="liked-message alert alert-warning">
+      <%= fa_icon "star" %> This mentor thought this project was well-done 
+    </div>
+  <% end %>
   <div class="critique-body">
     <%= Format.markdown critique.text %>
   </div>

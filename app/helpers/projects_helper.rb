@@ -16,17 +16,13 @@ module ProjectsHelper
   def project_like_button(project, is_liked)
     html = ""
     if is_liked
-      html += "<div class='field nominate starred'>"
       html += "<input type='hidden' name='like' class='like' value='1' />"
       html += fa_icon("star")
       html += " <span>I think this project is well-done</span>"
-      html += "</div>"
     else
-      html += "<div class='field nominate'>"
       html += "<input type='hidden' name='like' class='like' value='0' />"
       html += fa_icon("star-o")
       html += " <span>I want to nominate this project as well-done</span>"
-      html += "</div>"
     end
     html.html_safe
   end

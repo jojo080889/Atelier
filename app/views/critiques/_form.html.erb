@@ -15,7 +15,9 @@
     <div class="field text">
       <%= f.text_area :text, size: "20x6", placeholder: "Write your critique for this project here...", data: {provide: "markdown"} %>
     </div>
-    <%= project_like_button(@project, current_user.voted_up_on?(@project)) %>
+    <div class="field nominate <%= "starred" if current_user.voted_up_on?(@project) %>">
+      <%= project_like_button(@project, current_user.voted_up_on?(@project)) %>
+    </div>
     <div class="actions">
       <%= f.submit "Post" %>
     </div>
@@ -29,9 +31,11 @@
 <script>
   $(".edit_critique .nominate, .new_critique .nominate").click(function() {
     if ($(this).hasClass("starred")) {
-      $(this).replaceWith("<%= escape_javascript(project_like_button(@project, false)) %>");
+      $(this).html("<%= escape_javascript(project_like_button(@project, false)) %>");
+      $(this).removeClass("starred");
     } else {
-      $(this).replaceWith("<%= escape_javascript(project_like_button(@project, true)) %>");
+      $(this).html("<%= escape_javascript(project_like_button(@project, true)) %>");
+      $(this).addClass("starred");
     }
   });
 </script>

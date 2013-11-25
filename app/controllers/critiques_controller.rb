@@ -40,6 +40,13 @@ class CritiquesController < ApplicationController
 
     respond_to do |format|
       if @critique.update_attributes(params[:critique])
+        # check for likes
+        if (!current_user.voted_up_on?(@project) && params[:like] == "1")
+          @project.liked_by current_user
+        elsif (params[:like] == "0")
+          @project.unliked_by current_user
+        end
+        
         format.html { redirect_to @project, notice: 'Critique was successfully updated.' }
         format.json { head :no_content }
       else
