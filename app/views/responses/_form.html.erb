@@ -15,10 +15,32 @@
     <div class="field text">
       <%= f.text_area :text, size: "20x3", placeholder: "Write your critique response here...", data: {provide: "markdown"} %>
     </div>
+    <% if current_user.id == @project.user.id %>
+      <div class="response-info">
+          <%= link_to @critique.user.username, @critique.user %> has <%= pluralize(@critique.user.critiques_likes.count, "critique") %> marked as helpful -- needs <%= 10 - @critique.user.critiques_likes.count %> more to become a <%= @critique.user.next_tier %> user
+      </div>
+      <div class="field nominate <%= "btn-warning" if @project.user.voted_up_on?(@critique) %>">
+        <%= fa_icon "star-o" %> 
+        This critique was helpful
+        <input type="hidden" id="response_like" name="response_like" value="<%= @project.user.voted_up_on?(@critique) %>">
+      </div>
+    <% end %>
     <div class="actions">
       <%= f.submit "Post" %>
     </div>
   <% end %>
 <% end %>
 
-
+<script>
+  $(".edit_response .nominate, .new_response .nominate").click(function() {
+    if ($(this).hasClass("btn-warning")) {
+      $(this).removeClass("btn-warning");
+      $(".fa-star", $(this)).removeClass("fa-star").addClass("fa-star-o");
+      $(".nominate #response_like").val("false");
+    } else {
+      $(this).addClass("btn-warning");
+      $(".fa-star-o", $(this)).removeClass("fa-star-o").addClass("fa-star");
+      $(".nominate #response_like").val("true");
+    }
+  });
+</script>

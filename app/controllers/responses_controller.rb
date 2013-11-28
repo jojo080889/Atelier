@@ -17,6 +17,11 @@ class ResponsesController < ApplicationController
 
     respond_to do |format|
       if @response.save
+        if params[:response_like] == "true"
+          @critique.liked_by current_user
+        else
+          @critique.unliked_by current_user
+        end
         format.html { redirect_to project_path(@project), notice: 'Critique response was successfully created.' }
       end
     end

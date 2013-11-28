@@ -5,8 +5,6 @@
         <%= link_to critique.user.username, critique.user %> <%= skill_level_badge(critique.user.skill_level) %>
       </div>
       <div class="pull-right">
-        <%= critique_like_link(critique) %>
-        &middot;
         <span class="critique-likes" id="critique_<%= critique.id %>_likes_count">
           <%= critique.likes.count %>
         </span> 
