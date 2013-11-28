@@ -1,13 +1,5 @@
 <div class="project-info pull-left">
   <h1><%= @project.title %></h1>
-  <% if @project.likes.count != 0 %>
-    <div>
-      <%= @project.likes.count %> 
-      <%= fa_icon "star" %>
-
-      mentors think this project was well-done.
-    </div>
-  <% end %>
   <p>
     by <%= link_to @project.user.username, @project.user %> <%= skill_level_badge(@project.user.skill_level) %>
   </p>

@@ -38,12 +38,34 @@
     }
   }
 
-  .nominate {
+  .rating-info {
+    font-size: smaller;
+    padding: 5px;
+    font-weight: bold;
+    text-align: center;
+    background: #eee;
     border: 1px solid #ccc;
+    border-bottom: none;
+    color: #444;
+    margin-top: 10px;
+    border-radius: 5px 5px 0 0;
+  }
+
+  .nominate {
     padding: 10px;
+    text-align: center;
+    border: 1px solid #ccc;
     border-radius: 0 0 5px 5px;
     cursor: pointer;
 
+    .rating-label {
+      display: inline-block;
+    }
+
+    .rating-container {
+      display: inline-block;
+    }
+    
     &.starred {
       background: #f0ad4e;
       border-color: #eea236;

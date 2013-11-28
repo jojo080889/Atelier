@@ -20,6 +20,17 @@ class User < ActiveRecord::Base
     self.id != project.user.id && (self.skill_level == project.user.skill_level || self.lower_tier == project.user.skill_level)
   end
 
+  def next_tier
+    case self.skill_level
+    when "Beginner"
+      "Intermediate"
+    when "Intermediate"
+      "Advanced"
+    when "Advanced"
+      "Advanced"
+    end
+  end
+
   def lower_tier
     case self.skill_level
     when "Beginner"
@@ -33,16 +44,19 @@ class User < ActiveRecord::Base
     end
   end
 
-  def critiques_received
-    Critique.joins(:project).where("projects.user_id = ?", self.id)
+  def next_tier_ratings
+    case self.skill_level
+    when "Beginner"
+      Critique.joins(:project).where("projects.user_id = ? AND rating = 3", self.id).count
+    when "Intermediate"
+      Critique.joins(:project).where("projects.user_id = ? AND rating = 5", self.id).count
+    else
+      0
+    end
   end
 
-  def projects_likes
-    likes = []
-    self.projects.each do |p|
-      likes = likes + p.likes
-    end
-    likes
+  def critiques_received
+    Critique.joins(:project).where("projects.user_id = ?", self.id)
   end
 
   def critiques_likes

@@ -13,9 +13,9 @@
         <%= fa_icon "thumbs-up" %>
       </div>
     </div>
-    <% if critique.user.voted_up_on? critique.project %>
+    <% if !critique.rating.nil? %>
       <div class="liked-message alert alert-warning">
-        <%= fa_icon "star" %> This mentor thought this project was well-done 
+        <%= fa_icon "star" %> This mentor rated this project at <strong><%= rating_to_skill_level(critique.rating) %></strong> 
       </div>
     <% end %>
     <div class="critique-body">
@@ -25,7 +25,7 @@
     <div class="critique-actions clearfix">
       <div class="pull-left">
         <% if current_user.id == critique.user.id || current_user.id == project.user.id %>
-          <%= link_to "Reply", new_project_critique_response_path(critique.project, critique), remote: true %>
+          <%= link_to "Respond", new_project_critique_response_path(critique.project, critique), remote: true %>
         <% end %>
         <% if can? :manage, critique %>
           &middot;

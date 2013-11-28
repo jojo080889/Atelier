@@ -13,17 +13,25 @@ module ProjectsHelper
     "<span class='label #{badge_type}'>#{skill_level}</span>".html_safe
   end
 
-  def project_like_button(project, is_liked)
-    html = ""
-    if is_liked
-      html += "<input type='hidden' name='like' class='like' value='1' />"
-      html += fa_icon("star")
-      html += " <span>I think this project is well-done</span>"
-    else
-      html += "<input type='hidden' name='like' class='like' value='0' />"
-      html += fa_icon("star-o")
-      html += " <span>I want to nominate this project as well-done</span>"
+  def skill_level_to_rating(skill_level)
+    case skill_level
+    when "Beginner"
+      1
+    when "Intermediate"
+      3
+    when "Advanced"
+      5
     end
-    html.html_safe
+  end
+
+  def rating_to_skill_level(rating)
+    case rating
+    when 1
+      "Beginner"
+    when 3
+      "Intermediate"
+    when 5
+      "Advanced"
+    end
   end
 end

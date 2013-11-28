@@ -15,9 +15,35 @@
     <div class="field text">
       <%= f.text_area :text, size: "20x6", placeholder: "Write your critique for this project here...", data: {provide: "markdown"} %>
     </div>
-    <div class="field nominate <%= "starred" if current_user.voted_up_on?(@project) %>">
-      <%= project_like_button(@project, current_user.voted_up_on?(@project)) %>
-    </div>
+    <% if @project.user.skill_level != "Advanced" %>
+      <div class="rating-info">
+        <%= link_to @project.user.username, @project.user %> has <%= pluralize(@project.user.next_tier_ratings, "project rating") %> of <%= @project.user.next_tier %> -- needs <%= 5 - @project.user.next_tier_ratings %> more to become a <%= @project.user.next_tier %> user
+      </div>
+      <div class="field nominate">
+        <div class="rating-label">
+          Rate the overall quality of the project:
+        </div>
+        <div class="rating-container btn-group">
+          <% if @project.user.skill_level == "Beginner" %>
+            <a class="rating beginner btn btn-default">
+              <%= fa_icon "star-o" %>
+              Beginner
+            </a>
+          <% end %>
+
+          <a class="rating intermediate btn btn-default btn-warning">
+            <%= fa_icon "star" %>
+            Intermediate
+          </a>
+
+          <a class="rating advanced btn btn-default">
+            <%= fa_icon "star-o" %>
+            Advanced
+          </a>
+        </div>
+        <%= f.hidden_field :rating, :value => skill_level_to_rating(@project.user.skill_level) %>
+      </div>
+    <% end %>
     <div class="actions">
       <%= f.submit "Post" %>
     </div>
@@ -29,13 +55,22 @@
 <% end %>
 
 <script>
-  $(".edit_critique .nominate, .new_critique .nominate").click(function() {
-    if ($(this).hasClass("starred")) {
-      $(this).html("<%= escape_javascript(project_like_button(@project, false)) %>");
-      $(this).removeClass("starred");
-    } else {
-      $(this).html("<%= escape_javascript(project_like_button(@project, true)) %>");
-      $(this).addClass("starred");
+  $(".edit_critique .nominate .rating.btn, .new_critique .nominate .rating.btn").click(function() {
+    if (!$(this).hasClass("btn-warning")) {
+      $(this).siblings(".rating").removeClass("btn-warning");
+      $(".fa-star", $(this).siblings(".rating")).removeClass("fa-star").addClass("fa-star-o");
+      $(this).addClass("btn-warning");
+      $(".fa-star-o", $(this)).removeClass("fa-star-o").addClass("fa-star");
+
+      var skill_rating = 0;
+      if ($(this).hasClass("beginner")) {
+        skill_rating = <%= skill_level_to_rating("Beginner") %>
+      } else if ($(this).hasClass("intermediate")) {
+        skill_rating = <%= skill_level_to_rating("Intermediate") %>
+      } else if ($(this).hasClass("advanced")) {
+        skill_rating = <%= skill_level_to_rating("Advanced") %>
+      }
+      $(".nominate #critique_rating").val(skill_rating);
     }
   });
 </script>

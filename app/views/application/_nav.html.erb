@@ -2,9 +2,6 @@
   <% if user_signed_in? %>
     <%= link_to current_user do %> 
       <%= current_user.username %>
-      <%= current_user.projects_likes.count %>
-      <%= fa_icon "star" %>
-      |
       <%= current_user.critiques_likes.count %>
       <%= fa_icon "thumbs-up" %>
     <% end %>
