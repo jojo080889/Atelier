@@ -26,13 +26,21 @@
         <div class="rating-container btn-group">
           <% if @project.user.skill_level == "Beginner" %>
             <a class="rating beginner btn btn-default <%= "btn-warning" if @project.user.skill_level == "Beginner" %>">
-              <%= fa_icon "star-o" %>
+              <% if @project.user.skill_level == "Beginner" %>
+                <%= fa_icon "star" %>
+              <% else %>
+                <%= fa_icon "star-o" %>
+              <% end %>
               Beginner
             </a>
           <% end %>
 
           <a class="rating intermediate btn btn-default <%= "btn-warning" if @project.user.skill_level == "Intermediate" %>">
-            <%= fa_icon "star" %>
+            <% if @project.user.skill_level == "Intermediate" %>
+              <%= fa_icon "star" %>
+            <% else %>
+              <%= fa_icon "star-o" %>
+            <% end %>
             Intermediate
           </a>
 
