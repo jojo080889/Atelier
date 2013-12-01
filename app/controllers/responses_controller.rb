@@ -22,6 +22,7 @@ class ResponsesController < ApplicationController
         else
           @critique.unliked_by current_user
         end
+        NotificationMailer.response_received_email(@critique).deliver
         format.html { redirect_to project_path(@project), notice: 'Critique response was successfully created.' }
       end
     end

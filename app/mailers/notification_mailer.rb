@@ -9,4 +9,14 @@ class NotificationMailer < ActionMailer::Base
       subject: "[Atelier] You've received a critique!" 
     )
   end
+
+  def response_received_email(critique)
+    @user = critique.user
+    @critique = critique
+    @project = critique.project
+    mail(
+      to: @user.email,
+      subject: "[Atelier] You've received a critique response!"
+    )
+  end
 end

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>
+      You have received a critique response on your project!
+    </p>
+    <p>
+      To view it, <%= link_to "go view the project", project_url(@project) %> you wrote your critique for.
+    </p>
+    <%= render :partial => "notification_mailer/footer" %>
+  </body>
+</html>
