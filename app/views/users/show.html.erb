@@ -1,10 +1,6 @@
 <h1><%= @user.username %></h2>
 <p>
   <strong>Points</strong> 
-  <span class="tooltip-element" data-toggle="tooltip" title="Number of projects rated highly by others">
-    <%= @user.projects_likes.count %> <%= fa_icon "star" %>
-  </span>  
-  | 
   <span class="tooltip-element" data-toggle="tooltip" title="Number of critiques rated highly by others">
     <%= @user.critiques_likes.count %> <%= fa_icon "thumbs-up" %>
   </span>
