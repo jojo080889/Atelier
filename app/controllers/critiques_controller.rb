@@ -3,13 +3,14 @@ class CritiquesController < ApplicationController
 
   def create
     @entry = Entry.find(params[:entry_id])
+    @project = @entry.project
     @critique = @entry.critiques.create(params[:critique])
     @critique.user_id = current_user.id
 
     respond_to do |format|
       if @critique.save
         NotificationMailer.critique_received_email(@entry).deliver
-        format.html { redirect_to entry_path(@entry), notice: 'Critique was successfully created.' }
+        format.html { redirect_to project_entry_path(@project, @entry), notice: 'Critique was successfully created.' }
       else
         format.html { render action: "new" }
         format.json { render json: @critique.errors, status: :unprocessable_entity }
@@ -19,6 +20,7 @@ class CritiquesController < ApplicationController
 
   def edit
     @entry = Entry.find(params[:entry_id])
+    @project = Project.find(params[:project_id])
     @critique = Critique.find(params[:id])
 
     respond_to do |format|
@@ -28,11 +30,12 @@ class CritiquesController < ApplicationController
  
   def update
     @entry = Entry.find(params[:entry_id])
+    @project = @entry.project
     @critique = Critique.find(params[:id])
 
     respond_to do |format|
       if @critique.update_attributes(params[:critique])
-        format.html { redirect_to @entry, notice: 'Critique was successfully updated.' }
+        format.html { redirect_to project_entry_path(@project, @entry), notice: 'Critique was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -44,11 +47,12 @@ class CritiquesController < ApplicationController
 
   def destroy
     @entry = Entry.find(params[:entry_id])
+    @project = @entry.project
     @critique = Critique.find(params[:id])
     @critique.destroy
 
     respond_to do |format|
-      format.html { redirect_to entry_path(@entry), notice: "Critique was successfully deleted." }
+      format.html { redirect_to project_entry_path(@project, @entry), notice: "Critique was successfully deleted." }
       format.json { head :no_content }
     end
   end

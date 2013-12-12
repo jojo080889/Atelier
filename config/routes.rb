@@ -18,7 +18,7 @@ Atelier::Application.routes.draw do
 
   get "/about", to: "pages#about"
 
-  root :to => "entries#index"
+  root :to => "projects#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
