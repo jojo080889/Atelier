@@ -12,3 +12,18 @@
     border-color: #ccc;
   }
 }
+
+// Projects Index
+.project {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+
+  .project-link {
+    h3 {
+      margin: 10px 0;
+    }
+  }
+}

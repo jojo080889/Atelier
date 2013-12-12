@@ -13,14 +13,14 @@ To mentor a project, view the page corresponding to the project and <strong>make
   <div class="tab-pane active" id="recommended">
     <p>Because you are a <strong><%= current_user.skill_level %></strong> user, we recommend you mentor projects by <strong><%= current_user.skill_level %></strong> <% if current_user.skill_level != "Beginner" %>and <strong><%= current_user.lower_tier %></strong><% end %> users.</p>
 
-    <%= render "entry_list", entries: @rec_entries %>
+    <%= render "project_list", projects: @rec_projects %>
   </div>
 
   <div class="tab-pane" id="mentoring">
-    <%= render "entry_list", entries: @mentoring_entries %>
+    <%= render "project_list", projects: @mentoring_projects %>
   </div>
 
   <div class="tab-pane" id="all">
-    <%= render "entry_list", entries: @entries %>
+    <%= render "project_list", projects: @projects %>
   </div>
 </div>
