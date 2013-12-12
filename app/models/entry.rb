@@ -3,7 +3,7 @@ require 'format'
 class Entry < ActiveRecord::Base
   belongs_to :user
   belongs_to :project
-  has_many :critiques
+  has_many :critiques, :dependent => :destroy
   attr_accessible :title, :content, :user_id, :project_id
 
   acts_as_votable

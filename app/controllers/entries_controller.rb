@@ -39,7 +39,7 @@ class EntriesController < ApplicationController
 
     respond_to do |format|
       if @entry.save
-        format.html { redirect_to project_entry_path(@entry), notice: 'Project entry was successfully created.' }
+        format.html { redirect_to project_entry_path(@project, @entry), notice: 'Project entry was successfully created.' }
       else
         format.html { render action: "new" }
         format.json { render json: @entry.errors, status: :unprocessable_entity }
