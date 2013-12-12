@@ -15,6 +15,10 @@
 
 <h3><%= pluralize @entry.critiques.count, "Critique" %></h3>
 
-<%= render partial: "critiques/critique", collection: @entry.critiques %>
+<% if @entry.critiques.count <= 0 %>
+  No critiques yet.
+<% else %>
+  <%= render partial: "critiques/critique", collection: @entry.critiques %>
+<% end %>
 
 <%= render "critiques/form" %>

@@ -1,5 +1,10 @@
 <% if can? :manage, @project %>
 <div class="project-actions pull-right">
+  <%= link_to new_project_entry_path(@project), class: "btn btn-primary" do %>
+    <%= fa_icon "plus" %>
+    New Entry
+  <% end %>
+  
   <%= link_to edit_project_path(@project), class: "btn" do %>
     <%= fa_icon "pencil" %>
     Edit
@@ -11,7 +16,7 @@
 </div>
 <% end %>
 
-<div class="page-header project-header">
+<div class="project-header">
   <h1>
     <%= @project.name %>
     <small>
@@ -21,4 +26,10 @@
 </div>
 <p class="lead"><%= @project.description %></p>
 
-<%= render 'entries/entry_list', :entries => @project.entries %>
+<hr />
+
+<% if @project.entries.count <= 0 %>
+  No entries for this project yet.
+<% else %>
+  <%= render 'entries/entry_list', :entries => @project.entries %>
+<% end %>

@@ -7,6 +7,7 @@ class EntriesController < ApplicationController
 
   def show
     @entry = Entry.find(params[:id])
+    @project = @entry.project
     @critique = Critique.new
 
     respond_to do |format|
@@ -17,6 +18,7 @@ class EntriesController < ApplicationController
 
   def new
     @entry = Entry.new
+    @project = Project.find(params[:project_id])
 
     respond_to do |format|
       format.html # new.html.erb
@@ -26,15 +28,18 @@ class EntriesController < ApplicationController
 
   def edit
     @entry = Entry.find(params[:id])
+    @project = @entry.project
   end
 
   def create
     @entry = Entry.new(params[:entry])
+    @project = Project.find(params[:project_id])
     @entry.user_id = current_user.id
+    @entry.project_id = @project.id
 
     respond_to do |format|
       if @entry.save
-        format.html { redirect_to user_path(current_user), notice: 'Project entry was successfully created.' }
+        format.html { redirect_to project_entry_path(@entry), notice: 'Project entry was successfully created.' }
       else
         format.html { render action: "new" }
         format.json { render json: @entry.errors, status: :unprocessable_entity }
