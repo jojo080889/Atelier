@@ -49,10 +49,11 @@ class EntriesController < ApplicationController
 
   def update
     @entry = Entry.find(params[:id])
+    @project = @entry.project
 
     respond_to do |format|
       if @entry.update_attributes(params[:entry])
-        format.html { redirect_to @entry, notice: 'Project entry was successfully updated.' }
+        format.html { redirect_to project_entry_path(@project, @entry), notice: 'Project entry was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -63,10 +64,11 @@ class EntriesController < ApplicationController
 
   def destroy
     @entry = Entry.find(params[:id])
+    @project = @entry.project
     @entry.destroy
 
     respond_to do |format|
-      format.html { redirect_to entries_url }
+      format.html { redirect_to @project, notice: "Project entry was successfully deleted." }
       format.json { head :no_content }
     end
   end
