@@ -1,6 +1,6 @@
 require 'format'
 
-class Project < ActiveRecord::Base
+class Entry < ActiveRecord::Base
   belongs_to :user
   has_many :critiques
   attr_accessible :title, :url, :user_id

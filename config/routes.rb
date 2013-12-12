@@ -1,20 +1,20 @@
 Atelier::Application.routes.draw do
-  resources :projects do
+  resources :entries do
     resources :critiques do
       post "/like" => "critiques#like", :as => "like"
       post "/unlike" => "critiques#unlike", :as => "unlike"
       resources :responses 
     end
 
-    post "/like" => "projects#like", :as => "like"
-    post "/unlike" => "projects#unlike", :as => "unlike"
+    post "/like" => "entries#like", :as => "like"
+    post "/unlike" => "entries#unlike", :as => "unlike"
   end
   devise_for :users
   resources :users
 
   get "/about", to: "pages#about"
 
-  root :to => "projects#index"
+  root :to => "entries#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :projects
+  has_many :entries
   has_many :critiques
 
   acts_as_voter
@@ -16,8 +16,8 @@ class User < ActiveRecord::Base
   attr_accessible :username, :skill_level, :email, :password, :password_confirmation, :remember_me
   # attr_accessible :title, :body
   
-  def can_critique?(project)
-    self.id != project.user.id && (self.skill_level == project.user.skill_level || self.lower_tier == project.user.skill_level)
+  def can_critique?(entry)
+    self.id != entry.user.id && (self.skill_level == entry.user.skill_level || self.lower_tier == entry.user.skill_level)
   end
 
   def next_tier
@@ -47,16 +47,16 @@ class User < ActiveRecord::Base
   def next_tier_ratings
     case self.skill_level
     when "Beginner"
-      Critique.joins(:project).where("projects.user_id = ? AND rating = 3", self.id).count
+      Critique.joins(:entry).where("entries.user_id = ? AND rating = 3", self.id).count
     when "Intermediate"
-      Critique.joins(:project).where("projects.user_id = ? AND rating = 5", self.id).count
+      Critique.joins(:entry).where("entries.user_id = ? AND rating = 5", self.id).count
     else
       0
     end
   end
 
   def critiques_received
-    Critique.joins(:project).where("projects.user_id = ?", self.id)
+    Critique.joins(:entry).where("entries.user_id = ?", self.id)
   end
 
   def critiques_likes

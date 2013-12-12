@@ -2,14 +2,14 @@ class CritiquesController < ApplicationController
   load_and_authorize_resource
 
   def create
-    @project = Project.find(params[:project_id])
-    @critique = @project.critiques.create(params[:critique])
+    @entry = Entry.find(params[:entry_id])
+    @critique = @entry.critiques.create(params[:critique])
     @critique.user_id = current_user.id
 
     respond_to do |format|
       if @critique.save
-        NotificationMailer.critique_received_email(@project).deliver
-        format.html { redirect_to project_path(@project), notice: 'Critique was successfully created.' }
+        NotificationMailer.critique_received_email(@entry).deliver
+        format.html { redirect_to entry_path(@entry), notice: 'Critique was successfully created.' }
       else
         format.html { render action: "new" }
         format.json { render json: @critique.errors, status: :unprocessable_entity }
@@ -18,7 +18,7 @@ class CritiquesController < ApplicationController
   end
 
   def edit
-    @project = Project.find(params[:project_id])
+    @entry = Entry.find(params[:entry_id])
     @critique = Critique.find(params[:id])
 
     respond_to do |format|
@@ -27,28 +27,28 @@ class CritiquesController < ApplicationController
   end
  
   def update
-    @project = Project.find(params[:project_id])
+    @entry = Entry.find(params[:entry_id])
     @critique = Critique.find(params[:id])
 
     respond_to do |format|
       if @critique.update_attributes(params[:critique])
-        format.html { redirect_to @project, notice: 'Critique was successfully updated.' }
+        format.html { redirect_to @entry, notice: 'Critique was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
+        format.json { render json: @entry.errors, status: :unprocessable_entity }
       end
     end
   end
 
 
   def destroy
-    @project = Project.find(params[:project_id])
+    @entry = Entry.find(params[:entry_id])
     @critique = Critique.find(params[:id])
     @critique.destroy
 
     respond_to do |format|
-      format.html { redirect_to project_path(@project), notice: "Critique was successfully deleted." }
+      format.html { redirect_to entry_path(@entry), notice: "Critique was successfully deleted." }
       format.json { head :no_content }
     end
   end

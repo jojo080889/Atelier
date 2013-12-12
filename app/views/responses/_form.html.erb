@@ -1,5 +1,5 @@
-<% if current_user.id == @project.user.id || current_user.id == @critique.user.id %>
-  <%= form_for [@project, @critique, @response] do |f| %>
+<% if current_user.id == @entry.user.id || current_user.id == @critique.user.id %>
+  <%= form_for [@entry, @critique, @response] do |f| %>
     <% if @response.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@response.errors.count, "error") %> prohibited this response from being saved:</h2>
@@ -15,14 +15,14 @@
     <div class="field text">
       <%= f.text_area :text, size: "20x3", placeholder: "Write your critique response here...", data: {provide: "markdown"} %>
     </div>
-    <% if current_user.id == @project.user.id %>
+    <% if current_user.id == @entry.user.id %>
       <div class="response-info">
           <%= link_to @critique.user.username, @critique.user %> has <%= pluralize(@critique.user.critiques_likes.count, "critique") %> marked as helpful -- needs <%= 10 - @critique.user.critiques_likes.count %> more to become a <%= @critique.user.next_tier %> user
       </div>
-      <div class="field nominate <%= "btn-warning" if @project.user.voted_up_on?(@critique) %>">
+      <div class="field nominate <%= "btn-warning" if @entry.user.voted_up_on?(@critique) %>">
         <%= fa_icon "star-o" %> 
         This critique was helpful
-        <input type="hidden" id="response_like" name="response_like" value="<%= @project.user.voted_up_on?(@critique) %>">
+        <input type="hidden" id="response_like" name="response_like" value="<%= @entry.user.voted_up_on?(@critique) %>">
       </div>
     <% end %>
     <div class="actions">

@@ -8,7 +8,7 @@
       You have received a critique response on your project!
     </p>
     <p>
-    To view it, <%= link_to "go view your critique", project_url(@project, anchor: "critique_#{@critique.id}") %>.
+    To view it, <%= link_to "go view your critique", entry_url(@entry, anchor: "critique_#{@critique.id}") %>.
     </p>
     <%= render :partial => "notification_mailer/footer" %>
   </body>
