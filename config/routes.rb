@@ -1,4 +1,6 @@
 Atelier::Application.routes.draw do
+  mount Ckeditor::Engine => '/ckeditor'
+
   resources :entries do
     resources :critiques do
       post "/like" => "critiques#like", :as => "like"

@@ -35,6 +35,8 @@ gem 'postmark'
 gem "cancan"
 gem 'rails-bootstrap-markdown'
 gem 'redcarpet'
+gem 'ckeditor'
+gem 'paperclip'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

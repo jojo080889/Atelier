@@ -1,3 +1,5 @@
+<%= render 'header' %>
+
 <div class="entry-info pull-left">
   <h1><%= @entry.title %></h1>
   <p>
@@ -5,11 +7,11 @@
   </p>
 </div>
 
-<div class="entry-actions pull-right">
-  <%= link_to "View in new window", @entry.url, target: "_new", class: "btn btn-default" %> 
-</div>
+<div style="clear:both"></div>
 
-<iframe src="<%= @entry.url %>"></iframe>
+<div>
+  <%= @entry.content.html_safe %>
+</div>
 
 <h3><%= pluralize @entry.critiques.count, "Critique" %></h3>
 

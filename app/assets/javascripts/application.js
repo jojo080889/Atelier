@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-markdown
+//= require ckeditor/init
 //= require_tree .
 
 /* Initialize tooltips */

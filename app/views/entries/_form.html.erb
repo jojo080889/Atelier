@@ -12,12 +12,10 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :title, "Project Entry Title" %><br />
-    <%= f.text_field :title %>
+    <%= f.text_field :title, placeholder: "Project Entry Title", class: "largely" %>
   </div>
   <div class="field">
-    <%= f.label :url, "Google Doc URL" %><br />
-    <%= f.text_field :url %>
+    <%= f.cktext_area :content, :placeholder => "Write about progress you've made on your project...", :ckeditor => {:height => "400px"} %>
   </div>
   <div class="actions">
     <%= f.submit %>
