@@ -1,9 +1,13 @@
-<div class="project">
-  <div class="project-link">
-    <h3><%= link_to project.name, project %></h3>
-    <p><%= truncate(project.description, length: 100) %></p>
-  </div>
-  <div class="project-info">
-      by <%= link_to project.user.username, project.user %> <%= skill_level_badge(project.user.skill_level) %>
-  </div>
+<div class="project col-md-4">
+  <%= link_to project, class: "thumbnail" do %>
+    <div class="project-link">
+      <h3><%= project.name %></h3>
+      <p><%= truncate(project.description, length: 100) %></p>
+    </div>
+    <div class="project-info">
+      <%= pluralize project.entries.count, "entry" %>
+      <br />
+      by <%= project.user.username %> <%= skill_level_badge(project.user.skill_level) %>
+    </div>
+  <% end %>
 </div>

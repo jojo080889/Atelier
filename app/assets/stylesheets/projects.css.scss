@@ -15,15 +15,28 @@
 
 // Projects Index
 .project {
-  width: 100%;
-  margin: 10px 0;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+
+  .thumbnail {
+    padding: 10px;
+    margin-bottom: 0;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
 
   .project-link {
     h3 {
       margin: 10px 0;
     }
+    
+    p {
+      color: #666;
+    }
+  }
+
+  .project-info {
+    color: #666;
   }
 }
