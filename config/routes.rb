@@ -1,15 +1,17 @@
 Atelier::Application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
 
-  resources :entries do
-    resources :critiques do
-      post "/like" => "critiques#like", :as => "like"
-      post "/unlike" => "critiques#unlike", :as => "unlike"
-      resources :responses 
-    end
+  resources :projects do
+    resources :entries do
+      resources :critiques do
+        post "/like" => "critiques#like", :as => "like"
+        post "/unlike" => "critiques#unlike", :as => "unlike"
+        resources :responses 
+      end
 
-    post "/like" => "entries#like", :as => "like"
-    post "/unlike" => "entries#unlike", :as => "unlike"
+      post "/like" => "entries#like", :as => "like"
+      post "/unlike" => "entries#unlike", :as => "unlike"
+    end
   end
   devise_for :users
   resources :users

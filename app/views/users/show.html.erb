@@ -8,7 +8,7 @@
 
 <ul class="nav nav-tabs">
   <li class="active">
-  <a href="#entries" data-toggle="tab"><%= pluralize @user.entries.count, "Entry" %></a>
+  <a href="#projects" data-toggle="tab"><%= pluralize @user.projects.count, "Project" %></a>
   </li>
   <li>
   <a href="#critiques" data-toggle="tab"><%= pluralize @user.critiques.count, "Critique" %> Written</a>
@@ -19,22 +19,22 @@
 </ul>
 
 <div class="tab-content">
-  <div class="tab-pane active" id="entries">
+  <div class="tab-pane active" id="projects">
     <table class="table table-striped">
-      <% @user.entries.each do |entry| %>
+      <% @user.projects.each do |project| %>
         <tr>
-          <td><strong><%= link_to entry.title, entry %></strong></td>
-          <td>created <%= time_ago_in_words entry.created_at %> ago</td>
-          <td><%= pluralize entry.critiques.count, "critique" %> received</td>
+          <td><strong><%= link_to project.name, project %></strong></td>
+          <td>created <%= time_ago_in_words project.created_at %> ago</td>
+          <td><%= pluralize project.entries.count, "entry" %> written</td>
           <% if @user.id == current_user.id %>
           <td>
-            <%= link_to "View", entry %>
+            <%= link_to "View", project %>
           </td>
           <td>
-            <%= link_to "Update", edit_entry_path(entry) %>
+            <%= link_to "Update", edit_project_path(project) %>
           </td>
           <td>
-            <%= link_to "Delete", entry_path(entry), :method => :delete, :confirm => "Are you sure you want to delete this entry? You cannot undo this." %>
+            <%= link_to "Delete", project_path(project), :method => :delete, :confirm => "Are you sure you want to delete this project? You cannot undo this." %>
           </td>
           <% end %>
         </tr>
@@ -46,7 +46,7 @@
       <% @user.critiques.each do |crit| %>
         <tr>
           <td>On <%= link_to crit.entry.title, crit.entry %> by <%= link_to crit.entry.user.username, crit.entry.user %></td>
-          <td><%= link_to "View critique", entry_path(crit.entry, anchor: "critique_#{crit.id}") %></td>
+          <td><%= link_to "View critique", project_entry_path(crit.entry.project, crit.entry, anchor: "critique_#{crit.id}") %></td>
           <td>created <%= time_ago_in_words crit.created_at %> ago</td>
         </tr>
       <% end %>
@@ -56,8 +56,8 @@
     <table class="table table-striped">
       <% @user.critiques_received.each do |crit| %>
         <tr>
-          <td>From <%= link_to crit.user.username, crit.user %> on <%= link_to crit.entry.title, crit.entry %></td>
-          <td><%= link_to "View critique", entry_path(crit.entry, anchor: "critique_#{crit.id}") %></td>
+          <td>From <%= link_to crit.user.username, crit.user %> on <%= link_to crit.entry.title, project_entry_path(crit.entry.project, crit.entry) %></td>
+          <td><%= link_to "View critique", project_entry_path(crit.entry.project, crit.entry, anchor: "critique_#{crit.id}") %></td>
           <td>created <%= time_ago_in_words crit.created_at %> ago</td>
         </tr>
       <% end %>

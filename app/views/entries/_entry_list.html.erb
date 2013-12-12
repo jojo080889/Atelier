@@ -1,12 +1,10 @@
-<h2><%= pluralize(entries.count, "Project Entry") %></h2>
 <table class="table table-striped">
   <% entries.each do |entry| %>
     <tr>
-      <td><strong><%= link_to entry.title, entry %></strong></td>
-      <td><%= link_to "View entry", entry %></td>
+      <td><strong><%= link_to entry.title, project_entry_path(entry.project, entry) %></strong></td>
+      <td><%= link_to "View entry", project_entry_path(entry.project, entry) %></td>
       <td>created <%= time_ago_in_words entry.created_at %> ago</td>
       <td><%= pluralize entry.critiques.count, "critique" %> received</td>
-      <td>by <%= link_to entry.user.username, entry.user %> <%= skill_level_badge(entry.user.skill_level) %></td>
     </tr>
   <% end %>
 </table>

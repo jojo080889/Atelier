@@ -1,0 +1,22 @@
+<div class="project-actions pull-right">
+  <%= link_to edit_project_path(@project), class: "btn" do %>
+    <%= fa_icon "pencil" %>
+    Edit
+  <% end %>
+  <%= link_to project_path(@project), method: :delete, class: "btn" do %>
+    <%= fa_icon "times" %>
+    Delete
+  <% end %>
+</div>
+
+<div class="page-header project-header">
+  <h1>
+    <%= @project.name %>
+    <small>
+      by <%= link_to @project.user.username, @project.user %> <%= skill_level_badge(@project.user.skill_level) %>
+    </small>
+  </h1>
+</div>
+<p class="lead"><%= @project.description %></p>
+
+<%= render 'entries/entry_list', :entries => @project.entries %>

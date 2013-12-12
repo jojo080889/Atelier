@@ -7,6 +7,9 @@ class Ability
     can :read, :all
 
     unless user.id.blank?
+      # Owners of projects can...
+      can :manage, Project, :user_id => user.id
+
       # Owners of entries can...
       can :manage, Entry, :user_id => user.id
 

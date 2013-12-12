@@ -23,13 +23,13 @@
     <div class="critique-actions clearfix">
       <div class="pull-left">
         <% if current_user.id == critique.user.id || current_user.id == critique.entry.user.id %>
-          <%= link_to "Respond", new_entry_critique_response_path(critique.entry, critique), remote: true %>
+          <%= link_to "Respond", new_project_entry_critique_response_path(critique.entry.project, critique.entry, critique), remote: true %>
         <% end %>
         <% if can? :manage, critique %>
           &middot;
-          <%= link_to "Edit", edit_entry_critique_path(critique.entry, critique), remote: true %>
+          <%= link_to "Edit", edit_project_entry_critique_path(critique.entry.project, critique.entry, critique), remote: true %>
           &middot;
-          <%= link_to "Delete", entry_critique_path(critique.entry, critique), confirm: "Are you sure you want to delete your critique? You cannot undo this action.", method: :delete %>
+          <%= link_to "Delete", project_entry_critique_path(critique.entry.project, critique.entry, critique), confirm: "Are you sure you want to delete your critique? You cannot undo this action.", method: :delete %>
         <% end %>
       </div> 
       <div class="pull-right">

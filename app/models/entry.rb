@@ -2,8 +2,9 @@ require 'format'
 
 class Entry < ActiveRecord::Base
   belongs_to :user
+  belongs_to :project
   has_many :critiques
-  attr_accessible :title, :content, :user_id
+  attr_accessible :title, :content, :user_id, :project_id
 
   acts_as_votable
 
