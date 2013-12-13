@@ -42,11 +42,14 @@ class EntriesController < ApplicationController
 
     respond_to do |format|
       if @entry.save
+        
         # Like the critiques that were picked
         @picked_crits = params[:critique]
-        @picked_crits.each_key do |key|
-          crit = Critique.find(key)
-          crit.liked_by @entry
+        if !@picked_crits.nil?
+          @picked_crits.each_key do |key|
+            crit = Critique.find(key)
+            crit.liked_by @entry
+          end
         end
 
         format.html { redirect_to project_entry_path(@project, @entry), notice: 'Project entry was successfully created.' }
@@ -69,9 +72,11 @@ class EntriesController < ApplicationController
 
         # Like the critiques that were picked
         @picked_crits = params[:critique]
-        @picked_crits.each_key do |key|
-          crit = Critique.find(key)
-          crit.liked_by @entry
+        if !@picked_crits.nil? 
+          @picked_crits.each_key do |key|
+            crit = Critique.find(key)
+            crit.liked_by @entry
+          end
         end
 
         format.html { redirect_to project_entry_path(@project, @entry), notice: 'Project entry was successfully updated.' }
