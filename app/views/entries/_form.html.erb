@@ -17,35 +17,39 @@
   <div class="field">
     <%= f.cktext_area :content, :placeholder => "Write about progress you've made on your project...", :ckeditor => {:height => "400px"} %>
   </div>
-  <div class="field helpful-critiques">
-    <div class="critiques-info">
-      Pick recent critiques you found particularly helpful for this entry:
+  <% if !(@critique_options.nil? || @critique_options.count <= 0) %>
+    <div class="field helpful-critiques">
+      <div class="critiques-info">
+        Pick recent critiques you found particularly helpful for this entry:
+      </div>
+      <div class="critiques-select">
+        <table>
+          <% @critique_options.each do |crit| %>
+            <% if (crit.likes.size >= 1 && @entry.voted_for?(crit)) || crit.likes.size <= 0 %>
+            <tr>
+              <td class="critique-select">
+                <label>
+                  <input type="checkbox" name="critique[<%= crit.id %>]" value="<%= crit.id %>" <%= @entry.voted_for?(crit) ? "checked" : "" %> />
+                  <%= truncate(crit.text, length: 50) %>
+                </label>
+              </td>
+              <td class="critique-link">
+                <%= link_to "See full critique", project_entry_path(crit.entry.project, crit.entry, anchor: "critique_#{crit.id}"), target: "_new" %>
+              </td>
+              <td class="critiquer">
+                by <%= link_to crit.user.username, crit.user, target: "_new" %>
+                <%= skill_level_badge(crit.user.skill_level) %><br />
+                <small>
+                  needs <%= pluralize(crit.user.num_helpful_critiques_needed, "more vote") %> to become a <%= crit.user.next_tier %> user
+                </small>
+              </td>
+            </tr>
+            <% end %>
+          <% end %>
+        </table>
+      </div>
     </div>
-    <div class="critiques-select">
-      <table>
-        <% @current_user.recent_critiques_received.each do |crit| %>
-          <tr>
-            <td class="critique-select">
-              <label>
-                <input type="checkbox" />
-                <%= truncate(crit.text, length: 50) %>
-              </label>
-            </td>
-            <td class="critique-link">
-              <%= link_to "See full critique", project_entry_path(crit.entry.project, crit.entry, anchor: "critique_#{crit.id}"), target: "_new" %>
-            </td>
-            <td class="critiquer">
-              by <%= link_to crit.user.username, crit.user, target: "_new" %>
-              <%= skill_level_badge(crit.user.skill_level) %><br />
-              <small>
-                needs <%= pluralize(crit.user.num_helpful_critiques_needed, "more vote") %> to become a <%= crit.user.next_tier %> user
-              </small>
-            </td>
-          </tr>
-        <% end %>
-      </table>
-    </div>
-  </div>
+  <% end %>
   <div class="actions">
     <%= f.submit %>
   </div>

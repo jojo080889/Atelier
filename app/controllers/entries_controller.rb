@@ -19,6 +19,7 @@ class EntriesController < ApplicationController
   def new
     @entry = Entry.new
     @project = Project.find(params[:project_id])
+    @critique_options = current_user.recent_critiques_received
 
     respond_to do |format|
       format.html # new.html.erb
@@ -29,6 +30,7 @@ class EntriesController < ApplicationController
   def edit
     @entry = Entry.find(params[:id])
     @project = @entry.project
+    @critique_options = @entry.critique_options
   end
 
   def create
@@ -39,6 +41,13 @@ class EntriesController < ApplicationController
 
     respond_to do |format|
       if @entry.save
+        # Like the critiques that were picked
+        @picked_crits = params[:critique]
+        @picked_crits.each_key do |key|
+          crit = Critique.find(key)
+          crit.liked_by @entry
+        end
+
         format.html { redirect_to project_entry_path(@project, @entry), notice: 'Project entry was successfully created.' }
       else
         format.html { render action: "new" }
@@ -53,6 +62,17 @@ class EntriesController < ApplicationController
 
     respond_to do |format|
       if @entry.update_attributes(params[:entry])
+        # Reset the critiques liked by this entry
+        @crits = @entry.get_voted Critique
+        @crits.each {|c| c.unliked_by @entry}
+
+        # Like the critiques that were picked
+        @picked_crits = params[:critique]
+        @picked_crits.each_key do |key|
+          crit = Critique.find(key)
+          crit.liked_by @entry
+        end
+
         format.html { redirect_to project_entry_path(@project, @entry), notice: 'Project entry was successfully updated.' }
         format.json { head :no_content }
       else

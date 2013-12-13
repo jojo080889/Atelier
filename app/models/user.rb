@@ -69,7 +69,7 @@ class User < ActiveRecord::Base
   end
 
   def recent_critiques_received(limit = 5)
-    Critique.where(:user_id => self.id).order(:created_at).limit(limit)
+    Critique.joins(:entry).where(["entries.user_id = ?", self.id]).order(:created_at).limit(limit)
   end
 
   def num_helpful_critiques_needed

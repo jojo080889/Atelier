@@ -7,8 +7,13 @@ class Entry < ActiveRecord::Base
   attr_accessible :title, :content, :user_id, :project_id
 
   acts_as_votable
+  acts_as_voter
 
   def created_at_formatted
     self.created_at.strftime("%m-%d-%Y %I:%M%p")
+  end
+
+  def critique_options(limit = 5)
+    Critique.joins(:entry).where(["entries.user_id = ? AND critiques.created_at < ?", self.user.id, self.created_at]).order("critiques.created_at").limit(limit)
   end
 end
