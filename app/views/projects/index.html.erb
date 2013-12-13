@@ -13,14 +13,32 @@ To mentor a project, view the page corresponding to the project and <strong>make
   <div class="tab-pane active" id="recommended">
     <p>Because you are a <strong><%= current_user.skill_level %></strong> user, we recommend you mentor projects by <strong><%= current_user.skill_level %></strong> <% if current_user.skill_level != "Beginner" %>and <strong><%= current_user.lower_tier %></strong><% end %> users.</p>
 
-    <%= render "project_list", projects: @rec_projects %>
+    <% if @rec_projects.nil? || @rec_projects.count <= 0 %>
+      <p>
+      You have no recommended projects yet. Check back as people post!
+      </p>
+    <% else %>
+      <%= render "project_list", projects: @rec_projects %>
+    <% end %>
   </div>
 
   <div class="tab-pane" id="mentoring">
-    <%= render "project_list", projects: @mentoring_projects %>
+    <% if @mentoring_projects.nil? || @mentoring_projects.count <= 0 %>
+      <p>
+      You are not mentoring any projects.
+      </p>
+    <% else %>
+      <%= render "project_list", projects: @mentoring_projects %>
+    <% end %>
   </div>
 
   <div class="tab-pane" id="all">
-    <%= render "project_list", projects: @projects %>
+    <% if @projects.nil? || @projects.count <= 0 %>
+      <p>
+      There aren't any projects yet.
+      </p>
+    <% else %>
+      <%= render "project_list", projects: @projects %>
+    <% end %>
   </div>
 </div>
