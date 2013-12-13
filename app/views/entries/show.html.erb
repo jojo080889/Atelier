@@ -24,6 +24,30 @@
   <%= @entry.content.html_safe %>
 </div>
 
+<div class="helpful-critiques panel panel-info">
+  <div class="panel-heading">
+    The user thought the following critiques were helpful for this entry:
+  </div>
+  <div class="panel-body critiques-select">
+    <table>
+      <% @helpful_crits.each do |crit| %>
+        <tr>
+          <td class="critique-select">
+            <%= truncate(crit.text, length: 50) %>
+          </td>
+          <td class="critique-link">
+            <%= link_to "See full critique", project_entry_path(crit.entry.project, crit.entry, anchor: "critique_#{crit.id}") %>
+          </td>
+          <td class="critiquer">
+            by <%= link_to crit.user.username, crit.user  %>
+            <%= skill_level_badge(crit.user.skill_level) %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
 <h3><%= pluralize @entry.critiques.count, "Critique" %></h3>
 
 <% if @entry.critiques.count <= 0 %>

@@ -9,6 +9,7 @@ class EntriesController < ApplicationController
     @entry = Entry.find(params[:id])
     @project = @entry.project
     @critique = Critique.new
+    @helpful_crits = @entry.get_voted Critique
 
     respond_to do |format|
       format.html # show.html.erb

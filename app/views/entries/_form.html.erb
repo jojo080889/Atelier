@@ -18,11 +18,11 @@
     <%= f.cktext_area :content, :placeholder => "Write about progress you've made on your project...", :ckeditor => {:height => "400px"} %>
   </div>
   <% if !(@critique_options.nil? || @critique_options.count <= 0) %>
-    <div class="field helpful-critiques">
-      <div class="critiques-info">
+    <div class="field helpful-critiques panel panel-default">
+      <div class="critiques-info panel-heading">
         Pick recent critiques you found particularly helpful for this entry:
       </div>
-      <div class="critiques-select">
+      <div class="critiques-select panel-body">
         <table>
           <% @critique_options.each do |crit| %>
             <% if (crit.likes.size >= 1 && @entry.voted_for?(crit)) || crit.likes.size <= 0 %>
