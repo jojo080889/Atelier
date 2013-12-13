@@ -67,4 +67,12 @@ class User < ActiveRecord::Base
     end
     likes
   end
+
+  def recent_critiques_received(limit = 5)
+    Critique.where(:user_id => self.id).order(:created_at).limit(limit)
+  end
+
+  def num_helpful_critiques_needed
+    10 - self.critiques_likes.count
+  end
 end

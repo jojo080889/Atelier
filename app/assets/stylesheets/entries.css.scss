@@ -29,6 +29,66 @@
     line-height: 45px;
     font-family: 'Merriweather', Georgia;
   }
+
+  .helpful-critiques {
+    .critiques-info {
+      padding: 5px;
+      font-weight: bold;
+      text-align: center;
+      background: #eee;
+      border: 1px solid #ccc;
+      border-bottom: none;
+      color: #444;
+      border-radius: 5px 5px 0 0;
+    }
+
+    .critiques-select {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 0 0 5px 5px;
+  
+      label {
+          display: block;
+          padding-left: 15px;
+          text-indent: -15px;
+      }
+
+      input {
+          width: 13px;
+          height: 13px;
+          padding: 0;
+          margin:0;
+          vertical-align: bottom;
+          position: relative;
+          top: -1px;
+          *overflow: hidden;
+      }
+
+      table {
+        width: 100%;
+
+        td {
+          padding: 5px 0;
+        }
+ 
+        td.critique-select {
+          label {
+            font-size: 15px;
+            font-weight: 300;
+            font-style: italic;
+          }
+        }
+  
+        td.critique-link {
+          width: 20%;
+        }
+
+        td.critiquer {
+          width: 30%;
+        }
+      }
+    }
+  }
 }
 
 // Entry Show
