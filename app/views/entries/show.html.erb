@@ -24,6 +24,7 @@
   <%= @entry.content.html_safe %>
 </div>
 
+<% if !(@helpful_crits.nil? || @helpful_crits.count <= 0) %>
 <div class="helpful-critiques panel panel-info">
   <div class="panel-heading">
     The user thought the following critiques were helpful for this entry:
@@ -47,6 +48,7 @@
     </table>
   </div>
 </div>
+<% end %>
 
 <h3><%= pluralize @entry.critiques.count, "Critique" %></h3>
 

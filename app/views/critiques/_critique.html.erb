@@ -23,7 +23,7 @@
     <div class="critique-actions clearfix">
       <div class="pull-left">
         <% if current_user.id == critique.user.id || current_user.id == critique.entry.user.id %>
-          <%= link_to "Respond", new_project_entry_critique_response_path(critique.entry.project, critique.entry, critique), remote: true %>
+          <%= link_to "Reply", new_project_entry_critique_response_path(critique.entry.project, critique.entry, critique), remote: true %>
         <% end %>
         <% if can? :manage, critique %>
           &middot;
