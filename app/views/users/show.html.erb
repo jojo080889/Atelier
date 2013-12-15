@@ -1,6 +1,6 @@
-<h1><%= @user.username %></h2>
+<h1><%= @user.username %> <small><%= skill_level_badge @user.skill_level %></small></h1>
 <p>
-  <strong>Points</strong> 
+  <strong>Number of critiques rated highly by others: </strong> 
   <span class="tooltip-element" data-toggle="tooltip" title="Number of critiques rated highly by others">
     <%= @user.critiques_likes.count %> <%= fa_icon "thumbs-up" %>
   </span>
