@@ -21,14 +21,20 @@
 <div class="tab-content">
   <div class="tab-pane active" id="projects">
     <% if @user.projects.count <= 0 %>
-      This user has no projects.
+      <p class="text-muted">
+      <em>This user has no projects.</em>
+      </p>
     <% else %>
-      <%= render "projects/project_list", projects: @user.projects %>
+      <div class="row">
+        <%= render partial: "projects/project", collection: @user.projects, locals: { :show_name => false } %>
+      </div>
     <% end %>
   </div>
   <div class="tab-pane" id="critiques">
     <% if @user.critiques.count <= 0 %>
-      This user has not written any critiques.
+      <p class="text-muted">
+      <em>This user has not written any critiques.</em>
+      </p>
     <% else %>
       <table class="table table-striped">
         <% @user.critiques.each do |crit| %>
@@ -43,7 +49,9 @@
   </div>
   <div class="tab-pane" id="rec_critiques">
     <% if @user.critiques_received.count <= 0 %>
-      This user has not received any critiques.
+      <p class="text-muted">
+      <em>This user has not received any critiques.</em>
+      </p>
     <% else %>
       <table class="table table-striped">
         <% @user.critiques_received.each do |crit| %>

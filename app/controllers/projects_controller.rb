@@ -4,7 +4,7 @@ class ProjectsController < ApplicationController
 
   def index
     @projects = Project.all
-    @mentoring_projects = Project.joins(:entries => :critiques).where("critiques.user_id = ?", 1).uniq
+    @mentoring_projects = Project.joins(:entries => :critiques).where("critiques.user_id = ?", current_user.id).uniq
     @rec_entries = Project.joins(:user).where("users.id <> ? AND (users.skill_level = ? OR users.skill_level = ?)", current_user.id, current_user.skill_level, current_user.lower_tier)
 
     respond_to do |format|

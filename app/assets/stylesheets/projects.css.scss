@@ -23,6 +23,11 @@
 
     &:hover {
       text-decoration: none;
+      border-color: #428bca;
+    }
+
+    .pull-left {
+      max-width: 70%;
     }
   }
 

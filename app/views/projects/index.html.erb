@@ -14,31 +14,37 @@ To mentor a project, view the page corresponding to the project and <strong>make
     <p>Because you are a <strong><%= current_user.skill_level %></strong> user, we recommend you mentor projects by <strong><%= current_user.skill_level %></strong> <% if current_user.skill_level != "Beginner" %>and <strong><%= current_user.lower_tier %></strong><% end %> users.</p>
 
     <% if @rec_projects.nil? || @rec_projects.count <= 0 %>
-      <p>
-      You have no recommended projects yet. Check back as people post!
+      <p class="text-muted">
+      <em>You have no recommended projects yet. Check back as people post!</em>
       </p>
     <% else %>
-      <%= render "project_list", projects: @rec_projects %>
+      <div class="row">
+        <%= render partial: "projects/project", collection: @rec_projects %>
+      </div>
     <% end %>
   </div>
 
   <div class="tab-pane" id="mentoring">
     <% if @mentoring_projects.nil? || @mentoring_projects.count <= 0 %>
-      <p>
-      You are not mentoring any projects.
+      <p class="text-muted">
+      <em>You are not mentoring any projects.</em>
       </p>
     <% else %>
-      <%= render "project_list", projects: @mentoring_projects %>
+      <div class="row">
+        <%= render partial: "projects/project", collection: @mentoring_projects %>
+      </div>
     <% end %>
   </div>
 
   <div class="tab-pane" id="all">
     <% if @projects.nil? || @projects.count <= 0 %>
-      <p>
-      There aren't any projects yet.
+      <p class="text-muted">
+      <em>There aren't any projects yet.</em>
       </p>
     <% else %>
-      <%= render "project_list", projects: @projects %>
+      <div class="row">
+        <%= render partial: "projects/project", collection: @projects  %>
+      </div>
     <% end %>
   </div>
 </div>
