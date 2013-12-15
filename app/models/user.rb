@@ -17,6 +17,10 @@ class User < ActiveRecord::Base
   attr_accessible :username, :skill_level, :email, :password, :password_confirmation, :remember_me
   # attr_accessible :title, :body
   
+  def to_param
+    username
+  end
+
   def can_critique?(entry)
     self.id != entry.user.id && (self.skill_level == entry.user.skill_level || self.lower_tier == entry.user.skill_level)
   end
