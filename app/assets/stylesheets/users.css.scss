@@ -1,0 +1,50 @@
+.new_user {
+  width: 500px;
+
+  .skill-level-select {
+    .inner {
+      opacity: 0.6;
+      cursor: pointer;
+      border-radius: 5px;
+      padding: 10px;
+      -webkit-transition: opacity 0.3s;
+
+      h3 {
+        font-size: 1.3em;
+        margin-top: 10px;
+        color: #fff;
+        text-align: center;
+      }
+
+      p {
+        font-size: smaller;
+      }
+
+      .stars {
+        font-size: 2em;
+        color: #fff;
+        text-align: center;
+      }
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+    
+    &.beginner .inner {
+      background-color: #f0ad4e; 
+    }
+
+    &.intermediate .inner {
+      background-color: #5bc0de;
+    }
+
+    &.advanced .inner {
+      background-color: #5cb85c;
+    }
+
+    &.active .inner {
+      opacity: 1;
+    }
+  }
+}
