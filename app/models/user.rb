@@ -12,13 +12,23 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :username, presence: true
+  validates_presence_of :birthday, :on => :create
+  validate :birthday_older_than_13
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :username, :skill_level, :email, :password, :password_confirmation, :remember_me
-  # attr_accessible :title, :body
+  attr_accessible :username, :skill_level, :email, :password, :password_confirmation, :birthday, :remember_me
   
   def to_param
     username
+  end
+
+  # A custom validation to check that all users are 13 or older
+  def birthday_older_than_13
+    now = Time.now.utc.to_date
+    if !birthday.nil? 
+      age = now.year - birthday.year - ((now.month > birthday.month || (now.month == birthday.month && now.day >= birthday.day)) ? 0 : 1)
+    end
+    errors.add(:birthday, "must show that you are 13 or older.") if birthday.nil? || age < 13
   end
 
   def can_critique?(entry)

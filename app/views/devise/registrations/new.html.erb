@@ -15,11 +15,15 @@
   <div><%= f.label :password_confirmation %><br />
   <%= f.password_field :password_confirmation %></div>
 
+  <div><%= f.label :birthday %><br />
+  <%= text_field_tag "vis_birthday", nil %>
+  <%= f.hidden_field :birthday %>
+
   <div><%= f.label :skill_level %><br />
   <%= f.select(:skill_level, options_for_select(['Beginner', 'Intermediate', 'Advanced'])) %></div>
 
   <br />
-  <div><%= f.submit "Sign up" %></div>
+  <div><%= f.submit "Sign up", class: "btn" %></div>
 <% end %>
 
 <%= render "devise/shared/links" %>

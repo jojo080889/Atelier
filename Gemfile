@@ -26,6 +26,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem "font-awesome-rails"
 gem 'google-analytics-rails'
 gem 'devise'
