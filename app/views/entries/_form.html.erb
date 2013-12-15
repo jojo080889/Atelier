@@ -20,7 +20,7 @@
   <% if !(@critique_options.nil? || @critique_options.count <= 0) %>
     <div class="field helpful-critiques panel panel-default">
       <div class="critiques-info panel-heading">
-        Pick recent critiques you found particularly helpful for this entry:
+        Pick recent critiques for this project you found particularly helpful for this entry:
       </div>
       <div class="critiques-select panel-body">
         <table>
@@ -30,7 +30,7 @@
               <td class="critique-select">
                 <label>
                   <input type="checkbox" name="critique[<%= crit.id %>]" value="<%= crit.id %>" <%= @entry.voted_for?(crit) ? "checked" : "" %> />
-                  <%= truncate(crit.text, length: 50) %>
+                  <%= truncate(crit.text, length: 70) %>
                 </label>
               </td>
               <td class="critique-link">
