@@ -21,7 +21,13 @@
 <div style="clear:both"></div>
 
 <div>
-  <%= @entry.content.html_safe %>
+  <% if @entry.content == "" %>
+    <p class="text-muted">
+      <em>Hmm, this entry doesn't seem to have any content.</em>
+    </p>
+  <% else %>
+    <%= @entry.content.html_safe %>
+  <% end %>
 </div>
 
 <% if !(@helpful_crits.nil? || @helpful_crits.count <= 0) %>
