@@ -8,14 +8,16 @@
 </div>
 
 <div class="entry-actions pull-right">
-  <%= link_to edit_project_entry_path(@entry.project, @entry), class: "btn" do %>
-    <%= fa_icon "pencil" %>
-    Edit
-  <% end %>
-  <%= link_to project_entry_path(@entry.project, @entry), method: :delete, confirm: "Are you sure you want to delete this project entry? This action cannot be undone.", class: "btn" do %>
-    <%= fa_icon "times" %>
-    Delete
-  <% end %>
+  <% if can? :manage, @entry %>
+    <%= link_to edit_project_entry_path(@entry.project, @entry), class: "btn" do %>
+      <%= fa_icon "pencil" %>
+      Edit
+    <% end %>
+    <%= link_to project_entry_path(@entry.project, @entry), method: :delete, confirm: "Are you sure you want to delete this project entry? This action cannot be undone.", class: "btn" do %>
+      <%= fa_icon "times" %>
+      Delete
+    <% end %>
+<% end %>
 </div>
 
 <div style="clear:both"></div>
