@@ -1,7 +1,7 @@
 <% show_name = true if local_assigns[:show_name].nil? %>
 
-<div class="project col-md-4">
-  <div class="thumbnail">
+<tr class="project">
+  <td>
     <div class="pull-left">
       <div class="project-link">
         <h3><%= link_to project.name, project  %></h3>
@@ -31,5 +31,5 @@
         <% end %>
       </div>
     <div class="clearfix"></div>
-  </div>
-</div>
+  </td>
+</tr>

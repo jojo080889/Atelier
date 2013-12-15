@@ -1,3 +1,13 @@
-<div class="row">
-  <%= render partial: "projects/project", collection: projects %>
-</div>
+<% show_name = true if local_assigns[:show_name].nil? %>
+<% show_header = true if local_assigns[:show_header].nil? %>
+
+<table class="table project-list <%= "table-bordered" if show_header %>">
+  <% if show_header %>
+    <tr class="header">
+      <th>
+        <%= pluralize projects.count, "project" %>
+      </th>
+    </tr>
+  <% end %>
+  <%= render partial: "projects/project", collection: projects, locals: { :show_name => show_name } %>
+</table>

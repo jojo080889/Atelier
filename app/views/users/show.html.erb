@@ -5,63 +5,64 @@
     <%= @user.critiques_likes.count %> <%= fa_icon "thumbs-up" %>
   </span>
 </p>
+  
+<div class="user-show">
+  <ul class="nav nav-pills nav-stacked col-md-3">
+    <li class="active">
+    <a href="#projects" data-toggle="tab"><%= pluralize @user.projects.count, "Project" %></a>
+    </li>
+    <li>
+    <a href="#critiques" data-toggle="tab"><%= pluralize @user.critiques.count, "Critique" %> Written</a>
+    </li>
+    <li>
+    <a href="#rec_critiques" data-toggle="tab"><%= pluralize @user.critiques_received.count, "Critique" %> Received</a>
+    </li>
+  </ul>
 
-<ul class="nav nav-tabs">
-  <li class="active">
-  <a href="#projects" data-toggle="tab"><%= pluralize @user.projects.count, "Project" %></a>
-  </li>
-  <li>
-  <a href="#critiques" data-toggle="tab"><%= pluralize @user.critiques.count, "Critique" %> Written</a>
-  </li>
-  <li>
-  <a href="#rec_critiques" data-toggle="tab"><%= pluralize @user.critiques_received.count, "Critique" %> Received</a>
-  </li>
-</ul>
-
-<div class="tab-content">
-  <div class="tab-pane active" id="projects">
-    <% if @user.projects.count <= 0 %>
-      <p class="text-muted">
-      <em>This user has no projects.</em>
-      </p>
-    <% else %>
-      <div class="row">
-        <%= render partial: "projects/project", collection: @user.projects, locals: { :show_name => false } %>
-      </div>
-    <% end %>
-  </div>
-  <div class="tab-pane" id="critiques">
-    <% if @user.critiques.count <= 0 %>
-      <p class="text-muted">
-      <em>This user has not written any critiques.</em>
-      </p>
-    <% else %>
-      <table class="table table-striped">
-        <% @user.critiques.each do |crit| %>
-          <tr>
-            <td>On <%= link_to crit.entry.title, project_entry_path(crit.entry.project, crit.entry) %> by <%= link_to crit.entry.user.username, crit.entry.user %></td>
-            <td><%= link_to "View critique", project_entry_path(crit.entry.project, crit.entry, anchor: "critique_#{crit.id}") %></td>
-            <td>created <%= time_ago_in_words crit.created_at %> ago</td>
-          </tr>
-        <% end %>
-      </table>
-    <% end %>
-  </div>
-  <div class="tab-pane" id="rec_critiques">
-    <% if @user.critiques_received.count <= 0 %>
-      <p class="text-muted">
-      <em>This user has not received any critiques.</em>
-      </p>
-    <% else %>
-      <table class="table table-striped">
-        <% @user.critiques_received.each do |crit| %>
-          <tr>
-            <td>From <%= link_to crit.user.username, crit.user %> on <%= link_to crit.entry.title, project_entry_path(crit.entry.project, crit.entry) %></td>
-            <td><%= link_to "View critique", project_entry_path(crit.entry.project, crit.entry, anchor: "critique_#{crit.id}") %></td>
-            <td>created <%= time_ago_in_words crit.created_at %> ago</td>
-          </tr>
-        <% end %>
-      </table>
-    <% end %>
+  <div class="tab-content col-md-9">
+    <div class="tab-pane active" id="projects">
+      <% if @user.projects.count <= 0 %>
+        <p class="text-muted">
+        <em>This user has no projects.</em>
+        </p>
+      <% else %>
+        <%= render "projects/project_list", projects: @user.projects, show_name: false %>
+      <% end %>
+    </div>
+    <div class="tab-pane" id="critiques">
+      <% if @user.critiques.count <= 0 %>
+        <p class="text-muted">
+        <em>This user has not written any critiques.</em>
+        </p>
+      <% else %>
+        <table class="table table-striped">
+          <% @user.critiques.each do |crit| %>
+            <tr>
+              <td>On <%= link_to crit.entry.title, project_entry_path(crit.entry.project, crit.entry) %> by <%= link_to crit.entry.user.username, crit.entry.user %></td>
+              <td><%= link_to "View critique", project_entry_path(crit.entry.project, crit.entry, anchor: "critique_#{crit.id}") %></td>
+              <td>created <%= time_ago_in_words crit.created_at %> ago</td>
+            </tr>
+          <% end %>
+        </table>
+      <% end %>
+    </div>
+    <div class="tab-pane" id="rec_critiques">
+      <% if @user.critiques_received.count <= 0 %>
+        <p class="text-muted">
+        <em>This user has not received any critiques.</em>
+        </p>
+      <% else %>
+        <table class="table table-striped">
+          <% @user.critiques_received.each do |crit| %>
+            <tr>
+              <td>From <%= link_to crit.user.username, crit.user %> on <%= link_to crit.entry.title, project_entry_path(crit.entry.project, crit.entry) %></td>
+              <td><%= link_to "View critique", project_entry_path(crit.entry.project, crit.entry, anchor: "critique_#{crit.id}") %></td>
+              <td>created <%= time_ago_in_words crit.created_at %> ago</td>
+            </tr>
+          <% end %>
+        </table>
+      <% end %>
+    </div>
   </div>
 </div>
+<div class="clearfix"></div>
