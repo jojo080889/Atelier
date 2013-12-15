@@ -40,3 +40,14 @@
     color: #666;
   }
 }
+
+// Projects New, Edit
+.new_project, .edit_project {
+  input {
+    margin-bottom: 10px;
+  }
+
+  .actions {
+    margin-top: 10px;
+  }
+}
