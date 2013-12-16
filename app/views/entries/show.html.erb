@@ -32,7 +32,7 @@
       <em>Hmm, this entry doesn't seem to have any content.</em>
     </p>
   <% else %>
-    <%= @entry.content.html_safe %>
+    <%= Format.markdown @entry.content %>
   <% end %>
 </div>
 
