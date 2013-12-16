@@ -1,6 +1,6 @@
 <%= form_for([@project, @entry]) do |f| %>
   <% if @entry.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class="alert alert-danger">
       <h2><%= pluralize(@entry.errors.count, "error") %> prohibited this entry from being saved:</h2>
 
       <ul>

@@ -1,11 +1,24 @@
-<h1><%= @user.username %> <small><%= skill_level_badge @user.skill_level %></small></h1>
-<p>
-  <strong>Number of critiques rated highly by others: </strong> 
-  <span class="tooltip-element" data-toggle="tooltip" title="Number of critiques rated highly by others">
-    <%= @user.critiques_likes.count %> <%= fa_icon "thumbs-up" %>
-  </span>
-</p>
-  
+<div class="pull-left">
+  <h1><%= @user.username %> <small><%= skill_level_badge @user.skill_level %></small></h1>
+  <p>
+    <strong>Number of critiques rated highly by others: </strong> 
+    <span class="tooltip-element" data-toggle="tooltip" title="Number of critiques rated highly by others">
+      <%= @user.critiques_likes.count %> <%= fa_icon "thumbs-up" %>
+    </span>
+  </p>
+</div>
+
+<div class="pull-right user-actions">
+  <% if @user.id == current_user.id %>
+    <%= link_to new_project_path, class: "btn btn-primary" do %>
+      <%= fa_icon "plus" %>
+      New Project
+    <% end %>
+  <% end %>
+</div>
+
+<div class="clearfix"></div>
+
 <div class="user-show">
   <ul class="nav nav-pills nav-stacked col-md-3">
     <li class="active">
