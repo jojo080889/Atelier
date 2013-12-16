@@ -12,6 +12,10 @@ group :production do
   gem 'rails_12factor'
 end
 
+group :development do
+  gem 'figaro'
+end
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -36,8 +40,8 @@ gem 'postmark'
 gem "cancan"
 gem 'rails-bootstrap-markdown'
 gem 'redcarpet'
-gem 'ckeditor'
 gem 'paperclip'
+gem 'aws-sdk'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

@@ -22,6 +22,10 @@
 
 <div style="clear:both"></div>
 
+<div class="entry-image">
+  <%= image_tag @entry.image.url if !@entry.image.nil? %>
+</div>
+
 <div>
   <% if @entry.content == "" %>
     <p class="text-muted">

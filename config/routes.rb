@@ -1,6 +1,4 @@
 Atelier::Application.routes.draw do
-  mount Ckeditor::Engine => '/ckeditor'
-
   resources :projects do
     resources :entries do
       resources :critiques do

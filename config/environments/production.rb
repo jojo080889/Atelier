@@ -70,4 +70,14 @@ Atelier::Application.configure do
 
   # Google Analytics
   GA.tracker = "UA-45891308-1"
+
+  # For paperclip
+  config.paperclip_defaults = {
+    :storage => :s3,
+    :s3_credentials => {
+      :bucket => ENV['S3_BUCKET_NAME'],
+      :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+      :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+    }
+  }
 end

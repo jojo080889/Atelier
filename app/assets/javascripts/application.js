@@ -14,7 +14,6 @@
 //= require jquery_ujs
 //= require jquery.ui.datepicker
 //= require bootstrap-markdown
-//= require ckeditor/init
 //= require_tree .
 
 /* Initialize tooltips */

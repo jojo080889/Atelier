@@ -4,10 +4,12 @@ class Entry < ActiveRecord::Base
   belongs_to :user
   belongs_to :project
   has_many :critiques, :dependent => :destroy
-  attr_accessible :title, :content, :user_id, :project_id
+  attr_accessible :title, :content, :user_id, :project_id, :image
 
   validates_presence_of :title
   validates_presence_of :content
+
+  has_attached_file :image
 
   acts_as_votable
   acts_as_voter

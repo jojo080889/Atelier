@@ -37,4 +37,14 @@ Atelier::Application.configure do
 
   # For Devise
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+  # For Paperclip
+  config.paperclip_defaults = {
+    :storage => :s3,
+    :s3_credentials => {
+      :bucket => ENV['ATELIER_S3_BUCKET'],
+      :access_key_id => ENV['ATELIER_AWS_ACCESS_KEY_ID'],
+      :secret_access_key => ENV['ATELIER_AWS_SECRET_ACCESS_KEY']
+    }
+  }
 end
