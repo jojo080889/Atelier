@@ -29,7 +29,11 @@
 }
 
 .new_critique, .edit_critique {
+  margin-bottom: 10px;
+
   .text {
+    margin-bottom: 10px;
+    
     textarea {
       width: 100%;
       padding: 5px;
@@ -50,6 +54,7 @@
 
   .nominate {
     padding: 10px;
+    margin-bottom: 10px;
     text-align: center;
     border: 1px solid #ccc;
     border-radius: 0 0 5px 5px;

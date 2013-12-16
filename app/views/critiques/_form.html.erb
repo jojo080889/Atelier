@@ -53,7 +53,7 @@
       </div>
     <% end %>
     <div class="actions">
-      <%= f.submit "Post" %>
+      <%= f.submit "Post", class: "btn btn-default" %>
     </div>
   <% end %>
 <% elsif current_user.id != @entry.user.id %>

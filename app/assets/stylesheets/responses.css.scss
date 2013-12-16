@@ -33,6 +33,11 @@
 .new_response, .edit_response {
   width: 80%;
   margin-left: auto;
+  margin-bottom: 10px;
+
+  .text {
+    margin-bottom: 10px;
+  }
 
   textarea {
     padding: 5px;

@@ -6,6 +6,9 @@ class Entry < ActiveRecord::Base
   has_many :critiques, :dependent => :destroy
   attr_accessible :title, :content, :user_id, :project_id
 
+  validates_presence_of :title
+  validates_presence_of :content
+
   acts_as_votable
   acts_as_voter
 
