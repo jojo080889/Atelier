@@ -23,7 +23,7 @@
 <div style="clear:both"></div>
 
 <div class="entry-image">
-  <%= image_tag @entry.image.url if !@entry.image_file_name.nil? %>
+  <%= image_tag(@entry.image.url, class: "small") if !@entry.image_file_name.nil? %>
 </div>
 
 <div>
@@ -73,3 +73,11 @@
 <% end %>
 
 <%= render "critiques/form" %>
+
+<script>
+  $(document).ready(function() {
+    $(".entry-image img").click(function() {
+      $(this).toggleClass("small");
+    });
+  });
+</script>
