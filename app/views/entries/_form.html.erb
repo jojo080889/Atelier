@@ -19,7 +19,7 @@
     <%= f.file_field :image, class: "btn" %>
     <p class="help-block"><small>Leave blank if you want to keep the current image.</small></p>
   </div>
-  <div class="field">
+  <div class="field form-group">
     <%= f.text_area :content, size: "20x10", placeholder: "Write about progress you've made on your project...", data: {provide: "markdown"} %>
   </div>
   <% if !(@critique_options.nil? || @critique_options.count <= 0) %>
