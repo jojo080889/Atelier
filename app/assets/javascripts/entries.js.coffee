@@ -4,4 +4,6 @@ $(document).ready ->
     e.preventDefault();
 
   $("#entry_image").change ->
-    $("#entry-file-name").html($("#entry_image").val())
+    string = $("#entry_image").val()
+    filename = string.match(/\\([^\\]*\..*$)/)[1]
+    $("#entry-file-name").html(filename)
