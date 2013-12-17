@@ -4,5 +4,6 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find_by_username(params[:id])
+    @projects = Project.get_by_user("critiques_count ASC", @user)
   end
 end

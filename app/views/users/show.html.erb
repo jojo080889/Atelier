@@ -39,7 +39,7 @@
         <em>This user has no projects.</em>
         </p>
       <% else %>
-        <%= render "projects/project_list", projects: @user.projects, scope: "users", show_name: false %>
+        <%= render "projects/project_list", projects: @projects, scope: "users", show_name: false %>
       <% end %>
     </div>
     <div class="tab-pane" id="critiques">
