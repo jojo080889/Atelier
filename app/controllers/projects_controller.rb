@@ -78,6 +78,7 @@ class ProjectsController < ApplicationController
   def sort
     @order_by = params[:order_by]
     @scope = params[:scope]
+    @user = User.find_by_username(params[:username]) if !params[:username].nil?
 
     @order_clause = Project.get_order_clause(@order_by)
 
@@ -87,8 +88,8 @@ class ProjectsController < ApplicationController
       @projects = Project.get_mentoring(@order_clause, current_user)
     elsif @scope == "recommended"
       @projects = Project.get_recommended(@order_clause, current_user)
-    elsif @scope == "mine"
-      @projects = Project.get_mine(@order_clause, current_user)
+    elsif @scope == "users"
+      @projects = Project.get_by_user(@order_clause, @user)
     end
 
     respond_to do |format|

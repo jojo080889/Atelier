@@ -11,7 +11,7 @@ To mentor a project, view the page corresponding to the project and <strong>make
   </ul>
 
   <div class="tab-content col-md-9">
-    <div class="tab-pane active" id="recommended">
+    <div class="tab-pane recommended active" id="recommended">
       <p>Because you are a <strong><%= current_user.skill_level %></strong> user, we recommend you mentor projects by <strong><%= current_user.skill_level %></strong> <% if current_user.skill_level != "Beginner" %>and <strong><%= current_user.lower_tier %></strong><% end %> users.</p>
 
       <% if @rec_projects.nil? || @rec_projects.count <= 0 %>
@@ -23,7 +23,7 @@ To mentor a project, view the page corresponding to the project and <strong>make
       <% end %>
     </div>
 
-    <div class="tab-pane" id="mentoring">
+    <div class="tab-pane mentoring" id="mentoring">
       <% if @mentoring_projects.nil? || @mentoring_projects.count <= 0 %>
         <p class="text-muted">
         <em>You are not mentoring any projects.</em>
@@ -33,7 +33,7 @@ To mentor a project, view the page corresponding to the project and <strong>make
       <% end %>
     </div>
 
-    <div class="tab-pane" id="all">
+    <div class="tab-pane all" id="all">
       <% if @projects.nil? || @projects.count <= 0 %>
         <p class="text-muted">
         <em>There aren't any projects yet.</em>

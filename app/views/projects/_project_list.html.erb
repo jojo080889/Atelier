@@ -18,6 +18,9 @@
     ["Highest to Lowest Critiques", "highcritiques"]
   ], order_by), class: "form-control" %>
   <%= hidden_field_tag :scope, scope %>
+  <% if scope == "users" %>
+    <%= hidden_field_tag :username, @user.username %> 
+  <% end %>
 <% end %>
 <table class="table project-list <%= "table-bordered" if show_header %>">
   <% if show_header %>

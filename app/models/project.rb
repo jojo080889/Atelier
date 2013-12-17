@@ -43,8 +43,8 @@ class Project < ActiveRecord::Base
     @projects - self.get_mentoring(order_by, user)
   end
 
-  def self.get_mine(order_by, user)
-    Project.joins(:user).joins(:entries => :critiques).where("users.id = ?", user.id).order(order_by)
+  def self.get_by_user(order_by, user)
+    Project.joins(:user).where("users.id = ?", user.id).order(order_by)
   end
 
   def is_mentored_by?(user) 
