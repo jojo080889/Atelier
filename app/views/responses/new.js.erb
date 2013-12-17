@@ -1,2 +1,4 @@
-$("#critique_<%= @critique.id %>_container").append("<%= escape_javascript(render "responses/form") %>");
-$("#critique_<%= @critique.id %>_container .new_response textarea").markdown();
+if ($("#critique_<%= @critique.id %>_container form.new_response").length == 0) {
+  $("#critique_<%= @critique.id %>_container").append("<%= escape_javascript(render "responses/form") %>");
+  $("#critique_<%= @critique.id %>_container .new_response textarea").markdown();
+}
