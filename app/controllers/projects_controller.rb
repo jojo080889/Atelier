@@ -3,10 +3,11 @@ class ProjectsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @projects = Project.all
-    @mentoring_projects = Project.joins(:entries => :critiques).where("critiques.user_id = ?", current_user.id).uniq
-    @rec_projects = Project.joins(:user).where("users.id <> ? AND (users.skill_level = ? OR users.skill_level = ?)", current_user.id, current_user.skill_level, current_user.lower_tier)
-    @rec_projects = @rec_projects - @mentoring_projects
+    @order_clause = "critiques_count"
+
+    @projects = Project.get_all(@order_clause)
+    @mentoring_projects = Project.get_mentoring(@order_clause, current_user)
+    @rec_projects = Project.get_recommended(@order_clause, current_user)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -71,6 +72,27 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to projects_url, notice: "Project was successfully deleted." }
       format.json { head :no_content }
+    end
+  end
+
+  def sort
+    @order_by = params[:order_by]
+    @scope = params[:scope]
+
+    @order_clause = Project.get_order_clause(@order_by)
+
+    if @scope == "all"
+      @projects = Project.get_all(@order_clause)
+    elsif @scope == "mentoring"
+      @projects = Project.get_mentoring(@order_clause, current_user)
+    elsif @scope == "recommended"
+      @projects = Project.get_recommended(@order_clause, current_user)
+    elsif @scope == "mine"
+      @projects = Project.get_mine(@order_clause, current_user)
+    end
+
+    respond_to do |format|
+      format.js
     end
   end
 end

@@ -1,6 +1,24 @@
 <% show_name = true if local_assigns[:show_name].nil? %>
 <% show_header = true if local_assigns[:show_header].nil? %>
+<% scope = "all" if local_assigns[:scope].nil? %>
+<% order_by = "lowcritiques" if local_assigns[:order_by].nil? %>
 
+<div class="project-list-container">
+<%= form_tag sort_projects_path, remote: true, class: "sort-projects form-group pull-right" do %>
+  <label>
+    Sort by 
+  </label>
+  <%= select_tag :order_by, options_for_select([
+    ["Alphabetical", "alphabetical"],
+    ["Newest", "recentcreated"],
+    ["Most Recently Updated", "recentupdated"],
+    ["Lowest to Highest Entries", "lowentries"],
+    ["Highest to Lowest Entries", "highentries"],
+    ["Lowest to Highest Critiques", "lowcritiques"],
+    ["Highest to Lowest Critiques", "highcritiques"]
+  ], order_by), class: "form-control" %>
+  <%= hidden_field_tag :scope, scope %>
+<% end %>
 <table class="table project-list <%= "table-bordered" if show_header %>">
   <% if show_header %>
     <tr class="header">
@@ -11,3 +29,4 @@
   <% end %>
   <%= render partial: "projects/project", collection: projects, locals: { :show_name => show_name } %>
 </table>
+</div>

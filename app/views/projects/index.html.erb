@@ -19,7 +19,7 @@ To mentor a project, view the page corresponding to the project and <strong>make
         <em>You have no recommended projects yet. Check back as people post!</em>
         </p>
       <% else %>
-        <%= render "projects/project_list", projects: @rec_projects %>
+        <%= render "projects/project_list", projects: @rec_projects, scope: "recommended" %>
       <% end %>
     </div>
 
@@ -29,7 +29,7 @@ To mentor a project, view the page corresponding to the project and <strong>make
         <em>You are not mentoring any projects.</em>
         </p>
       <% else %>
-        <%= render "projects/project_list", projects: @mentoring_projects %>
+        <%= render "projects/project_list", projects: @mentoring_projects, scope: "mentoring" %>
       <% end %>
     </div>
 

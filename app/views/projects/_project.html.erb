@@ -8,7 +8,11 @@
         <p><%= truncate(project.description, length: 60) %></p>
       </div>
       <div class="project-info">
-        <%= pluralize project.entries.count, "entry" %>
+        <span class="<%= 'text-danger' if project.critiques.count == 0 %>">
+          <strong><%= pluralize project.critiques.count, "critique" %></strong>
+        </span> &sdot;
+        <%= pluralize project.entries.count, "entry" %> &sdot;
+        last updated <%= time_ago_in_words project.updated_at %> ago
         <% if show_name %>
           <br />
           by <%= project.user.username %> <%= skill_level_badge(project.user.skill_level) %>

@@ -10,6 +10,8 @@ Atelier::Application.routes.draw do
       post "/like" => "entries#like", :as => "like"
       post "/unlike" => "entries#unlike", :as => "unlike"
     end
+
+    post "/sort" => "projects#sort", on: :collection, as: :sort
   end
   devise_for :users
   resources :users
