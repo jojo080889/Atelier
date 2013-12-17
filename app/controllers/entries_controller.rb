@@ -49,6 +49,10 @@ class EntriesController < ApplicationController
           @picked_crits.each_key do |key|
             crit = Critique.find(key)
             crit.liked_by @entry
+          
+            if (current_user.id != crit.user.id)
+              NotificationMailer.crit_marked_email(crit, @entry).deliver
+            end
           end
         end
 
@@ -76,6 +80,10 @@ class EntriesController < ApplicationController
           @picked_crits.each_key do |key|
             crit = Critique.find(key)
             crit.liked_by @entry
+            
+            if (current_user.id != crit.user.id)
+              NotificationMailer.crit_marked_email(crit, @entry).deliver
+            end
           end
         end
 

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>
+      Your critique has been marked as helpful!
+    </p>
+    <p>
+      To view the entry your critique was helpful for, <%= link_to "go to the entry page", project_entry_url(@project, @entry) %>.
+    </p>
+    <%= render :partial => "notification_mailer/footer" %>
+  </body>
+</html>

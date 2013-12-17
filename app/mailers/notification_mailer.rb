@@ -21,4 +21,15 @@ class NotificationMailer < ActionMailer::Base
       subject: "[Atelier] You've received a critique response!"
     )
   end
+
+  def crit_marked_email(critique, entry)
+    @user = critique.user
+    @critique = critique
+    @entry = entry
+    @project = @entry.project
+    mail(
+      to: @user.email,
+      subject: "[Atelier] Your critique has been marked as helpful!"
+    )
+  end
 end
