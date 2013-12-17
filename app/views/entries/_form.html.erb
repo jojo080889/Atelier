@@ -16,8 +16,15 @@
   </div>
   <div class="field form-group">
     <%= f.label :image %><br />
-    <%= f.file_field :image, class: "btn" %>
-    <p class="help-block"><small>Leave blank if you want to keep the current image.</small></p>
+    <%= f.file_field :image, class: "hidden" %>
+    <button class="entry-browse-image btn btn-default">Choose file</button>
+    <span id="entry-file-name">
+      <% if @entry.image_file_name.nil? %>
+        <em>No file chosen</em>
+      <% else %>
+        <%= @entry.image_file_name %>
+      <% end %>
+    </span>
   </div>
   <div class="field form-group">
     <%= f.text_area :content, size: "20x10", placeholder: "Write about progress you've made on your project...", data: {provide: "markdown"} %>
