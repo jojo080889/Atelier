@@ -2,8 +2,7 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   margin: 10px 0;
-  width: 80%;
-  margin-left: auto;
+  margin-left: 60px;
 
   & > div {
     padding: 10px;
@@ -31,9 +30,8 @@
 }
 
 .new_response, .edit_response {
-  width: 80%;
-  margin-left: auto;
-  margin-bottom: 10px;
+  margin: 10px 0;
+  margin-left: 60px;
 
   .text {
     margin-bottom: 10px;
