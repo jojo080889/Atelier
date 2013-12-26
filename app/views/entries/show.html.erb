@@ -69,7 +69,7 @@
     No critiques yet.
   </p>
 <% else %>
-  <%= render partial: "critiques/critique", collection: @entry.critiques %>
+  <%= render partial: "critiques/critique", collection: @entry.critiques.order(:created_at) %>
 <% end %>
 
 <%= render "critiques/form" %>
