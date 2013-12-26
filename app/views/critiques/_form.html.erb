@@ -11,14 +11,26 @@
         </ul>
       </div>
     <% end %>
-
+    
     <div class="field text">
       <%= f.text_area :text, size: "20x6", placeholder: "Write your critique for this entry here...", data: {provide: "markdown"} %>
     </div>
+    
+    <% if !@entry.image_file_name.nil? %>
+      <div class="literally-toggle">
+        <%= fa_icon "plus" %> 
+        Add a paintover/redline
+      </div>
+      <div class="literally"><canvas></canvas></div>
+      <%= hidden_field_tag(:paintover_data, "none") %>
+      <%= f.hidden_field :paintover_snapshot %>
+    <% end %>
+
     <% if @entry.user.skill_level != "Advanced" %>
       <div class="rating-info">
         <%= link_to @entry.user.username, @entry.user %> has <%= pluralize(@entry.user.next_tier_ratings, "entry rating") %> of <%= @entry.user.next_tier %> -- needs <%= 5 - @entry.user.next_tier_ratings %> more to become a <%= @entry.user.next_tier %> user
       </div>
+
       <div class="field nominate">
         <div class="rating-label">
           Rate the overall quality of the project entry:
@@ -80,5 +92,9 @@
       }
       $(".nominate #critique_rating").val(skill_rating);
     }
+  });
+
+  $(".edit_critique .literally-toggle, .new_critique .literally-toggle").click(function() {
+    $(".edit_critique .literally, .new_critique .literally").toggle();
   });
 </script>

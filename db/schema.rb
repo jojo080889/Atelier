@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131217043704) do
+ActiveRecord::Schema.define(:version => 20131226070601) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -33,9 +33,14 @@ ActiveRecord::Schema.define(:version => 20131217043704) do
     t.integer  "user_id"
     t.integer  "entry_id"
     t.text     "text"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
     t.integer  "rating"
+    t.string   "paintover_file_name"
+    t.string   "paintover_content_type"
+    t.integer  "paintover_file_size"
+    t.datetime "paintover_updated_at"
+    t.text     "paintover_snapshot"
   end
 
   create_table "entries", :force => true do |t|

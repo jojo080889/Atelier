@@ -16,8 +16,17 @@
         <%= fa_icon "star" %> This mentor rated this entry entry at <strong><%= rating_to_skill_level(critique.rating) %></strong> 
       </div>
     <% end %>
-    <div class="critique-body">
-      <%= Format.markdown critique.text %>
+    <div class="critique-body clearfix">
+      <div class="pull-left">
+        <%= Format.markdown critique.text %>
+      </div>
+      <% if !critique.paintover_file_name.nil? %>
+        <div class="pull-right">
+          <%= link_to critique.paintover.url, target: "_blank" do %>
+            <%= image_tag critique.paintover.url %>
+          <% end %>
+        </div>
+      <% end %>
     </div>
     <hr />
     <div class="critique-actions clearfix">
