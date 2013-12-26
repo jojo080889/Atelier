@@ -6,7 +6,9 @@ class CritiquesController < ApplicationController
     @project = @entry.project
     @critique = @entry.critiques.create(params[:critique])
     @critique.user_id = current_user.id
-    if (params[:paintover_data] != "none")
+    if (params[:paintover_data] == "none")
+      @critique.paintover = nil
+    else
       @critique.save_paintover(params[:paintover_data])
     end
 
@@ -35,7 +37,9 @@ class CritiquesController < ApplicationController
     @entry = Entry.find(params[:entry_id])
     @project = @entry.project
     @critique = Critique.find(params[:id])
-    if (params[:paintover_data] != "none")
+    if (params[:paintover_data] == "none")
+      @critique.paintover = nil
+    else
       @critique.save_paintover(params[:paintover_data])
     end
 

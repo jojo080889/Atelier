@@ -12,8 +12,7 @@ originalImg.onload = function() {
     backgroundShapes: [originalShape],
     toolClasses: [LC.PencilWidget, LC.EraserWidget, LC.LineWidget, LC.RectangleWidget, LC.TextWidget, LC.PanWidget],
     onInit: function(lc) {
-      window.LCTemp = lc;
-      window.literallyCanvasInit(lc);
+      window.literallyCanvasInit(lc, $("#edit_critique_<%= @critique.id %>"));
       lc.loadSnapshotJSON('<%= @critique.paintover_snapshot.html_safe if !@critique.paintover_snapshot.nil? %>');
     }
   });

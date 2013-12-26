@@ -13,16 +13,16 @@ $(document).ready ->
         backgroundShapes: [originalShape],
         toolClasses: [LC.PencilWidget, LC.EraserWidget, LC.LineWidget, LC.RectangleWidget, LC.TextWidget, LC.PanWidget],
         onInit: (lc) ->
-          literallyCanvasInit(lc)
+          literallyCanvasInit(lc, $(".new_critique"))
       })
 
-literallyCanvasInit = (lc) ->
-  $(".literally").hide()
+literallyCanvasInit = (lc, parent) ->
+  $(".literally", parent).hide()
   lc.on("drawingChange", ->
     if lc.numShapes() == 0
-      $("#paintover_data").val("none")
-      $("#critique_paintover_snapshot").val("")
+      $("#paintover_data", parent).val("none")
+      $("#critique_paintover_snapshot", parent).val("")
     else
-      $("#paintover_data").val(lc.canvasForExport().toDataURL())
-      $("#critique_paintover_snapshot").val(lc.getSnapshotJSON())
+      $("#paintover_data", parent).val(lc.canvasForExport().toDataURL())
+      $("#critique_paintover_snapshot", parent).val(lc.getSnapshotJSON())
   )
