@@ -19,11 +19,10 @@ $(document).ready ->
 literallyCanvasInit = (lc) ->
   $(".literally").hide()
   lc.on("drawingChange", ->
-    $("#paintover_data").val(lc.canvasForExport().toDataURL())
-    $("#critique_paintover_snapshot").val(lc.getSnapshotJSON())
+    if lc.numShapes() == 0
+      $("#paintover_data").val("none")
+      $("#critique_paintover_snapshot").val("")
+    else
+      $("#paintover_data").val(lc.canvasForExport().toDataURL())
+      $("#critique_paintover_snapshot").val(lc.getSnapshotJSON())
   )
-  lc.on("clear", ->
-    $("#paintover_data").val("none")
-    $("#critique_paintover_snapshot").val("")
-  )
-
