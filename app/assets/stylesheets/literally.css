@@ -7,7 +7,7 @@
 .colorpicker-saturation {
   width: 200px;
   height: 200px;
-  background-image: url(../img/saturation.png);
+  background-image: url(../assets/literallycanvas/saturation.png);
   cursor: crosshair;
   float: left; }
 
@@ -55,10 +55,10 @@
   margin-top: -1px; }
 
 .colorpicker-hue {
-  background-image: url(../img/hue.png); }
+  background-image: url(../assets/literallycanvas/hue.png); }
 
 .colorpicker-alpha {
-  background-image: url(../img/alpha.png);
+  background-image: url(../assets/literallycanvas/alpha.png);
   display: none; }
 
 .colorpicker {
@@ -87,7 +87,7 @@
   height: 20px;
   margin-top: 5px;
   clear: both;
-  background-image: url(../img/alpha.png);
+  background-image: url(../assets/literallycanvas/alpha.png);
   background-position: 0 100%; }
 
 .colorpicker-color div {
