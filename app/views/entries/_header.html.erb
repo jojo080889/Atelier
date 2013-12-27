@@ -1,6 +1,8 @@
-<div class="page-header back-to-project">
-  <%= link_to @project do %>
+<% if !@folder.nil? %>
+<div class="page-header back-to-folder">
+  <%= link_to @folder do %>
     &larr;
-    Back to project
+    Back to folder
   <% end %>
 </div>
+<% end %>

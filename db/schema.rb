@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131226070601) do
+ActiveRecord::Schema.define(:version => 20131227060636) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(:version => 20131226070601) do
     t.datetime "created_at",                         :null => false
     t.datetime "updated_at",                         :null => false
     t.text     "content",            :default => ""
-    t.integer  "project_id"
+    t.integer  "folder_id"
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(:version => 20131226070601) do
     t.integer  "critiques_count",    :default => 0
   end
 
-  create_table "projects", :force => true do |t|
+  create_table "folders", :force => true do |t|
     t.string   "name"
     t.text     "description"
     t.integer  "user_id"

@@ -1,6 +1,6 @@
 Atelier::Application.routes.draw do
-  resources :projects do
-    post "/sort" => "projects#sort", on: :collection, as: :sort
+  resources :folders do
+    post "/sort" => "folders#sort", on: :collection, as: :sort
   end
   resources :entries do
     resources :critiques do
@@ -18,7 +18,7 @@ Atelier::Application.routes.draw do
 
   get "/about", to: "pages#about"
 
-  root :to => "projects#index"
+  root :to => "entries#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

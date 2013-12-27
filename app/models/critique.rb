@@ -7,8 +7,8 @@ class Critique < ActiveRecord::Base
   has_attached_file :paintover
   attr_accessible :user_id, :entry_id, :text, :rating, :paintover, :paintover_snapshot
 
-  after_create :increment_project_critiques_counter
-  after_destroy :decrement_project_critiques_counter
+  after_create :increment_folder_critiques_counter
+  after_destroy :decrement_folder_critiques_counter
 
   acts_as_votable
 
@@ -21,11 +21,15 @@ class Critique < ActiveRecord::Base
 
   private
 
-  def increment_project_critiques_counter
-    Project.increment_counter(:critiques_count, self.entry.project.id) 
+  def increment_folder_critiques_counter
+    if !self.entry.folder.nil?
+      Folder.increment_counter(:critiques_count, self.entry.folder.id) 
+    end
   end
 
-  def decrement_project_critiques_counter
-    Project.decrement_counter(:critiques_count, self.entry.project.id)
+  def decrement_folder_critiques_counter
+    if !self.entry.folder.nil?
+      Folder.decrement_counter(:critiques_count, self.entry.folder.id)
+    end
   end
 end

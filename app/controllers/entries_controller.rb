@@ -11,14 +11,9 @@ class EntriesController < ApplicationController
 
   def show
     @entry = Entry.find(params[:id])
-    @project = @entry.project
+    @folder = @entry.folder
     @critique = Critique.new
     @helpful_crits = @entry.get_voted Critique
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @entry }
-    end
   end
 
   def new
@@ -33,7 +28,7 @@ class EntriesController < ApplicationController
 
   def edit
     @entry = Entry.find(params[:id])
-    @project = @entry.project
+    @folder = @entry.folder
     @critique_options = @entry.critique_options
   end
 
@@ -67,7 +62,7 @@ class EntriesController < ApplicationController
 
   def update
     @entry = Entry.find(params[:id])
-    @project = @entry.project
+    @folder = @entry.folder
 
     respond_to do |format|
       if @entry.update_attributes(params[:entry])
@@ -99,11 +94,12 @@ class EntriesController < ApplicationController
 
   def destroy
     @entry = Entry.find(params[:id])
-    @project = @entry.project
+    @folder = @entry.folder
     @entry.destroy
 
     respond_to do |format|
-      format.html { redirect_to @project, notice: "Project entry was successfully deleted." }
+      destination = @folder.nil? ? current_user : @folder
+      format.html { redirect_to destination, notice: "Project entry was successfully deleted." }
       format.json { head :no_content }
     end
   end

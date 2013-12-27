@@ -1,6 +1,6 @@
 require 'format'
 
-class Project < ActiveRecord::Base
+class Folder < ActiveRecord::Base
   belongs_to :user
   has_many :entries, :dependent => :destroy
   has_many :critiques, through: :entries
@@ -31,24 +31,24 @@ class Project < ActiveRecord::Base
   end
 
   def self.get_all(order_by)
-    Project.order(order_by) 
+    Folder.order(order_by) 
   end
 
   def self.get_mentoring(order_by, user)
-    Project.joins(:entries => :critiques).where("critiques.user_id = ?", user.id).uniq.order(order_by)
+    Folder.joins(:entries => :critiques).where("critiques.user_id = ?", user.id).uniq.order(order_by)
   end
 
   def self.get_recommended(order_by, user)
-    @projects = Project.joins(:user).where("users.id <> ? AND (users.skill_level = ? OR users.skill_level = ?)", user.id, user.skill_level, user.lower_tier).order(order_by)
-    @projects - self.get_mentoring(order_by, user)
+    @folders = Folder.joins(:user).where("users.id <> ? AND (users.skill_level = ? OR users.skill_level = ?)", user.id, user.skill_level, user.lower_tier).order(order_by)
+    @folders - self.get_mentoring(order_by, user)
   end
 
   def self.get_by_user(order_by, user)
-    Project.joins(:user).where("users.id = ?", user.id).order(order_by)
+    Folder.joins(:user).where("users.id = ?", user.id).order(order_by)
   end
 
   def is_mentored_by?(user) 
-    @projects = Project.joins(:entries => :critiques).where("critiques.user_id = ?", user.id).uniq
-    @projects.include? self
+    @folders = Folder.joins(:entries => :critiques).where("critiques.user_id = ?", user.id).uniq
+    @folders.include? self
   end
 end

@@ -2,9 +2,9 @@ require 'format'
 
 class Entry < ActiveRecord::Base
   belongs_to :user
-  belongs_to :project, :counter_cache => true, :touch => true
+  belongs_to :folder, :counter_cache => true, :touch => true
   has_many :critiques, :dependent => :destroy
-  attr_accessible :title, :content, :user_id, :project_id, :image
+  attr_accessible :title, :content, :user_id, :folder_id, :image
 
   validates_presence_of :title
   validates_presence_of :content

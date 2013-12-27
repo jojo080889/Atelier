@@ -1,0 +1,35 @@
+<% if can? :manage, @folder%>
+<div class="project-actions pull-right">
+  <%= link_to new_entry_path, class: "btn btn-primary" do %>
+    <%= fa_icon "plus" %>
+    New Entry
+  <% end %>
+  
+  <%= link_to edit_folder_path(@folder), class: "btn" do %>
+    <%= fa_icon "pencil" %>
+    Edit
+  <% end %>
+  <%= link_to folder_path(@folder), method: :delete, confirm: "Are you sure you want to delete this folder? This action cannot be undone.", class: "btn" do %>
+    <%= fa_icon "times" %>
+    Delete
+  <% end %>
+</div>
+<% end %>
+
+<div class="project-header">
+  <h1>
+    <%= @folder.name %>
+    <small>
+      by <%= link_to @folder.user.username, @folder.user %> <%= skill_level_badge(@folder.user.skill_level) %>
+    </small>
+  </h1>
+</div>
+<p class="lead"><%= @folder.description %></p>
+
+<hr />
+
+<% if @folder.entries.count <= 0 %>
+  No entries for this folder yet.
+<% else %>
+  <%= render 'entries/entry_list', :entries => @folder.entries %>
+<% end %>

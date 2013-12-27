@@ -2,7 +2,7 @@ class ResponsesController < ApplicationController
   def new
     @response = Response.new
     @entry = Entry.find(params[:entry_id])
-    @project = @entry.project
+    @folder = @entry.folder
     @critique = Critique.find(params[:critique_id])
 
     respond_to do |format|
@@ -33,7 +33,7 @@ class ResponsesController < ApplicationController
 
   def edit
     @entry = Entry.find(params[:entry_id])
-    @project = @entry.project
+    @folder = @entry.folder
     @critique = Critique.find(params[:critique_id])
     @response = Response.find(params[:id])
 

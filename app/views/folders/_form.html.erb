@@ -1,0 +1,23 @@
+<%= form_for [@folder] do |f| %>
+  <% if @folder.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <h2><%= pluralize(@folder.errors.count, "error") %> prohibited this folder from being saved:</h2>
+
+      <ul>
+      <% @folder.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.text_field :name, placeholder: "Folder Name", class: "form-control" %>
+  </div>
+  <div class="field">
+    <%= f.text_area :description, size: "20x3", placeholder: "Briefly describe this folder.", class: "form-control" %>
+  </div>
+  <div class="actions">
+    <%= f.submit button_name, class: "btn btn-default" %>
+  </div>
+<% end %>
