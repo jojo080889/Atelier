@@ -718,10 +718,11 @@
         };
         LiterallyCanvas.prototype.loadSnapshot = function(snapshot) {
             var shape, shapeRepr, _i, _len;
+            var snapshotShapes = snapshot.shapes;
             this.shapes = [];
             this.repaint(true);
-            for (_i = 0, _len = snapshot.shapes.length; _i < _len; _i++) {
-                shapeRepr = snapshot.shapes[_i];
+            for (_i = 0, _len = snapshotShapes.length; _i < _len; _i++) {
+                shapeRepr = snapshotShapes[_i];
                 if (shapeRepr.className in LC) {
                     shape = LC[shapeRepr.className].fromJSON(this, shapeRepr.data);
                     if (shape) this.execute(new LC.AddShapeAction(this, shape));
@@ -761,7 +762,6 @@
             }
 
             ctx.putImageData(imageData, 0, 0);
-            return this.trigger("drawingChange", {});
         };
         return LiterallyCanvas;
     }();
@@ -807,11 +807,13 @@
                 var w = this.lc.canvas.width;
                 var h = this.lc.canvas.height;
                 this.lc.oldPixelData = this.lc.ctx.getImageData(0, 0, w, h).data;
+                this.lc.trigger("drawingChange", {});
                 return this.lc.repaint(true);
             }
         };
         ConvertToGreyscaleAction.prototype.undo = function() {
             this.lc.oldPixelData = null;
+            this.lc.trigger("drawingChange", {});
             return this.lc.repaint();
         };
         return ConvertToGreyscaleAction;
