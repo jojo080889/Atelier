@@ -1,2 +1,18 @@
-<%= render 'header' %>
+<% if !@project.nil? %>
+  <%= render 'header' %>
+<% end %>
+<h1>Post a Project</h1>
+
+<p>
+Receive mentoring by creating projects you want help with. A project should represent a learning goal that you want to achieve. This could range from skill-related things like "Learn how to draw cats" to more "meta" projects like "Prepare for a tabling at a conference".
+</p>
+
+<p>
+  You'll be able to add entries to this project (like a diary), to record the progress you make on your goals and to help you mentors see how you improve.
+</p>
+
+<p>
+<strong>Example Project:</strong> <a href="http://atelier-stanford.herokuapp.com/projects/6">Improve my figure drawing skills</a>
+</p>
+<hr />
 <%= render 'form', button_name: "Create Entry" %>

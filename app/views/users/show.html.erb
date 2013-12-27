@@ -14,6 +14,11 @@
       <%= fa_icon "plus" %>
       New Project
     <% end %>
+
+    <%= link_to new_entry_path, class: "btn btn-default" do %>
+      <%= fa_icon "plus" %>
+      New Entry
+    <% end %>
   <% end %>
 </div>
 
@@ -22,7 +27,7 @@
 <div class="user-show">
   <ul class="nav nav-pills nav-stacked col-md-3">
     <li class="active">
-    <a href="#projects" data-toggle="tab"><%= pluralize @user.projects.count, "Project" %></a>
+    <a href="#projects" data-toggle="tab"><%= pluralize @user.entries.count, "Project" %></a>
     </li>
     <li>
     <a href="#critiques" data-toggle="tab"><%= pluralize @user.critiques.count, "Critique" %> Written</a>
@@ -39,7 +44,7 @@
         <em>This user has no projects.</em>
         </p>
       <% else %>
-        <%= render "projects/project_list", projects: @projects, scope: "users", show_name: false %>
+        <%= render "entries/project_list", projects: @entries, scope: "users", show_name: false %>
       <% end %>
     </div>
     <div class="tab-pane" id="critiques">
@@ -49,10 +54,10 @@
         </p>
       <% else %>
         <table class="table table-striped">
-          <% @user.critiques.each do |crit| %>
+          <% @user.critiques.order("created_at DESC").each do |crit| %>
             <tr>
-              <td>On <%= link_to crit.entry.title, project_entry_path(crit.entry.project, crit.entry) %> by <%= link_to crit.entry.user.username, crit.entry.user %></td>
-              <td><%= link_to "View critique", project_entry_path(crit.entry.project, crit.entry, anchor: "critique_#{crit.id}") %></td>
+              <td>On <%= link_to crit.entry.title, entry_path(crit.entry) %> by <%= link_to crit.entry.user.username, crit.entry.user %></td>
+              <td><%= link_to "View critique", entry_path(crit.entry, anchor: "critique_#{crit.id}") %></td>
               <td>created <%= time_ago_in_words crit.created_at %> ago</td>
             </tr>
           <% end %>
@@ -68,8 +73,8 @@
         <table class="table table-striped">
           <% @user.critiques_received.each do |crit| %>
             <tr>
-              <td>From <%= link_to crit.user.username, crit.user %> on <%= link_to crit.entry.title, project_entry_path(crit.entry.project, crit.entry) %></td>
-              <td><%= link_to "View critique", project_entry_path(crit.entry.project, crit.entry, anchor: "critique_#{crit.id}") %></td>
+              <td>From <%= link_to crit.user.username, crit.user %> on <%= link_to crit.entry.title, entry_path(crit.entry) %></td>
+              <td><%= link_to "View critique", entry_path(crit.entry, anchor: "critique_#{crit.id}") %></td>
               <td>created <%= time_ago_in_words crit.created_at %> ago</td>
             </tr>
           <% end %>

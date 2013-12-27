@@ -26,7 +26,7 @@ class ResponsesController < ApplicationController
         if (current_user.id != @critique.user.id)
           NotificationMailer.response_received_email(@critique).deliver
         end
-        format.html { redirect_to project_entry_path(@entry.project, @entry), notice: 'Critique response was successfully created.' }
+        format.html { redirect_to entry_path(@entry), notice: 'Critique response was successfully created.' }
       end
     end
   end
@@ -49,7 +49,7 @@ class ResponsesController < ApplicationController
 
     respond_to do |format|
       if @response.update_attributes(params[:response])
-        format.html { redirect_to project_entry_path(@entry.project, @entry), notice: 'Critique response was successfully updated.' }
+        format.html { redirect_to entry_path(@entry), notice: 'Critique response was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -66,7 +66,7 @@ class ResponsesController < ApplicationController
     @response.destroy
 
     respond_to do |format|
-      format.html { redirect_to project_entry_path(@entry.project, @entry), notice: "Critique response was successfully deleted." }
+      format.html { redirect_to entry_path(@entry), notice: "Critique response was successfully deleted." }
       format.json { head :no_content }
     end
   end

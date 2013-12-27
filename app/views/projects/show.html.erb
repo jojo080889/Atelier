@@ -1,6 +1,6 @@
 <% if can? :manage, @project %>
 <div class="project-actions pull-right">
-  <%= link_to new_project_entry_path(@project), class: "btn btn-primary" do %>
+  <%= link_to new_entry_path, class: "btn btn-primary" do %>
     <%= fa_icon "plus" %>
     New Entry
   <% end %>

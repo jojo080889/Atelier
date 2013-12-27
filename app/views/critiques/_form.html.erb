@@ -1,5 +1,5 @@
 <% if current_user.can_critique? @entry %>
-  <%= form_for [@project, @entry, @critique] do |f| %>
+  <%= form_for [@entry, @critique] do |f| %>
     <% if @critique.errors.any? %>
       <div id="error_explanation" class="alert alert-danger">
         <h2><%= pluralize(@critique.errors.count, "error") %> prohibited this critique from being saved:</h2>

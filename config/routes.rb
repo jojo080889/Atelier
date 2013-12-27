@@ -1,17 +1,17 @@
 Atelier::Application.routes.draw do
   resources :projects do
-    resources :entries do
-      resources :critiques do
-        post "/like" => "critiques#like", :as => "like"
-        post "/unlike" => "critiques#unlike", :as => "unlike"
-        resources :responses 
-      end
-
-      post "/like" => "entries#like", :as => "like"
-      post "/unlike" => "entries#unlike", :as => "unlike"
+    post "/sort" => "projects#sort", on: :collection, as: :sort
+  end
+  resources :entries do
+    resources :critiques do
+      post "/like" => "critiques#like", :as => "like"
+      post "/unlike" => "critiques#unlike", :as => "unlike"
+      resources :responses 
     end
 
-    post "/sort" => "projects#sort", on: :collection, as: :sort
+    post "/like" => "entries#like", :as => "like"
+    post "/unlike" => "entries#unlike", :as => "unlike"
+    post "/sort" => "entries#sort", on: :collection, as: :sort
   end
   devise_for :users
   resources :users

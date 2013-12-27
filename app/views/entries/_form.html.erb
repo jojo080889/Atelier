@@ -46,7 +46,7 @@
                 </label>
               </td>
               <td class="critique-link">
-                <%= link_to "See full critique", project_entry_path(crit.entry.project, crit.entry, anchor: "critique_#{crit.id}"), target: "_new" %>
+                <%= link_to "See full critique", entry_path(crit.entry, anchor: "critique_#{crit.id}"), target: "_new" %>
               </td>
               <td class="critiquer">
                 by <%= link_to crit.user.username, crit.user, target: "_new" %>

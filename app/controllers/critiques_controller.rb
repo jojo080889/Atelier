@@ -15,7 +15,7 @@ class CritiquesController < ApplicationController
     respond_to do |format|
       if @critique.save
         NotificationMailer.critique_received_email(@entry).deliver
-        format.html { redirect_to project_entry_path(@project, @entry), notice: 'Critique was successfully created.' }
+        format.html { redirect_to entry_path(@entry), notice: 'Critique was successfully created.' }
       else
         format.html { render action: "new" }
         format.json { render json: @critique.errors, status: :unprocessable_entity }
@@ -45,7 +45,7 @@ class CritiquesController < ApplicationController
 
     respond_to do |format|
       if @critique.update_attributes(params[:critique])
-        format.html { redirect_to project_entry_path(@project, @entry), notice: 'Critique was successfully updated.' }
+        format.html { redirect_to entry_path(@entry), notice: 'Critique was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -62,7 +62,7 @@ class CritiquesController < ApplicationController
     @critique.destroy
 
     respond_to do |format|
-      format.html { redirect_to project_entry_path(@project, @entry), notice: "Critique was successfully deleted." }
+      format.html { redirect_to entry_path(@entry), notice: "Critique was successfully deleted." }
       format.json { head :no_content }
     end
   end

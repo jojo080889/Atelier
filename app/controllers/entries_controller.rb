@@ -3,6 +3,10 @@ class EntriesController < ApplicationController
   load_and_authorize_resource
 
   def index
+    @order_clause = "critiques_count"
+    @projects = Entry.order(@order_clause)
+    @mentoring_projects = Entry.get_mentoring(@order_clause, current_user)
+    @rec_projects = Entry.get_recommended(@order_clause, current_user)
   end
 
   def show
@@ -19,7 +23,6 @@ class EntriesController < ApplicationController
 
   def new
     @entry = Entry.new
-    @project = Project.find(params[:project_id])
     @critique_options = current_user.recent_critiques_received
 
     respond_to do |format|
@@ -36,9 +39,7 @@ class EntriesController < ApplicationController
 
   def create
     @entry = Entry.new(params[:entry])
-    @project = Project.find(params[:project_id])
     @entry.user_id = current_user.id
-    @entry.project_id = @project.id
 
     respond_to do |format|
       if @entry.save
@@ -56,7 +57,7 @@ class EntriesController < ApplicationController
           end
         end
 
-        format.html { redirect_to project_entry_path(@project, @entry), notice: 'Project entry was successfully created.' }
+        format.html { redirect_to entry_path(@entry), notice: 'Project entry was successfully created.' }
       else
         format.html { render action: "new" }
         format.json { render json: @entry.errors, status: :unprocessable_entity }
@@ -87,7 +88,7 @@ class EntriesController < ApplicationController
           end
         end
 
-        format.html { redirect_to project_entry_path(@project, @entry), notice: 'Project entry was successfully updated.' }
+        format.html { redirect_to entry_path(@entry), notice: 'Project entry was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -119,6 +120,28 @@ class EntriesController < ApplicationController
   def unlike
     @entry = Entry.find(params[:entry_id])
     @entry.unliked_by current_user
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def sort
+    @scope = params[:scope]
+    @order_by = params[:order_by]
+    @order_clause = Entry.get_order_clause(@order_by)
+    @user = User.find_by_username(params[:username]) if !params[:username].nil?
+    @show_name = (@scope != "users")
+
+    if @scope == "all"
+      @entries = Entry.order(@order_clause)
+    elsif @scope == "mentoring"
+      @entries = Entry.get_mentoring(@order_clause, current_user)
+    elsif @scope == "recommended"
+      @entries = Entry.get_recommended(@order_clause, current_user)
+    elsif @scope == "users"
+      @entries = Entry.get_by_user(@order_clause, @user)
+    end
 
     respond_to do |format|
       format.js

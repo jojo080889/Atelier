@@ -3,8 +3,8 @@
 <table class="table table-striped">
   <% entries.each do |entry| %>
     <tr>
-      <td><strong><%= link_to entry.title, project_entry_path(entry.project, entry) %></strong></td>
-      <td><%= link_to "View entry", project_entry_path(entry.project, entry) %></td>
+      <td><strong><%= link_to entry.title, entry_path(entry) %></strong></td>
+      <td><%= link_to "View entry", entry_path(entry) %></td>
       <td>created <%= time_ago_in_words entry.created_at %> ago</td>
       <td><%= pluralize entry.critiques.count, "critique" %> received</td>
     </tr>

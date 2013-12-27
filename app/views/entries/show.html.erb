@@ -9,11 +9,11 @@
 
 <div class="entry-actions pull-right">
   <% if can? :manage, @entry %>
-    <%= link_to edit_project_entry_path(@entry.project, @entry), class: "btn" do %>
+    <%= link_to edit_entry_path(@entry), class: "btn" do %>
       <%= fa_icon "pencil" %>
       Edit
     <% end %>
-    <%= link_to project_entry_path(@entry.project, @entry), method: :delete, confirm: "Are you sure you want to delete this project entry? This action cannot be undone.", class: "btn" do %>
+    <%= link_to entry_path(@entry), method: :delete, confirm: "Are you sure you want to delete this project entry? This action cannot be undone.", class: "btn" do %>
       <%= fa_icon "times" %>
       Delete
     <% end %>
@@ -49,7 +49,7 @@
             <%= truncate(crit.text, length: 50) %>
           </td>
           <td class="critique-link">
-            <%= link_to "See full critique", project_entry_path(crit.entry.project, crit.entry, anchor: "critique_#{crit.id}") %>
+            <%= link_to "See full critique", entry_path(crit.entry, anchor: "critique_#{crit.id}") %>
           </td>
           <td class="critiquer">
             by <%= link_to crit.user.username, crit.user  %>

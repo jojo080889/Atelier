@@ -8,7 +8,7 @@
       You have received a critique on your project entry!
     </p>
     <p>
-      To view it, <%= link_to "go to your project entry page", project_entry_url(@project, @entry) %>.
+      To view it, <%= link_to "go to your project entry page", entry_url(@entry) %>.
     </p>
     <%= render :partial => "notification_mailer/footer" %>
   </body>

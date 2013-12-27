@@ -71,7 +71,7 @@ class User < ActiveRecord::Base
   end
 
   def critiques_received
-    Critique.joins(:entry).where("entries.user_id = ?", self.id)
+    Critique.joins(:entry).where("entries.user_id = ?", self.id).order("created_at DESC")
   end
 
   def critiques_likes

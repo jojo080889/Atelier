@@ -1,0 +1,38 @@
+<% show_name = true if local_assigns[:show_name].nil? %>
+
+<tr class="project">
+  <td>
+    <div class="pull-left">
+      <div class="project-link">
+        <h3><%= link_to project.title, project  %></h3>
+        <p><%= truncate(project.content, length: 60) %></p>
+      </div>
+      <div class="project-info">
+        <span class="<%= 'text-danger' if project.critiques.count == 0 %>">
+          <strong><%= pluralize project.critiques.count, "critique" %></strong>
+        </span> &sdot;
+        last updated <%= time_ago_in_words project.updated_at %> ago
+        <% if show_name %>
+          <br />
+          by <%= project.user.username %> <%= skill_level_badge(project.user.skill_level) %>
+        <% end %>
+      </div>
+    </div>
+      <div class="pull-right project-actions">
+        <% if project.is_mentored_by? current_user %>
+          <%= link_to project, class: "btn", disabled: "disabled" do %>
+            <%= fa_icon "star" %>
+            Mentoring
+          <% end %>
+        <% elsif project.user.id != current_user.id %>
+          <%= link_to project, class: "btn btn-primary" do %>
+            <%= fa_icon "star" %>
+            Mentor
+          <% end %>
+        <% elsif show_name %>
+          <%= link_to "Your project", project, class: "btn", disabled: "disabled" %>
+        <% end %>
+      </div>
+    <div class="clearfix"></div>
+  </td>
+</tr>
