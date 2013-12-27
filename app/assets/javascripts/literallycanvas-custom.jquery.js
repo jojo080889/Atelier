@@ -710,18 +710,25 @@
             return _results;
         };
         LiterallyCanvas.prototype.getSnapshotJSON = function() {
-            return JSON.stringify(this.shapes);
+            var greyscale = false;
+            if (this.oldPixelData != null) {
+                greyscale = true;
+            }
+            return JSON.stringify({shapes: this.shapes, greyscale: greyscale});
         };
         LiterallyCanvas.prototype.loadSnapshot = function(snapshot) {
             var shape, shapeRepr, _i, _len;
             this.shapes = [];
             this.repaint(true);
-            for (_i = 0, _len = snapshot.length; _i < _len; _i++) {
-                shapeRepr = snapshot[_i];
+            for (_i = 0, _len = snapshot.shapes.length; _i < _len; _i++) {
+                shapeRepr = snapshot.shapes[_i];
                 if (shapeRepr.className in LC) {
                     shape = LC[shapeRepr.className].fromJSON(this, shapeRepr.data);
                     if (shape) this.execute(new LC.AddShapeAction(this, shape));
                 }
+            }
+            if (snapshot.greyscale) {
+                this.oldPixelData = 1;
             }
             return this.repaint(true);
         };
@@ -754,6 +761,7 @@
             }
 
             ctx.putImageData(imageData, 0, 0);
+            return this.trigger("drawingChange", {});
         };
         return LiterallyCanvas;
     }();

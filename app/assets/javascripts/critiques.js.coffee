@@ -13,6 +13,7 @@ $(document).ready ->
         backgroundShapes: [originalShape],
         toolClasses: [LC.PencilWidget, LC.EraserWidget, LC.LineWidget, LC.RectangleWidget, LC.TextWidget, LC.PanWidget],
         onInit: (lc) ->
+          window.LCTemp = lc;
           literallyCanvasInit(lc, $(".new_critique"))
       })
 
