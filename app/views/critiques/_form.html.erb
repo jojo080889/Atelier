@@ -1,5 +1,5 @@
-<% if current_user.can_critique? @entry %>
-  <%= form_for [@entry, @critique] do |f| %>
+<% if current_user.can_critique? @project %>
+  <%= form_for [@project, @critique] do |f| %>
     <% if @critique.errors.any? %>
       <div id="error_explanation" class="alert alert-danger">
         <h2><%= pluralize(@critique.errors.count, "error") %> prohibited this critique from being saved:</h2>
@@ -13,10 +13,10 @@
     <% end %>
     
     <div class="field text">
-      <%= f.text_area :text, size: "20x6", placeholder: "Write your critique for this entry here...", data: {provide: "markdown"} %>
+      <%= f.text_area :text, size: "20x6", placeholder: "Write your critique for this project here...", data: {provide: "markdown"} %>
     </div>
     
-    <% if !@entry.image_file_name.nil? %>
+    <% if !@project.image_file_name.nil? %>
       <div class="literally-toggle">
         <%= fa_icon "plus" %> 
         Add a paintover/redline
@@ -26,19 +26,19 @@
       <%= f.hidden_field :paintover_snapshot %>
     <% end %>
 
-    <% if @entry.user.skill_level != "Advanced" %>
+    <% if @project.user.skill_level != "Advanced" %>
       <div class="rating-info">
-        <%= link_to @entry.user.username, @entry.user %> has <%= pluralize(@entry.user.next_tier_ratings, "entry rating") %> of <%= @entry.user.next_tier %> -- needs <%= 5 - @entry.user.next_tier_ratings %> more to become a <%= @entry.user.next_tier %> user
+        <%= link_to @project.user.username, @project.user %> has <%= pluralize(@project.user.next_tier_ratings, "project rating") %> of <%= @project.user.next_tier %> -- needs <%= 5 - @project.user.next_tier_ratings %> more to become a <%= @project.user.next_tier %> user
       </div>
 
       <div class="field nominate">
         <div class="rating-label">
-          Rate the overall quality of the project entry:
+          Rate the overall quality of the project:
         </div>
         <div class="rating-container btn-group">
-          <% if @entry.user.skill_level == "Beginner" %>
-            <a class="rating beginner btn btn-default <%= "btn-warning" if @entry.user.skill_level == "Beginner" %>">
-              <% if @entry.user.skill_level == "Beginner" %>
+          <% if @project.user.skill_level == "Beginner" %>
+            <a class="rating beginner btn btn-default <%= "btn-warning" if @project.user.skill_level == "Beginner" %>">
+              <% if @project.user.skill_level == "Beginner" %>
                 <%= fa_icon "star" %>
               <% else %>
                 <%= fa_icon "star-o" %>
@@ -47,8 +47,8 @@
             </a>
           <% end %>
 
-          <a class="rating intermediate btn btn-default <%= "btn-warning" if @entry.user.skill_level == "Intermediate" %>">
-            <% if @entry.user.skill_level == "Intermediate" %>
+          <a class="rating intermediate btn btn-default <%= "btn-warning" if @project.user.skill_level == "Intermediate" %>">
+            <% if @project.user.skill_level == "Intermediate" %>
               <%= fa_icon "star" %>
             <% else %>
               <%= fa_icon "star-o" %>
@@ -61,16 +61,16 @@
             Advanced
           </a>
         </div>
-        <%= f.hidden_field :rating, :value => skill_level_to_rating(@entry.user.skill_level) %>
+        <%= f.hidden_field :rating, :value => skill_level_to_rating(@project.user.skill_level) %>
       </div>
     <% end %>
     <div class="actions">
       <%= f.submit "Post", class: "btn btn-default" %>
     </div>
   <% end %>
-<% elsif current_user.id != @entry.user.id %>
+<% elsif current_user.id != @project.user.id %>
   <div class="alert alert-info">
-    You are not yet at a high enough skill level (or too high of a skill level) to critique this project entry.
+    You are not yet at a high enough skill level (or too high of a skill level) to critique this project.
   </div>
 <% end %>
 

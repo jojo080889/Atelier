@@ -6,6 +6,15 @@ $(document).ready ->
   sortProjectsHandler()
   window.sortProjectsHandler = sortProjectsHandler
 
+  $(".project-browse-image").click (e) ->
+    $("#project_image").click();
+    e.preventDefault();
+
+  $("#project_image").change ->
+    string = $("#project_image").val()
+    filename = string.match(/\\([^\\]*\..*$)/)[1]
+    $("#project-file-name").html(filename)
+
 sortProjectsHandler = (element = "all") ->
   element = $(".sort-projects #order_by") if (element == "all")
   element.change (e) ->

@@ -2,23 +2,23 @@ Atelier::Application.routes.draw do
   resources :folders do
     post "/sort" => "folders#sort", on: :collection, as: :sort
   end
-  resources :entries do
+  resources :projects do
     resources :critiques do
       post "/like" => "critiques#like", :as => "like"
       post "/unlike" => "critiques#unlike", :as => "unlike"
       resources :responses 
     end
 
-    post "/like" => "entries#like", :as => "like"
-    post "/unlike" => "entries#unlike", :as => "unlike"
-    post "/sort" => "entries#sort", on: :collection, as: :sort
+    post "/like" => "projects#like", :as => "like"
+    post "/unlike" => "projects#unlike", :as => "unlike"
+    post "/sort" => "projects#sort", on: :collection, as: :sort
   end
   devise_for :users
   resources :users
 
   get "/about", to: "pages#about"
 
-  root :to => "entries#index"
+  root :to => "projects#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

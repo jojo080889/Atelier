@@ -2,9 +2,9 @@ $(document).ready ->
   window.literallyCanvasInit = literallyCanvasInit
 
   # This only works in chrome with the --disable-web-security flag.
-  if $(".entry-image img").length != 0
+  if $(".project-image img").length != 0
     originalImg = new Image()
-    originalImg.src = $(".entry-image img").attr("src")
+    originalImg.src = $(".project-image img").attr("src")
     originalImg.crossOrigin = "use-credentials"
     originalImg.onload = ->
       originalShape = new LC.ImageShape(0,0, originalImg)

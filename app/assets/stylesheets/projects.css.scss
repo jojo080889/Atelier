@@ -1,18 +1,18 @@
-// Place all the styles related to the Entries controller here.
+// Place all the styles related to the Projects controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-// Entry Index
+// Project Index
 .user-show {
   padding-top: 30px;
 }
 
-// Entry New
+// Project New
 .back-to-folder {
   margin-top: 0px !important;
 }
 
-.new_entry, .edit_entry {
+.new_project, .edit_project {
   input {
     padding: 4px 6px;
     margin-bottom: 10px;
@@ -78,14 +78,14 @@
   }
 }
 
-// Entry Show
-.entry-info {
+// Project Show
+.project-info {
   h1 {
     margin-top: 0;
   }
 }
 
-.entry-image {
+.project-image {
   text-align: center;
   margin-bottom: 10px;
 

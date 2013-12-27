@@ -2,10 +2,10 @@ require 'paperclip_string'
 
 class Critique < ActiveRecord::Base
   belongs_to :user
-  belongs_to :entry, :counter_cache => true
+  belongs_to :project, :counter_cache => true
   has_many :responses, :dependent => :destroy
   has_attached_file :paintover
-  attr_accessible :user_id, :entry_id, :text, :rating, :paintover, :paintover_snapshot
+  attr_accessible :user_id, :project_id, :text, :rating, :paintover, :paintover_snapshot
 
   after_create :increment_folder_critiques_counter
   after_destroy :decrement_folder_critiques_counter
@@ -22,14 +22,14 @@ class Critique < ActiveRecord::Base
   private
 
   def increment_folder_critiques_counter
-    if !self.entry.folder.nil?
-      Folder.increment_counter(:critiques_count, self.entry.folder.id) 
+    if !self.project.folder.nil?
+      Folder.increment_counter(:critiques_count, self.project.folder.id) 
     end
   end
 
   def decrement_folder_critiques_counter
-    if !self.entry.folder.nil?
-      Folder.decrement_counter(:critiques_count, self.entry.folder.id)
+    if !self.project.folder.nil?
+      Folder.decrement_counter(:critiques_count, self.project.folder.id)
     end
   end
 end

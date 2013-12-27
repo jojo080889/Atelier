@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131227060636) do
+ActiveRecord::Schema.define(:version => 20131227065611) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(:version => 20131227060636) do
 
   create_table "critiques", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "entry_id"
+    t.integer  "project_id"
     t.text     "text"
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
@@ -43,7 +43,17 @@ ActiveRecord::Schema.define(:version => 20131227060636) do
     t.text     "paintover_snapshot"
   end
 
-  create_table "entries", :force => true do |t|
+  create_table "folders", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "user_id"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.integer  "entries_count",   :default => 0
+    t.integer  "critiques_count", :default => 0
+  end
+
+  create_table "projects", :force => true do |t|
     t.string   "title"
     t.integer  "user_id"
     t.datetime "created_at",                         :null => false
@@ -55,16 +65,6 @@ ActiveRecord::Schema.define(:version => 20131227060636) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.integer  "critiques_count",    :default => 0
-  end
-
-  create_table "folders", :force => true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.integer  "user_id"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
-    t.integer  "entries_count",   :default => 0
-    t.integer  "critiques_count", :default => 0
   end
 
   create_table "responses", :force => true do |t|

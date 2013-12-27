@@ -3,7 +3,7 @@ $("#critique_<%= @critique.id %>").after('<%= escape_javascript(render "critique
 $("#edit_critique_<%= @critique.id %> textarea").markdown();
 
 var originalImg = new Image();
-originalImg.src = $(".entry-image img").attr("src");
+originalImg.src = $(".project-image img").attr("src");
 originalImg.crossOrigin = "use-credentials";
 originalImg.onload = function() {
   var originalShape = new LC.ImageShape(0,0, originalImg);

@@ -2,8 +2,8 @@ require 'format'
 
 class Folder < ActiveRecord::Base
   belongs_to :user
-  has_many :entries, :dependent => :destroy
-  has_many :critiques, through: :entries
+  has_many :projects, :dependent => :destroy
+  has_many :critiques, through: :projects
   attr_accessible :name, :description, :user_id
 
   validates_presence_of :name
@@ -17,10 +17,10 @@ class Folder < ActiveRecord::Base
       "created_at DESC"
     when "recentupdated"
       "updated_at DESC"
-    when "lowentries"
-      "entries_count ASC"
-    when "highentries"
-      "entries_count DESC"
+    when "lowprojects"
+      "projects_count ASC"
+    when "highprojects"
+      "projects_count DESC"
     when "lowcritiques"
       "critiques_count ASC"
     when "highcritiques"
@@ -35,7 +35,7 @@ class Folder < ActiveRecord::Base
   end
 
   def self.get_mentoring(order_by, user)
-    Folder.joins(:entries => :critiques).where("critiques.user_id = ?", user.id).uniq.order(order_by)
+    Folder.joins(:projects => :critiques).where("critiques.user_id = ?", user.id).uniq.order(order_by)
   end
 
   def self.get_recommended(order_by, user)
@@ -48,7 +48,7 @@ class Folder < ActiveRecord::Base
   end
 
   def is_mentored_by?(user) 
-    @folders = Folder.joins(:entries => :critiques).where("critiques.user_id = ?", user.id).uniq
+    @folders = Folder.joins(:projects => :critiques).where("critiques.user_id = ?", user.id).uniq
     @folders.include? self
   end
 end

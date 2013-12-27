@@ -1,10 +1,10 @@
-<%= form_for(@entry) do |f| %>
-  <% if @entry.errors.any? %>
+<%= form_for(@project) do |f| %>
+  <% if @project.errors.any? %>
     <div id="error_explanation" class="alert alert-danger">
-      <h2><%= pluralize(@entry.errors.count, "error") %> prohibited this entry from being saved:</h2>
+      <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
 
       <ul>
-      <% @entry.errors.full_messages.each do |msg| %>
+      <% @project.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
@@ -12,17 +12,17 @@
   <% end %>
 
   <div class="field">
-    <%= f.text_field :title, placeholder: "Project Entry Title", class: "largely" %>
+    <%= f.text_field :title, placeholder: "Project Title", class: "largely" %>
   </div>
   <div class="field form-group">
     <%= f.label :image %><br />
     <%= f.file_field :image, class: "hidden" %>
-    <button class="entry-browse-image btn btn-default">Choose file</button>
-    <span id="entry-file-name">
-      <% if @entry.image_file_name.nil? %>
+    <button class="project-browse-image btn btn-default">Choose file</button>
+    <span id="project-file-name">
+      <% if @project.image_file_name.nil? %>
         <em>No file chosen</em>
       <% else %>
-        <%= @entry.image_file_name %>
+        <%= @project.image_file_name %>
       <% end %>
     </span>
   </div>
@@ -32,21 +32,21 @@
   <% if !(@critique_options.nil? || @critique_options.count <= 0) %>
     <div class="field helpful-critiques panel panel-default">
       <div class="critiques-info panel-heading">
-        Pick recent critiques for this project you found particularly helpful for this entry:
+        Pick recent critiques for this project you found particularly helpful for this project:
       </div>
       <div class="critiques-select panel-body">
         <table>
           <% @critique_options.each do |crit| %>
-            <% if (crit.likes.size >= 1 && @entry.voted_for?(crit)) || crit.likes.size <= 0 %>
+            <% if (crit.likes.size >= 1 && @project.voted_for?(crit)) || crit.likes.size <= 0 %>
             <tr>
               <td class="critique-select">
                 <label>
-                  <input type="checkbox" name="critique[<%= crit.id %>]" value="<%= crit.id %>" <%= @entry.voted_for?(crit) ? "checked" : "" %> />
+                  <input type="checkbox" name="critique[<%= crit.id %>]" value="<%= crit.id %>" <%= @project.voted_for?(crit) ? "checked" : "" %> />
                   <%= truncate(crit.text, length: 70) %>
                 </label>
               </td>
               <td class="critique-link">
-                <%= link_to "See full critique", entry_path(crit.entry, anchor: "critique_#{crit.id}"), target: "_new" %>
+                <%= link_to "See full critique", project_path(crit.project, anchor: "critique_#{crit.id}"), target: "_new" %>
               </td>
               <td class="critiquer">
                 by <%= link_to crit.user.username, crit.user, target: "_new" %>

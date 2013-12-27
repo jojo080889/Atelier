@@ -1,10 +1,10 @@
 class NotificationMailer < ActionMailer::Base
   default from: "atelier@cs.stanford.edu"
 
-  def critique_received_email(entry)
-    @user = entry.user
-    @entry = entry
-    @folder = entry.folder
+  def critique_received_email(project)
+    @user = project.user
+    @project = project
+    @folder = project.folder
     mail(
       to: @user.email,
       subject: "[Atelier] You've received a critique!" 
@@ -14,19 +14,19 @@ class NotificationMailer < ActionMailer::Base
   def response_received_email(critique)
     @user = critique.user
     @critique = critique
-    @entry = critique.entry
-    @folder = @entry.folder
+    @project = critique.project
+    @folder = @project.folder
     mail(
       to: @user.email,
       subject: "[Atelier] You've received a critique response!"
     )
   end
 
-  def crit_marked_email(critique, entry)
+  def crit_marked_email(critique, project)
     @user = critique.user
     @critique = critique
-    @entry = entry
-    @folder = @entry.folder
+    @project = project
+    @folder = @project.folder
     mail(
       to: @user.email,
       subject: "[Atelier] Your critique has been marked as helpful!"

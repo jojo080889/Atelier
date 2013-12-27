@@ -1,8 +1,8 @@
 <% if can? :manage, @folder%>
 <div class="project-actions pull-right">
-  <%= link_to new_entry_path, class: "btn btn-primary" do %>
+  <%= link_to new_project_path, class: "btn btn-primary" do %>
     <%= fa_icon "plus" %>
-    New Entry
+    New Project
   <% end %>
   
   <%= link_to edit_folder_path(@folder), class: "btn" do %>
@@ -28,8 +28,8 @@
 
 <hr />
 
-<% if @folder.entries.count <= 0 %>
-  No entries for this folder yet.
+<% if @folder.projects.count <= 0 %>
+  No projects for this folder yet.
 <% else %>
-  <%= render 'entries/entry_list', :entries => @folder.entries %>
+  <%= render 'projects/entry_list', :projects => @folder.projects %>
 <% end %>

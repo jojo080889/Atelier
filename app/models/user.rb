@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   has_many :folders
-  has_many :entries
+  has_many :projects
   has_many :critiques
 
   acts_as_voter
@@ -31,8 +31,8 @@ class User < ActiveRecord::Base
     errors.add(:birthday, "must show that you are 13 or older.") if birthday.nil? || age < 13
   end
 
-  def can_critique?(entry)
-    self.id != entry.user.id && (self.skill_level == entry.user.skill_level || self.lower_tier == entry.user.skill_level)
+  def can_critique?(project)
+    self.id != project.user.id && (self.skill_level == project.user.skill_level || self.lower_tier == project.user.skill_level)
   end
 
   def next_tier
@@ -62,16 +62,16 @@ class User < ActiveRecord::Base
   def next_tier_ratings
     case self.skill_level
     when "Beginner"
-      Critique.joins(:entry).where("entries.user_id = ? AND rating = 3", self.id).count
+      Critique.joins(:project).where("projects.user_id = ? AND rating = 3", self.id).count
     when "Intermediate"
-      Critique.joins(:entry).where("entries.user_id = ? AND rating = 5", self.id).count
+      Critique.joins(:project).where("projects.user_id = ? AND rating = 5", self.id).count
     else
       0
     end
   end
 
   def critiques_received
-    Critique.joins(:entry).where("entries.user_id = ?", self.id).order("created_at DESC")
+    Critique.joins(:project).where("projects.user_id = ?", self.id).order("created_at DESC")
   end
 
   def critiques_likes
@@ -83,7 +83,7 @@ class User < ActiveRecord::Base
   end
 
   def recent_critiques_received(limit = 5)
-    Critique.joins(:entry).where(["entries.user_id = ?", self.id]).order(:created_at).limit(limit)
+    Critique.joins(:project).where(["projects.user_id = ?", self.id]).order(:created_at).limit(limit)
   end
 
   def num_helpful_critiques_needed

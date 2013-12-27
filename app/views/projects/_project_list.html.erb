@@ -4,7 +4,7 @@
 <% order_by = "lowcritiques" if local_assigns[:order_by].nil? %>
 
 <div class="project-list-container">
-<%= form_tag sort_entries_path, remote: true, class: "sort-projects form-group pull-right" do %>
+<%= form_tag sort_projects_path, remote: true, class: "sort-projects form-group pull-right" do %>
   <label>
     Sort by 
   </label>
@@ -28,6 +28,6 @@
       </th>
     </tr>
   <% end %>
-  <%= render partial: "entries/project", collection: projects, locals: { :show_name => show_name } %>
+  <%= render partial: "projects/project", collection: projects, locals: { :show_name => show_name } %>
 </table>
 </div>

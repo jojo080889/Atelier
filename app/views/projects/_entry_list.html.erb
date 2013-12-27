@@ -1,0 +1,12 @@
+<h3><%= pluralize projects.count, "project" %></h3>
+
+<table class="table table-striped">
+  <% projects.each do |project| %>
+    <tr>
+      <td><strong><%= link_to project.title, project_path(project) %></strong></td>
+      <td><%= link_to "View project", project_path(project) %></td>
+      <td>created <%= time_ago_in_words project.created_at %> ago</td>
+      <td><%= pluralize project.critiques.count, "critique" %> received</td>
+    </tr>
+  <% end %>
+</table>

@@ -1,6 +1,6 @@
 require 'format'
 
-class Entry < ActiveRecord::Base
+class Project < ActiveRecord::Base
   belongs_to :user
   belongs_to :folder, :counter_cache => true, :touch => true
   has_many :critiques, :dependent => :destroy
@@ -32,16 +32,16 @@ class Entry < ActiveRecord::Base
   end
 
   def self.get_mentoring(order_by, user)
-    Entry.joins(:critiques).where("critiques.user_id = ?", user.id).uniq.order(order_by)
+    Project.joins(:critiques).where("critiques.user_id = ?", user.id).uniq.order(order_by)
   end
 
   def self.get_recommended(order_by, user)
-    @entries = Entry.joins(:user).where("users.id <> ? AND (users.skill_level = ? OR users.skill_level = ?)", user.id, user.skill_level, user.lower_tier).order(order_by)
-    @entries - self.get_mentoring(order_by, user)
+    @projects = Project.joins(:user).where("users.id <> ? AND (users.skill_level = ? OR users.skill_level = ?)", user.id, user.skill_level, user.lower_tier).order(order_by)
+    @projects - self.get_mentoring(order_by, user)
   end
 
   def self.get_by_user(order_by, user)
-    Entry.where("user_id = ?", user.id).order(order_by)
+    Project.where("user_id = ?", user.id).order(order_by)
   end
 
   def created_at_formatted
@@ -49,11 +49,11 @@ class Entry < ActiveRecord::Base
   end
 
   def critique_options(limit = 5)
-    Critique.joins(:entry).where(["entries.user_id = ? AND critiques.created_at < ?", self.user.id, self.created_at]).order("critiques.created_at").limit(limit)
+    Critique.joins(:project).where(["projects.user_id = ? AND critiques.created_at < ?", self.user.id, self.created_at]).order("critiques.created_at").limit(limit)
   end
 
   def is_mentored_by?(user) 
-    @entries = Entry.joins(:critiques).where("critiques.user_id = ?", user.id).uniq
-    @entries.include? self
+    @projects = Project.joins(:critiques).where("critiques.user_id = ?", user.id).uniq
+    @projects.include? self
   end
 end

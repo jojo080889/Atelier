@@ -1,0 +1,83 @@
+<%= render 'projects/header' %>
+
+<div class="project-info pull-left">
+  <h1><%= @project.title %></h1>
+  <p>
+    by <%= link_to @project.user.username, @project.user %> <%= skill_level_badge(@project.user.skill_level) %>
+  </p>
+</div>
+
+<div class="project-actions pull-right">
+  <% if can? :manage, @project %>
+    <%= link_to edit_project_path(@project), class: "btn" do %>
+      <%= fa_icon "pencil" %>
+      Edit
+    <% end %>
+    <%= link_to project_path(@project), method: :delete, confirm: "Are you sure you want to delete this project? This action cannot be undone.", class: "btn" do %>
+      <%= fa_icon "times" %>
+      Delete
+    <% end %>
+<% end %>
+</div>
+
+<div style="clear:both"></div>
+
+<div class="project-image">
+  <%= image_tag(@project.image.url, class: "small") if !@project.image_file_name.nil? %>
+</div>
+
+<div>
+  <% if @project.content == "" %>
+    <p class="text-muted">
+      <em>Hmm, this project doesn't seem to have any content.</em>
+    </p>
+  <% else %>
+    <%= Format.markdown @project.content %>
+  <% end %>
+</div>
+
+<% if !(@helpful_crits.nil? || @helpful_crits.count <= 0) %>
+<div class="helpful-critiques panel panel-info">
+  <div class="panel-heading">
+    The user thought the following critiques were helpful for this project:
+  </div>
+  <div class="panel-body critiques-select">
+    <table>
+      <% @helpful_crits.each do |crit| %>
+        <tr>
+          <td class="critique-select">
+            <%= truncate(crit.text, length: 50) %>
+          </td>
+          <td class="critique-link">
+            <%= link_to "See full critique", project_path(crit.project, anchor: "critique_#{crit.id}") %>
+          </td>
+          <td class="critiquer">
+            by <%= link_to crit.user.username, crit.user  %>
+            <%= skill_level_badge(crit.user.skill_level) %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+<% end %>
+
+<h3><%= pluralize @project.critiques.count, "Critique" %></h3>
+
+<% if @project.critiques.count <= 0 %>
+  <p>
+    No critiques yet.
+  </p>
+<% else %>
+  <%= render partial: "critiques/critique", collection: @project.critiques.order(:created_at) %>
+<% end %>
+
+<%= render "critiques/form" %>
+
+<script>
+  $(document).ready(function() {
+    $(".project-image img").click(function() {
+      $(this).toggleClass("small");
+    });
+  });
+</script>
