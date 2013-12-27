@@ -40,11 +40,17 @@
   }
 
   .critique-body {
-    .pull-right {
-      width: 150px;
+    &.paintover {
+      .pull-left {
+        width: 75%;
+      }
 
-      img {
-        width: 100%;
+      .pull-right {
+        width: 25%;
+
+        img {
+          width: 100%;
+        }
       }
     }
   }
