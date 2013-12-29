@@ -6,6 +6,9 @@ class CritiquesController < ApplicationController
     @project = Project.find(params[:project_id])
     @folder = @project.folder
     @critique = @project.critiques.new(params[:critique])
+    if current_or_guest_user.is_guest?
+      @critique.rating = nil
+    end
     @critique.user_id = current_or_guest_user.id
     if (params[:paintover_data] == "none" || params[:paintover_data].nil?)
       @critique.paintover = nil

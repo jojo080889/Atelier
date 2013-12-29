@@ -37,7 +37,7 @@
       <%= f.hidden_field :paintover_snapshot %>
     <% end %>
 
-    <% if @project.user.skill_level != "Advanced" %>
+    <% if !current_or_guest_user.is_guest? && @project.user.skill_level != "Advanced" %>
       <div class="rating-info">
         <%= link_to @project.user.username, @project.user %> has <%= pluralize(@project.user.next_tier_ratings, "project rating") %> of <%= @project.user.next_tier %> -- needs <%= 5 - @project.user.next_tier_ratings %> more to become a <%= @project.user.next_tier %> user
       </div>
