@@ -1,0 +1,8 @@
+<table class="table project-list table-bordered">
+  <tr class="header">
+    <th>
+      <%= pluralize folders.count, "folder" %>
+    </th>
+  </tr>
+  <%= render partial: "folders/folder", collection: folders, locals: { :show_name => show_name } %>
+</table>

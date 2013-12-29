@@ -1,0 +1,39 @@
+<% show_name = true if local_assigns[:show_name].nil? %>
+
+<tr class="project">
+  <td>
+    <div class="pull-left">
+      <div class="project-link">
+        <h3><%= link_to folder.name, folder %></h3>
+        <p><%= truncate(folder.description, length: 60) %></p>
+      </div>
+      <div class="project-info">
+        <span class="<%= 'text-danger' if folder.critiques.count == 0 %>">
+          <strong><%= pluralize folder.critiques.count, "critique" %></strong>
+        </span> &sdot;
+        <%= pluralize folder.projects.count, "project" %></strong> &sdot;
+        last updated <%= time_ago_in_words folder.updated_at %> ago
+        <% if show_name %>
+          <br />
+          by <%= folder.user.username %> <%= skill_level_badge(folder.user.skill_level) %>
+        <% end %>
+      </div>
+    </div>
+      <div class="pull-right project-actions">
+        <% if folder.is_mentored_by? current_user %>
+          <%= link_to folder, class: "btn", disabled: "disabled" do %>
+            <%= fa_icon "star" %>
+            Mentoring
+          <% end %>
+        <% elsif folder.user.id != current_user.id %>
+          <%= link_to folder, class: "btn btn-primary" do %>
+            <%= fa_icon "star" %>
+            Mentor
+          <% end %>
+        <% elsif show_name %>
+          <%= link_to "Your folder", folder, class: "btn", disabled: "disabled" %>
+        <% end %>
+      </div>
+    <div class="clearfix"></div>
+  </td>
+</tr>
