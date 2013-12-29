@@ -7,6 +7,58 @@
   padding-top: 30px;
 }
 
+// Projects Show
+.project-header {
+  margin-top: 0 !important;
+
+  small {
+    font-size: 50%;
+  }
+}
+
+.project-actions {
+  .btn {
+    border-color: #ccc;
+  }
+}
+
+// Projects Index
+.project-index {
+  margin-top: 30px;
+}
+
+.project-list {
+  tr.header {
+    background-color: #eee;
+  }
+}
+
+.sort-projects {
+  .form-control {
+    display: inline-block;
+    width: 250px;
+    margin-left: 10px;
+  }
+}
+
+.project {
+  padding: 10px;
+
+  .thumbnail {
+    padding: 10px;
+    margin-bottom: 0;
+
+    &:hover {
+      text-decoration: none;
+      border-color: #428bca;
+    }
+
+    .pull-left {
+      max-width: 80%;
+    }
+  }
+}
+
 // Project New
 .back-to-folder {
   margin-top: 0px !important;

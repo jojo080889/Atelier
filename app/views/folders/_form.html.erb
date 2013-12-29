@@ -17,6 +17,43 @@
   <div class="field">
     <%= f.text_area :description, size: "20x3", placeholder: "Briefly describe this folder.", class: "form-control" %>
   </div>
+  <div class="field folders-entries-choose panel panel-default">
+    <div class="panel-heading">
+      <p>
+        Choose <strong>projects</strong> to include in this folder:
+        <br />
+        <small class="text-muted">
+          Adding an project already inside a different folder will move it out of its original folder.  
+        </small>
+      </p>
+    </div>
+    <div class="panel-body">
+      <table>
+        <% current_user.projects.each do |project| %>
+          <tr>
+            <td class="entry-name">
+              <label>
+                <input type="checkbox" name="project[<%= project.id %>]" value="<%= project.id %>" <%= !@folder.new_record? && (project.folder == @folder) ? "checked": "" %> />
+              </label>
+              
+              <%= link_to project.title, project %>
+            </td>
+            <td class="folder-label">
+              <% if !project.folder.nil? %>
+                <div class="label label-info">
+                  Folder: <%= project.folder.name %>
+                </div>
+              <% else %>
+                <div class="label label-default">
+                  No folder
+                </div>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
   <div class="actions">
     <%= f.submit button_name, class: "btn btn-default" %>
   </div>

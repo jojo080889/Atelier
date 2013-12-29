@@ -14,6 +14,7 @@ end
 
 group :development do
   gem 'figaro'
+  gem 'debugger'
 end
 
 # Gems used only for assets and not required

@@ -23,6 +23,16 @@ class FoldersController < ApplicationController
 
     respond_to do |format|
       if @folder.save
+        # Add projects to this folder
+        @picked_projects = params[:project]
+        if !@picked_projects.nil?
+          @picked_projects.each_key do |key|
+            project = Project.find(key)
+            project.folder_id = @folder.id
+            project.save
+          end
+        end
+
         format.html { redirect_to @folder, notice: 'Folder was successfully created.' }
       else
         format.html { render action: "new" }
@@ -36,6 +46,20 @@ class FoldersController < ApplicationController
 
     respond_to do |format|
       if @folder.update_attributes(params[:folder])
+        # Reset the projects that were added to this folder
+        @proj = Project.where(:folder_id => @folder.id)
+        @proj.each {|p| p.folder_id = nil; p.save}
+
+        # Add projects to folder
+        @picked_projects = params[:project]
+        if !@picked_projects.nil?
+          @picked_projects.each_key do |key|
+            p = Project.find(key)
+            p.folder_id = @folder.id
+            p.save
+          end
+        end
+
         format.html { redirect_to @folder, notice: 'Folder was successfully updated.' }
         format.json { head :no_content }
       else
