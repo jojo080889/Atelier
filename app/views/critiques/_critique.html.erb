@@ -2,7 +2,11 @@
   <div class="critique" id="critique_<%= critique.id %>">
     <div class="critique-header clearfix">
       <div class="pull-left">
-        <%= link_to critique.user.username, critique.user %> <%= skill_level_badge(critique.user.skill_level) %>
+        <% if critique.user.nil? || critique.user.is_guest? %>
+          <%= critique.guest_name %> (Guest user)
+        <% else %>
+          <%= link_to critique.user.username, critique.user %> <%= skill_level_badge(critique.user.skill_level) %>
+        <% end %>
       </div>
       <div class="pull-right">
         <span class="critique-likes" id="critique_<%= critique.id %>_likes_count">
@@ -31,9 +35,7 @@
     <hr />
     <div class="critique-actions clearfix">
       <div class="pull-left">
-        <% if current_user.id == critique.user.id || current_user.id == critique.project.user.id %>
-          <%= link_to "Reply", new_project_critique_response_path(critique.project, critique), remote: true %>
-        <% end %>
+        <%= link_to "Reply", new_project_critique_response_path(critique.project, critique), remote: true %>
         <% if can? :manage, critique %>
           &middot;
           <%= link_to "Edit", edit_project_critique_path(critique.project, critique), remote: true %>

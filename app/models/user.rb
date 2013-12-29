@@ -31,8 +31,10 @@ class User < ActiveRecord::Base
     errors.add(:birthday, "must show that you are 13 or older.") if birthday.nil? || age < 13
   end
 
+  # Users can critique if they are a guest or if they are a logged in user with the right
+  # skill level.
   def can_critique?(project)
-    self.id != project.user.id && (self.skill_level == project.user.skill_level || self.lower_tier == project.user.skill_level)
+    (self.is_guest? || (self.id != project.user.id && (self.skill_level == project.user.skill_level || self.lower_tier == project.user.skill_level)))
   end
 
   def next_tier
@@ -88,5 +90,9 @@ class User < ActiveRecord::Base
 
   def num_helpful_critiques_needed
     10 - self.critiques_likes.count
+  end
+
+  def is_guest?
+    self.username == "guest"
   end
 end

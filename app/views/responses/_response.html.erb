@@ -1,12 +1,11 @@
 <div class="response" id="response_<%= response.id %>">
   <div class="response-header">
-    <%= link_to response.user.username, response.user %> <%= skill_level_badge(response.user.skill_level) %>
+    <% if response.user.nil? || response.user.is_guest? %>
+      <%= response.guest_name %> (Guest user)
+    <% else %>
+      <%= link_to response.user.username, response.user %> <%= skill_level_badge(response.user.skill_level) %>
+    <% end %>
   </div>
-  <% if response.user.voted_up_on?(response.critique) %>
-    <div class="liked-message alert alert-warning">
-      <%= fa_icon "thumbs-up" %> The mentee thought this critique was <strong>helpful</strong>. 
-    </div>
-  <% end %>
   <div class="response-body">
     <%= Format.markdown response.text %>
   </div>

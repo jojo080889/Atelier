@@ -1,4 +1,8 @@
 class ResponsesController < ApplicationController
+  load_and_authorize_resource 
+  skip_authorize_resource :only => [:new, :create]
+  skip_before_filter :verify_authenticity_token, :only => :new
+
   def new
     @response = Response.new
     @project = Project.find(params[:project_id])
@@ -14,19 +18,16 @@ class ResponsesController < ApplicationController
     @project = Project.find(params[:project_id])
     @critique = Critique.find(params[:critique_id])
     @response = @critique.responses.new(params[:response])
-    @response.user_id = current_user.id
+    @response.user_id = current_or_guest_user.id
 
     respond_to do |format|
       if @response.save
-        if params[:response_like] == "true"
-          @critique.liked_by current_user
-        else
-          @critique.unliked_by current_user
-        end
-        if (current_user.id != @critique.user.id)
+        if (!@critique.user.nil? && current_or_guest_user.id != @critique.user.id)
           NotificationMailer.response_received_email(@critique).deliver
         end
-        format.html { redirect_to project_path(@project), notice: 'Critique response was successfully created.' }
+        format.html { redirect_to project_path(@project), notice: 'Reply was successfully created.' }
+      else
+        format.html { redirect_to project_path(@project), notice: 'Something went wrong when creating your reply. Please try again.' }
       end
     end
   end

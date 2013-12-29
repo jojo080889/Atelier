@@ -5,6 +5,7 @@ class Ability
     user ||= User.new
 
     can :read, :all
+    can :create, Critique
 
     unless user.id.blank?
       # Owners of folders can...

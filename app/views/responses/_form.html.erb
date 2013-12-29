@@ -1,22 +1,31 @@
-<% if current_user.id == @project.user.id || current_user.id == @critique.user.id %>
-  <%= form_for [@project, @critique, @response] do |f| %>
-    <% if @response.errors.any? %>
-      <div id="error_explanation" class="alert alert-danger">
-        <h2><%= pluralize(@response.errors.count, "error") %> prohibited this response from being saved:</h2>
+<%= form_for [@project, @critique, @response] do |f| %>
+  <% if @response.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <h2><%= pluralize(@response.errors.count, "error") %> prohibited this response from being saved:</h2>
 
-        <ul>
-        <% @response.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-        </ul>
-      </div>
-    <% end %>
-
-    <div class="field text">
-      <%= f.text_area :text, size: "20x3", placeholder: "Reply to this critique...", data: {provide: "markdown"} %>
-    </div>
-    <div class="actions">
-      <%= f.submit "Post", class: "btn btn-default" %>
+      <ul>
+      <% @response.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
     </div>
   <% end %>
+
+  <% if current_or_guest_user.is_guest? %>
+    <div class="row guest-name">
+      <div class="field text col-md-4">
+        <%= f.text_field :guest_name, placeholder: "Name (required)", class: "form-control" %>
+      </div>
+      <div class="col-md-8 text-muted guest-notice">
+        You are currently logged in as a guest. Fill in your name or <%= link_to "sign in.", new_user_session_path %> 
+      </div>
+    </div>
+  <% end %>
+  
+  <div class="field text">
+    <%= f.text_area :text, size: "20x3", placeholder: "Reply to this critique...", data: {provide: "markdown"} %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Post", class: "btn btn-default" %>
+  </div>
 <% end %>

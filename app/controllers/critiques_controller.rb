@@ -1,11 +1,12 @@
 class CritiquesController < ApplicationController
   load_and_authorize_resource
+  skip_authorize_resource :only => :create
 
   def create
     @project = Project.find(params[:project_id])
     @folder = @project.folder
-    @critique = @project.critiques.create(params[:critique])
-    @critique.user_id = current_user.id
+    @critique = @project.critiques.new(params[:critique])
+    @critique.user_id = current_or_guest_user.id
     if (params[:paintover_data] == "none" || params[:paintover_data].nil?)
       @critique.paintover = nil
     else
@@ -17,7 +18,7 @@ class CritiquesController < ApplicationController
         NotificationMailer.critique_received_email(@project).deliver
         format.html { redirect_to project_path(@project), notice: 'Critique was successfully created.' }
       else
-        format.html { render action: "new" }
+        format.html { redirect_to project_path(@project), notice: 'There were errors creating your critique. Please try again.' }
         format.json { render json: @critique.errors, status: :unprocessable_entity }
       end
     end
@@ -48,7 +49,7 @@ class CritiquesController < ApplicationController
         format.html { redirect_to project_path(@project), notice: 'Critique was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { redirect_to project_path(@project), notice: "There was a problem editing your critique. Please try again." }
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end

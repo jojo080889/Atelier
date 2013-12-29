@@ -1,6 +1,8 @@
 class ProjectsController < ApplicationController
   before_filter :authenticate_user!
+  skip_before_filter :authenticate_user!, :only => :show
   load_and_authorize_resource
+  skip_authorize_resource :only => :show
 
   def index
     @order_clause = "critiques_count"
