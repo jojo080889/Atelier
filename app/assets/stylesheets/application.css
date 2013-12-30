@@ -12,6 +12,5 @@
  *= require_self
  *= require font-awesome
  *= require bootstrap-markdown
- *= require forem/base
  *= require_tree .
  */
