@@ -72,7 +72,9 @@
   <%= render partial: "critiques/critique", collection: @project.critiques.order(:created_at) %>
 <% end %>
 
-<h3>Add a Critique</h3>
+<% if current_or_guest_user.id != @project.user.id %>
+  <h3>Add a Critique</h3>
+<% end %>
 <%= render "critiques/form" %>
 
 <script>
