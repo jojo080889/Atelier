@@ -1,0 +1,47 @@
+#topic {
+  #menu {
+    margin-bottom: 10px;
+  }
+}
+
+.post-container {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 10px 0;
+
+  &.reply {
+    margin-left: 60px;
+  }
+
+  .post {
+    background: #eee;
+    
+    .alert-warning {
+      margin-bottom: 0;
+    }
+
+    .user {
+      padding: 10px;
+      text-align: center;
+
+      .username {
+        margin-bottom: 5px;
+      }
+    }
+
+    .contents {
+      background: #fff;
+      padding: 10px;
+      min-height: 120px;
+
+      & > time, .post-time, .in-reply-to {
+        color: #aaa;
+        font-size: smaller;
+
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}

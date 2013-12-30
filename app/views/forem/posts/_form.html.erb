@@ -1,0 +1,10 @@
+<%= f.input :text, 
+            :input_html => { :class => "field form-control",
+                             :data => { :provide => "markdown" }
+                           },
+            :label_html => { :class => "control-label" },
+            :wrapper_html => { :class => "form-group" } %>
+
+<% if params[:reply_to_id] %>
+  <%= f.hidden_field :reply_to_id, :value => params[:reply_to_id] %>
+<% end %>

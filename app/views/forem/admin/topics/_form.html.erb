@@ -1,0 +1,25 @@
+<%= simple_form_for [forem, :admin, @topic] do |f| %>
+  <%= f.input :subject,
+              input_html: { class: "form-control" },
+              label_html: { class: "control-label" },
+              wrapper_html: { class: "form-group" } %>
+              <%= f.association :forum , :label => "Forum", input_html: { class: "form-control" }, wrapper_html: { class: "form-group" } %>
+
+  <div class="form-group">
+    <label class="boolean optional checkbox" for="topic_locked">
+      <%= f.check_box :locked %>
+      Locked
+    </label>
+    <label class="boolean optional checkbox" for="topic_pinned">
+      <%= f.check_box :pinned %>
+      Pinned
+    </label>
+    <label class="boolean optional checkbox" for="topic_hidden">
+      <%= f.check_box :hidden %>
+      Hidden
+    </label>
+  </div>
+
+  <br />
+  <%= f.submit :class => "btn btn-primary" %>
+<% end %>
