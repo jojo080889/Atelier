@@ -22,6 +22,14 @@ class User < ActiveRecord::Base
     username
   end
 
+  def name
+    username
+  end
+
+  def to_s
+    name
+  end
+
   # A custom validation to check that all users are 13 or older
   def birthday_older_than_13
     now = Time.now.utc.to_date

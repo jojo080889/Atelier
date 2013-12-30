@@ -1,14 +1,17 @@
 <div class="metanav">
   <% if user_signed_in? %>
-    <%= link_to current_user do %> 
+    <%= link_to main_app.user_path(current_user) do %> 
       <%= current_user.username %>
       <%= current_user.critiques_likes.count %>
       <%= fa_icon "thumbs-up" %>
     <% end %>
-    <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+    <% if current_user.forem_admin? %>
+      <%= link_to "Forem Admin Area", forem.admin_root_path %>
+    <% end %>
+    <%= link_to "Sign out", main_app.destroy_user_session_path, :method => :delete %>
   <% else %>
-    <%= link_to "Sign in", new_user_session_path %> 
-    <%= link_to "Sign up", new_user_registration_path %>
+    <%= link_to "Sign in", main_app.new_user_session_path %> 
+    <%= link_to "Sign up", main_app.new_user_registration_path %>
   <% end %>
 </div>
   
@@ -18,11 +21,12 @@
   </div>
   <div class="collapse navbar-collapse">
     <ul class="nav navbar-nav navbar-right">
-      <li><%= link_to "About", about_path %></li>
-      <li><%= link_to "Post Project", new_project_path %></li>
-      <li><%= link_to "Mentor a Project", projects_path %></li>
+      <li><%= link_to "About", main_app.about_path %></li>
+      <li><%= link_to "Post Project", main_app.new_project_path %></li>
+      <li><%= link_to "Mentor a Project", main_app.projects_path %></li>
       <% if user_signed_in? %>
-        <li><%= link_to "My Projects", current_user %></li>
+        <li><%= link_to "My Projects", main_app.user_path(current_user) %></li>
+        <li><%= link_to "Forums", main_app.forem_path %></li>
       <% end %>
     </ul>
   </div>

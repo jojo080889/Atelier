@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery.ui.datepicker
 //= require bootstrap-markdown
+//= require forem
 //= require_tree .
 
 /* Initialize tooltips */
