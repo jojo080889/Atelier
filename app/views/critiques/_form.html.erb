@@ -2,7 +2,7 @@
   <%= form_for [@project, @critique] do |f| %>
     <% if @critique.errors.any? %>
       <div id="error_explanation" class="alert alert-danger">
-        <h2><%= pluralize(@critique.errors.count, "error") %> prohibited this critique from being saved:</h2>
+        <h2><%= pluralize(@critique.errors.count, "error") %> prohibited this feedback from being saved:</h2>
 
         <ul>
         <% @critique.errors.full_messages.each do |msg| %>
@@ -24,12 +24,12 @@
     <% end %>
 
     <div class="alert alert-info">
-      Some advice for writing your critiques: <br />
+      Some advice for writing feedback: <br />
       <%= critique_hints(current_or_guest_user) %>   
     </div>
 
     <div class="field text">
-      <%= f.text_area :text, size: "20x6", placeholder: "Write your critique for this project here...", data: {provide: "markdown"} %>
+      <%= f.text_area :text, size: "20x6", placeholder: "Write feedback for this project here...", data: {provide: "markdown"} %>
     </div>
     
     <% if !@project.image_file_name.nil? %>
@@ -86,7 +86,7 @@
   <% end %>
 <% elsif current_user && current_user.id != @project.user.id %>
   <div class="alert alert-info">
-    You are not yet at a high enough skill level (or too high of a skill level) to critique this project.
+    You are not yet at a high enough skill level (or too high of a skill level) to give feedback on this project.
   </div>
 <% end %>
 

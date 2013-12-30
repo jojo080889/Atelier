@@ -32,7 +32,7 @@
   <% if !(@critique_options.nil? || @critique_options.count <= 0) %>
     <div class="field helpful-critiques panel panel-default">
       <div class="critiques-info panel-heading">
-        Pick recent critiques for this project you found particularly helpful for this project:
+        Pick recent feedback for this project you found particularly helpful for this project:
       </div>
       <div class="critiques-select panel-body">
         <table>
@@ -46,7 +46,7 @@
                 </label>
               </td>
               <td class="critique-link">
-                <%= link_to "See full critique", project_path(crit.project, anchor: "critique_#{crit.id}"), target: "_new" %>
+                <%= link_to "See full feedback", project_path(crit.project, anchor: "critique_#{crit.id}"), target: "_new" %>
               </td>
               <td class="critiquer">
                 by <%= link_to crit.user.username, crit.user, target: "_new" %>

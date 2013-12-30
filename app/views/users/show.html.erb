@@ -1,8 +1,8 @@
 <div class="pull-left">
   <h1><%= @user.username %> <small><%= skill_level_badge @user.skill_level %></small></h1>
   <p>
-    <strong>Number of critiques rated highly by others: </strong> 
-    <span class="tooltip-element" data-toggle="tooltip" title="Number of critiques rated highly by others">
+    <strong>Number of feedback rated highly by others: </strong> 
+    <span class="tooltip-element" data-toggle="tooltip" title="Number of feedback rated highly by others">
       <%= @user.critiques_likes.count %> <%= fa_icon "thumbs-up" %>
     </span>
   </p>
@@ -33,10 +33,10 @@
     <a href="#folders" data-toggle="tab"><%= pluralize @user.folders.count, "Folder" %></a>
     </li>
     <li>
-    <a href="#critiques" data-toggle="tab"><%= pluralize @user.critiques.count, "Critique" %> Written</a>
+    <a href="#critiques" data-toggle="tab"><%= pluralize @user.critiques.count, "Feedback" %> Written</a>
     </li>
     <li>
-    <a href="#rec_critiques" data-toggle="tab"><%= pluralize @user.critiques_received.count, "Critique" %> Received</a>
+    <a href="#rec_critiques" data-toggle="tab"><%= pluralize @user.critiques_received.count, "Feedback" %> Received</a>
     </li>
   </ul>
 
@@ -62,14 +62,14 @@
     <div class="tab-pane" id="critiques">
       <% if @user.critiques.count <= 0 %>
         <p class="text-muted">
-        <em>This user has not written any critiques.</em>
+        <em>This user has not written any feedback.</em>
         </p>
       <% else %>
         <table class="table table-striped">
           <% @user.critiques.order("created_at DESC").each do |crit| %>
             <tr>
               <td>On <%= link_to crit.project.title, project_path(crit.project) %> by <%= link_to crit.project.user.username, crit.project.user %></td>
-              <td><%= link_to "View critique", project_path(crit.project, anchor: "critique_#{crit.id}") %></td>
+              <td><%= link_to "View feedback", project_path(crit.project, anchor: "critique_#{crit.id}") %></td>
               <td>created <%= time_ago_in_words crit.created_at %> ago</td>
             </tr>
           <% end %>
@@ -79,14 +79,14 @@
     <div class="tab-pane" id="rec_critiques">
       <% if @user.critiques_received.count <= 0 %>
         <p class="text-muted">
-        <em>This user has not received any critiques.</em>
+        <em>This user has not received any feedback.</em>
         </p>
       <% else %>
         <table class="table table-striped">
           <% @user.critiques_received.each do |crit| %>
             <tr>
               <td>From <%= link_to crit.user.username, crit.user %> on <%= link_to crit.project.title, project_path(crit.project) %></td>
-              <td><%= link_to "View critique", project_path(crit.project, anchor: "critique_#{crit.id}") %></td>
+              <td><%= link_to "View feedback", project_path(crit.project, anchor: "critique_#{crit.id}") %></td>
               <td>created <%= time_ago_in_words crit.created_at %> ago</td>
             </tr>
           <% end %>

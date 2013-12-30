@@ -6,7 +6,7 @@
       <td><strong><%= link_to project.title, project_path(project) %></strong></td>
       <td><%= link_to "View project", project_path(project) %></td>
       <td>created <%= time_ago_in_words project.created_at %> ago</td>
-      <td><%= pluralize project.critiques.count, "critique" %> received</td>
+      <td><%= pluralize project.critiques.count, "feedback" %> received</td>
     </tr>
   <% end %>
 </table>

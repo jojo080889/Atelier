@@ -39,7 +39,7 @@
 <% if !(@helpful_crits.nil? || @helpful_crits.count <= 0) %>
 <div class="helpful-critiques panel panel-info">
   <div class="panel-heading">
-    The user thought the following critiques were helpful for this project:
+    The user thought the following feedback was helpful for this project:
   </div>
   <div class="panel-body critiques-select">
     <table>
@@ -49,7 +49,7 @@
             <%= truncate(crit.text, length: 50) %>
           </td>
           <td class="critique-link">
-            <%= link_to "See full critique", project_path(crit.project, anchor: "critique_#{crit.id}") %>
+            <%= link_to "See full feedback", project_path(crit.project, anchor: "critique_#{crit.id}") %>
           </td>
           <td class="critiquer">
             by <%= link_to crit.user.username, crit.user  %>
@@ -62,18 +62,18 @@
 </div>
 <% end %>
 
-<h3><%= pluralize @project.critiques.count, "Critique" %></h3>
+<h3><%= pluralize @project.critiques.count, "Feedback" %></h3>
 
 <% if @project.critiques.count <= 0 %>
   <p>
-    No critiques yet.
+    No feedback yet.
   </p>
 <% else %>
   <%= render partial: "critiques/critique", collection: @project.critiques.order(:created_at) %>
 <% end %>
 
 <% if current_or_guest_user.id != @project.user.id %>
-  <h3>Add a Critique</h3>
+  <h3>Add Feedback</h3>
 <% end %>
 <%= render "critiques/form" %>
 
