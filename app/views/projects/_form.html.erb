@@ -36,7 +36,6 @@
       </div>
       <div class="critiques-select panel-body">
         <table>
-          <% debugger %>
           <% @critique_options.each do |crit| %>
             <tr>
               <td class="critique-select">
@@ -51,9 +50,11 @@
               <td class="critiquer">
                 by <%= link_to crit.user.username, crit.user, target: "_new" %>
                 <%= skill_level_badge(crit.user.skill_level) %><br />
-                <small>
-                  needs <%= pluralize(crit.user.num_helpful_critiques_needed, "more vote") %> to become a <%= crit.user.next_tier %> user
-                </small>
+                <% if crit.user.helpful_critiques_needed > 0 %>
+                  <small>
+                    needs <%= pluralize(crit.user.helpful_critiques_needed, "more vote") %> to become a <%= crit.user.skill_level.higher_tier %> user
+                  </small>
+                <% end %>
               </td>
             </tr>
           <% end %>

@@ -17,9 +17,13 @@ class SkillLevel < ActiveRecord::Base
     !SkillLevel.find_by_name_key(level).nil?
   end
 
-  # Compares two skill levels to see if they match.
+  # Compares two skill levels to see if they include one.
   def self.compare(current_level, level)
     SkillLevel.levels[current_level.name_key.to_sym] >= SkillLevel.levels[level.name_key.to_sym]
+  end
+
+  def self.compare_exact(level, other_level)
+    SkillLevel.levels[level.name_key.to_sym] == SkillLevel.levels[other_level.name_key.to_sym]
   end
 
   def to_s
@@ -28,6 +32,11 @@ class SkillLevel < ActiveRecord::Base
 
   def lower_tier
     skill_index = [0, SkillLevel.levels[self.name_key.to_sym] - 1].max
+    SkillLevel.find_by_name_key(SkillLevel.levels[skill_index])
+  end
+
+  def higher_tier
+    skill_index = [SkillLevel.levels[self.name_key.to_sym] + 1, SkillLevel.levels.size - 1].min
     SkillLevel.find_by_name_key(SkillLevel.levels[skill_index])
   end
 

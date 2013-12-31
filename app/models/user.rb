@@ -47,6 +47,16 @@ class User < ActiveRecord::Base
     (self.is_guest? || (self.id != project.user.id && (SkillLevel.compare(self.skill_level, project.user.skill_level) || SkillLevel.compare(self.skill_level.lower_tier, project.user.skill_level))))
   end
 
+  # Gets the number of ratings contributing to the next tier
+  def next_tier_ratings
+    Critique.joins(:project).where("projects.user_id = ? AND rating = ?", self.id, self.skill_level.higher_tier.id).count
+  end
+
+  # Gets the number of ratings needed to get to the next tier
+  def next_tier_ratings_needed
+    [5 - self.next_tier_ratings, 0].max
+  end
+
   def critiques_received
     Critique.joins(:project).where("projects.user_id = ?", self.id).order("created_at DESC")
   end
@@ -63,8 +73,8 @@ class User < ActiveRecord::Base
     Critique.joins(:project).where(["projects.user_id = ?", self.id]).order(:created_at).limit(limit)
   end
 
-  def num_helpful_critiques_needed
-    10 - self.critiques_likes.count
+  def helpful_critiques_needed
+    [10 - self.critiques_likes.count, 0].max
   end
 
   def is_guest?
@@ -77,12 +87,19 @@ class User < ActiveRecord::Base
 
   def has_skill_level?(level)
     raise "Invalid skill level #{level}" unless SkillLevel.valid_level?(level)
-    SkillLevel.compare(self.skill_level, SkillLevel.find_by_name_key(level))
+    SkillLevel.compare_exact(self.skill_level, SkillLevel.find_by_name_key(level))
   end
 
   def change_skill_level!(level)
     raise "Invalid skill level #{level}" unless SkillLevel.valid_level?(level)
-    self.skill_level = SkillLevel.find_by_name_key(level)
+    self.skill_level_id = SkillLevel.find_by_name_key(level).id
     self.save!
+  end
+
+  def check_for_user_level!
+    debugger
+    if (self.helpful_critiques_needed <= 0 && self.next_tier_ratings_needed <= 0)
+      self.change_skill_level!(self.skill_level.higher_tier.name_key.to_sym)   
+    end
   end
 end
