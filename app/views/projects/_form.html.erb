@@ -36,8 +36,8 @@
       </div>
       <div class="critiques-select panel-body">
         <table>
+          <% debugger %>
           <% @critique_options.each do |crit| %>
-            <% if (crit.likes.size >= 1 && @project.voted_for?(crit)) || crit.likes.size <= 0 %>
             <tr>
               <td class="critique-select">
                 <label>
@@ -56,7 +56,6 @@
                 </small>
               </td>
             </tr>
-            <% end %>
           <% end %>
         </table>
       </div>

@@ -42,7 +42,7 @@
       <%= f.hidden_field :paintover_snapshot %>
     <% end %>
 
-    <% if !current_or_guest_user.is_guest? && @project.user.skill_level != "Advanced" %>
+    <% if !current_or_guest_user.is_guest? && @project.user.skill_level.highest? %>
       <div class="rating-info">
         <%= link_to @project.user.username, @project.user %> has <%= pluralize(@project.user.next_tier_ratings, "project rating") %> of <%= @project.user.next_tier %> -- needs <%= 5 - @project.user.next_tier_ratings %> more to become a <%= @project.user.next_tier %> user
       </div>
@@ -52,9 +52,9 @@
           Rate the overall quality of the project:
         </div>
         <div class="rating-container btn-group">
-          <% if @project.user.skill_level == "Beginner" %>
-            <a class="rating beginner btn btn-default <%= "btn-warning" if @project.user.skill_level == "Beginner" %>">
-              <% if @project.user.skill_level == "Beginner" %>
+          <% if @project.user.has_skill_level?(:beginner) %>
+            <a class="rating beginner btn btn-default <%= "btn-warning" if @project.user.has_skill_level?(:beginner) %>">
+              <% if @project.user.has_skill_level?(:beginner) %>
                 <%= fa_icon "star" %>
               <% else %>
                 <%= fa_icon "star-o" %>
@@ -63,8 +63,8 @@
             </a>
           <% end %>
 
-          <a class="rating intermediate btn btn-default <%= "btn-warning" if @project.user.skill_level == "Intermediate" %>">
-            <% if @project.user.skill_level == "Intermediate" %>
+          <a class="rating intermediate btn btn-default <%= "btn-warning" if @project.user.has_skill_level?(:intermediate) %>">
+            <% if @project.user.has_skill_levle?(:intermediate) %>
               <%= fa_icon "star" %>
             <% else %>
               <%= fa_icon "star-o" %>
@@ -77,7 +77,7 @@
             Advanced
           </a>
         </div>
-        <%= f.hidden_field :rating, :value => skill_level_to_rating(@project.user.skill_level) %>
+        <%= f.hidden_field :rating, :value => @project.user.skill_level.id %>
       </div>
     <% end %>
     <div class="actions">
@@ -100,11 +100,11 @@
 
       var skill_rating = 0;
       if ($(this).hasClass("beginner")) {
-        skill_rating = <%= skill_level_to_rating("Beginner") %>
+        skill_rating = <%= SkillLevel.find_by_name_key(:beginner).id %>
       } else if ($(this).hasClass("intermediate")) {
-        skill_rating = <%= skill_level_to_rating("Intermediate") %>
+        skill_rating = <%= SkillLevel.find_by_name_key(:intermediate).id %>
       } else if ($(this).hasClass("advanced")) {
-        skill_rating = <%= skill_level_to_rating("Advanced") %>
+        skill_rating = <%= SkillLevel.find_by_name_key(:advanced).id %>
       }
       $(".nominate #critique_rating").val(skill_rating);
     }

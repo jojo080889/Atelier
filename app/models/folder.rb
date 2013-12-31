@@ -39,7 +39,7 @@ class Folder < ActiveRecord::Base
   end
 
   def self.get_recommended(order_by, user)
-    @folders = Folder.joins(:user).where("users.id <> ? AND (users.skill_level = ? OR users.skill_level = ?)", user.id, user.skill_level, user.lower_tier).order(order_by)
+    @folders = Folder.joins(:user).where("users.id <> ? AND (users.skill_level = ? OR users.skill_level = ?)", user.id, user.skill_level.id, user.skill_level.lower_tier.id).order(order_by)
     @folders - self.get_mentoring(order_by, user)
   end
 

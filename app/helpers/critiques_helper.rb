@@ -18,7 +18,7 @@ module CritiquesHelper
   end
 
   def critique_hints(user)
-    if user.skill_level == "Beginner"
+    if user.has_skill_level?(:beginner)
       html = "<ul>"
       html += "<li>"
       html += "Be respectful, encouraging, and specific with your comments."

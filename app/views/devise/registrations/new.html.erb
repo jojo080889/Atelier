@@ -38,7 +38,7 @@
       You are joining an Atelier community centered around <strong>drawing/painting</strong>. To help you find mentors and mentees of the right skill level, pick the description that fits you best, but pick wisely -- you can move up and down in skill level based on community feedback.
     </p>
     <div class="row">
-      <div data-tier="Beginner" class="skill-level-select beginner col-md-4 active">
+      <div data-tier="<%= SkillLevel.find_by_name_key(:beginner).id %>" class="skill-level-select beginner col-md-4 active">
         <div class="inner">
           <p class="stars">
             <%= fa_icon "star" %>
@@ -49,7 +49,7 @@
           </p>
         </div>
       </div>
-      <div data-tier="Intermediate" class="skill-level-select intermediate col-md-4">
+      <div data-tier="<%= SkillLevel.find_by_name_key(:intermediate).id %>" class="skill-level-select intermediate col-md-4">
         <div class="inner">
           <p class="stars">
             <%= fa_icon "star" %>
@@ -61,7 +61,7 @@
           </p>
         </div>
       </div>
-      <div data-tier="Advanced" class="skill-level-select advanced col-md-4">
+      <div data-tier="<%= SkillLevel.find_by_name_key(:advanced).id %>" class="skill-level-select advanced col-md-4">
         <div class="inner">
           <p class="stars">
             <%= fa_icon "star" %>
@@ -74,7 +74,7 @@
           </p>
         </div>
       </div>
-      <%= f.hidden_field :skill_level, :value => "Beginner" %>
+      <%= f.hidden_field :skill_level, :value => SkillLevel.find_by_name_key(:beginner).id %>
     </div>
   </div>
 

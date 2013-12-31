@@ -85,7 +85,13 @@
         <table class="table table-striped">
           <% @user.critiques_received.each do |crit| %>
             <tr>
-              <td>From <%= link_to crit.user.username, crit.user %> on <%= link_to crit.project.title, project_path(crit.project) %></td>
+              <td>From 
+              <% if crit.user.nil? %>
+                <%= crit.guest_name %> (Guest user)
+              <% else %>
+                <%= link_to crit.user.username, crit.user %>
+              <% end %>
+              on <%= link_to crit.project.title, project_path(crit.project) %></td>
               <td><%= link_to "View feedback", project_path(crit.project, anchor: "critique_#{crit.id}") %></td>
               <td>created <%= time_ago_in_words crit.created_at %> ago</td>
             </tr>

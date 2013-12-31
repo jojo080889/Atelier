@@ -17,7 +17,7 @@
     </div>
     <% if !critique.rating.nil? %>
       <div class="liked-message alert alert-warning">
-        <%= fa_icon "star" %> This mentor rated this project at <strong><%= rating_to_skill_level(critique.rating) %></strong> 
+        <%= fa_icon "star" %> This mentor rated this project at <strong><%= SkillLevel.find(critique.rating) %></strong> 
       </div>
     <% end %>
     <div class="critique-body clearfix <%= "paintover" if !critique.paintover_file_name.nil? %>">

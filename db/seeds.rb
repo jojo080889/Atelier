@@ -5,3 +5,8 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+# Skill Levels
+[:beginner, :intermediate, :advanced].each do |skill_level|
+  SkillLevel.find_or_create_by_name_key skill_level
+end

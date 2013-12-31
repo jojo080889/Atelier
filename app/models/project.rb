@@ -35,7 +35,7 @@ class Project < ActiveRecord::Base
   end
 
   def self.get_recommended(order_by, user)
-    @projects = Project.joins(:user).where("users.id <> ? AND (users.skill_level = ? OR users.skill_level = ?)", user.id, user.skill_level, user.lower_tier).order(order_by)
+    @projects = Project.joins(:user).where("users.id <> ? AND (users.skill_level_id = ? OR users.skill_level_id = ?)", user.id, user.skill_level.id, user.skill_level.lower_tier.id).order(order_by)
     @projects - self.get_mentoring(order_by, user)
   end
 

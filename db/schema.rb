@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131230034668) do
+ActiveRecord::Schema.define(:version => 20131231004824) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -172,6 +172,12 @@ ActiveRecord::Schema.define(:version => 20131230034668) do
     t.string   "guest_name"
   end
 
+  create_table "skill_levels", :force => true do |t|
+    t.string   "name_key",   :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",               :null => false
     t.string   "encrypted_password",     :default => "",               :null => false
@@ -186,11 +192,11 @@ ActiveRecord::Schema.define(:version => 20131230034668) do
     t.datetime "created_at",                                           :null => false
     t.datetime "updated_at",                                           :null => false
     t.string   "username"
-    t.string   "skill_level"
     t.datetime "birthday"
     t.boolean  "forem_admin",            :default => false
     t.string   "forem_state",            :default => "pending_review"
     t.boolean  "forem_auto_subscribe",   :default => false
+    t.integer  "skill_level_id",         :default => 1,                :null => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

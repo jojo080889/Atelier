@@ -1,3 +1,5 @@
+require_dependency 'skill_level'
+
 class User < ActiveRecord::Base
   has_many :folders
   has_many :projects
@@ -16,7 +18,7 @@ class User < ActiveRecord::Base
   validate :birthday_older_than_13
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :username, :skill_level, :email, :password, :password_confirmation, :birthday, :remember_me
+  attr_accessible :username, :skill_level_id, :email, :password, :password_confirmation, :birthday, :remember_me
   
   def to_param
     username
@@ -42,42 +44,7 @@ class User < ActiveRecord::Base
   # Users can critique if they are a guest or if they are a logged in user with the right
   # skill level.
   def can_critique?(project)
-    (self.is_guest? || (self.id != project.user.id && (self.skill_level == project.user.skill_level || self.lower_tier == project.user.skill_level)))
-  end
-
-  def next_tier
-    case self.skill_level
-    when "Beginner"
-      "Intermediate"
-    when "Intermediate"
-      "Advanced"
-    when "Advanced"
-      "Advanced"
-    end
-  end
-
-  def lower_tier
-    case self.skill_level
-    when "Beginner"
-      "Beginner"
-    when "Intermediate"
-      "Beginner"
-    when "Advanced"
-      "Intermediate"
-    else
-      "Beginner"
-    end
-  end
-
-  def next_tier_ratings
-    case self.skill_level
-    when "Beginner"
-      Critique.joins(:project).where("projects.user_id = ? AND rating = 3", self.id).count
-    when "Intermediate"
-      Critique.joins(:project).where("projects.user_id = ? AND rating = 5", self.id).count
-    else
-      0
-    end
+    (self.is_guest? || (self.id != project.user.id && (SkillLevel.compare(self.skill_level, project.user.skill_level) || SkillLevel.compare(self.skill_level.lower_tier, project.user.skill_level))))
   end
 
   def critiques_received
@@ -102,5 +69,20 @@ class User < ActiveRecord::Base
 
   def is_guest?
     self.username == "guest"
+  end
+
+  def skill_level
+    SkillLevel.find(self.skill_level_id)
+  end
+
+  def has_skill_level?(level)
+    raise "Invalid skill level #{level}" unless SkillLevel.valid_level?(level)
+    SkillLevel.compare(self.skill_level, SkillLevel.find_by_name_key(level))
+  end
+
+  def change_skill_level!(level)
+    raise "Invalid skill level #{level}" unless SkillLevel.valid_level?(level)
+    self.skill_level = SkillLevel.find_by_name_key(level)
+    self.save!
   end
 end
