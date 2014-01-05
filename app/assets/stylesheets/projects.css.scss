@@ -17,6 +17,7 @@
 }
 
 .project-actions {
+  margin-bottom: 10px;
   .btn {
     border-color: #ccc;
   }
@@ -65,7 +66,7 @@
 }
 
 .new_project, .edit_project {
-  input {
+  input[type="text"] {
     padding: 4px 6px;
     margin-bottom: 10px;
     color: #555;
