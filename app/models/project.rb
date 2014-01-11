@@ -9,6 +9,7 @@ class Project < ActiveRecord::Base
   validates_presence_of :title
 
   has_attached_file :image
+  validates_attachment_content_type :image, :content_type => /^image\/(jpg|jpeg|pjpeg|png|x-png|gif)$/, :message => 'Your attachment is the wrong file type. Only jpeg/jpg/png/gif images are allowed.'
 
   acts_as_votable
   acts_as_voter
