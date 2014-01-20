@@ -30,6 +30,8 @@
 
     <div class="field text">
       <%= f.text_area :text, size: "20x6", placeholder: "Write feedback for this project here...", data: {provide: "markdown"} %>
+
+      <%= f.hidden_field :started_at %>
     </div>
     
     <% if !@project.image_file_name.nil? %>
@@ -94,6 +96,12 @@
 <% end %>
 
 <script>
+  $("#critique_text").focus(function() {
+    if ($("#critique_started_at").val() == "") {
+      $("#critique_started_at").val(+new Date() / 1000);
+    }
+  });
+
   $(".edit_critique .nominate .rating.btn, .new_critique .nominate .rating.btn").click(function() {
     if (!$(this).hasClass("btn-warning")) {
       $(this).siblings(".rating").removeClass("btn-warning");

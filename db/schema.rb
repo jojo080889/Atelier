@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131231004824) do
+ActiveRecord::Schema.define(:version => 20140120012450) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(:version => 20131231004824) do
     t.datetime "paintover_updated_at"
     t.text     "paintover_snapshot"
     t.string   "guest_name"
+    t.datetime "started_at"
   end
 
   create_table "folders", :force => true do |t|

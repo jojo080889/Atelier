@@ -15,6 +15,10 @@ class CritiquesController < ApplicationController
     else
       @critique.save_paintover(params[:paintover_data])
     end
+    debugger
+    if params[:critique][:started_at] != ""
+      @critique.started_at = Time.at(params[:critique][:started_at].to_d)
+    end
 
     respond_to do |format|
       if @critique.save
