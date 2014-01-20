@@ -24,6 +24,28 @@
 
 <div class="clearfix"></div>
 
+<div class="badges panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      Level-up Progress
+      
+      <span class="tooltip-element" data-toggle="tooltip" title="These are the tasks the user needs to complete to advance to the next skill level.">
+        <%= fa_icon "question-circle" %>
+      </span>
+    </h3>
+  </div>
+  <div class="panel-body row">
+    <% @available_badges.each do |b| %>
+      <div class="task-badge col-md-2 <%= "achieved" if @earned_badges.include? b %> ">
+        <div class="task-badge-inner">
+          <%= fa_icon "bookmark" %>
+          <%= b.description %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
 <div class="user-show">
   <ul class="nav nav-pills nav-stacked col-md-3">
     <li class="active">

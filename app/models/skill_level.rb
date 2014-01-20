@@ -47,4 +47,9 @@ class SkillLevel < ActiveRecord::Base
   def highest?
     SkillLevel.levels[self.name_key.to_sym] == (SkillLevel.levels.size - 1)
   end
+
+  # Gets all possible badges for that skill level
+  def badges
+    Merit::Badge.find { |b| b.custom_fields[:skill_level] == self.name_key.to_sym }
+  end
 end

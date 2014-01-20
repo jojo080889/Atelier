@@ -1,6 +1,8 @@
 require_dependency 'skill_level'
 
 class User < ActiveRecord::Base
+  has_merit
+
   has_many :folders
   has_many :projects
   has_many :critiques
@@ -47,9 +49,14 @@ class User < ActiveRecord::Base
     (self.is_guest? || (self.id != project.user.id && (SkillLevel.compare(self.skill_level, project.user.skill_level) || SkillLevel.compare(self.skill_level.lower_tier, project.user.skill_level))))
   end
 
+  # Gets number of ratings for the given skill level
+  def tier_ratings(skill_level)
+    Critique.joins(:project).where("projects.user_id = ? AND rating = ?", self.id, SkillLevel.find_by_name_key(skill_level).id).count
+  end
+
   # Gets the number of ratings contributing to the next tier
   def next_tier_ratings
-    Critique.joins(:project).where("projects.user_id = ? AND rating = ?", self.id, self.skill_level.higher_tier.id).count
+    self.tier_ratings(self.skill_level.higher_tier.name_key)
   end
 
   # Gets the number of ratings needed to get to the next tier

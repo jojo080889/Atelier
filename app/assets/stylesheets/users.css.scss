@@ -55,3 +55,43 @@
 .user-actions {
   margin-top: 20px;
 }
+
+.badges {
+  .task-badge {
+    .task-badge-inner {
+      text-align: center;
+      display: table-cell;
+      vertical-align: middle;
+      border-radius: 50%;
+      height: 120px;
+      width: 120px;
+      font-size: smaller;
+      background-color: #ddd;
+      border: 5px solid #fff;
+      box-shadow: 0 0 0 5px #ddd;
+      padding: 10px;
+      color: #999;
+      position: relative;
+
+      .fa-bookmark {
+        position: absolute;
+        font-size: 18px;
+        bottom: 6px;
+        left: 50%;
+        margin-left: -7px;
+      }
+    }
+
+    &.achieved {
+      .task-badge-inner {
+        color: #333;
+        background-color: #93E1FF;
+        box-shadow: 0 0 0 5px #FF6F42;
+
+        .fa-bookmark {
+          color: rgb(255, 48, 48);
+        }
+      }
+    }
+  }
+}
