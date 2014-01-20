@@ -15,7 +15,6 @@ class CritiquesController < ApplicationController
     else
       @critique.save_paintover(params[:paintover_data])
     end
-    debugger
     if params[:critique][:started_at] != ""
       @critique.started_at = Time.at(params[:critique][:started_at].to_d)
     end
@@ -91,5 +90,19 @@ class CritiquesController < ApplicationController
     respond_to do |format|
       format.js
     end
+  end
+
+  # Used when a user is prompted to create a critique after they
+  # create their own project
+  def new
+    @projects = Project.get_recommended(Project.get_order_clause("lowcritiques"), current_user)
+    @project = Project.find(params[:project_id])
+    if @projects.index(@project).nil?
+      redirect_to root_path, notice: "You are not able to access that page. Sorry!"
+    end
+  end
+
+  # When the user reaches the end of their recommended list
+  def new_none
   end
 end

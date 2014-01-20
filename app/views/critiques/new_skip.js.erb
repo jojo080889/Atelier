@@ -1,0 +1,5 @@
+$("#next-project").click(function(e) {
+  e.preventDefault();
+  <% @project = @projects_nexter.next %>
+  $(".critique-new").html('<%= escape_javascript(render "critiques/next_project") %>');
+});

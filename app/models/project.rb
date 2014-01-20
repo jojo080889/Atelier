@@ -40,10 +40,22 @@ class Project < ActiveRecord::Base
   def self.get_recommended(order_by, user)
     @projects = Project.joins(:user).where("users.id <> ? AND (users.skill_level_id = ? OR users.skill_level_id = ?)", user.id, user.skill_level.id, user.skill_level.lower_tier.id).order(order_by)
     @projects - self.get_mentoring(order_by, user)
+
+    # Convert array into a relation
+    ids = @projects.map(&:id)
+    @projects = Project.where(:id => ids)
   end
 
   def self.get_by_user(order_by, user)
     Project.where("user_id = ?", user.id).order(order_by)
+  end
+
+  # Gets the project after this one in the list of recommended projects for the
+  # current user. Returns nil if it reaches the end of the list.
+  def recommended_next(user)
+    @recommended = Project.get_recommended(Project.get_order_clause("lowcritiques"), user)
+    index = @recommended.index(self)
+    @recommended[index + 1]
   end
 
   def created_at_formatted

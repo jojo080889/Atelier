@@ -1,0 +1,36 @@
+<div class="critique-actions">
+  <div class="pull-left">
+    <p>
+    You are giving feedback on <strong><%= @project.title %></strong> by <strong><%= @project.user %></strong> <%= skill_level_badge(@project.user.skill_level) %>
+    <br />
+    This project has <strong><%= pluralize @project.critiques.count, "piece" %> of feedback</strong>
+    </p>
+  </div>
+  <div class="pull-right">
+    <%= link_to @project, target: "_blank", class: "btn btn-default" do %>
+      <%= fa_icon "external-link" %>
+      View project in new window
+    <% end %>
+    <% if @project.recommended_next(current_user).nil? %>
+      <%= link_to new_none_critiques_path, class: "btn btn-info" do %>
+        <%= fa_icon "refresh" %>
+        Let me do a different one
+      <% end %>
+    <% else %>
+      <%= link_to new_project_critique_path(@project.recommended_next(current_user)), id: "next-project", class: "btn btn-info" do %>
+        <%= fa_icon "refresh" %>
+        Let me do a different one
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<div class="clearfix"></div>
+
+<div class="critique-new-project">
+  <%= render 'projects/body' %>
+</div>
+
+<div class="critique-new-form">
+  <%= render 'critiques/form' %>
+</div>
