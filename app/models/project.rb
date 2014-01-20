@@ -40,10 +40,6 @@ class Project < ActiveRecord::Base
   def self.get_recommended(order_by, user)
     @projects = Project.joins(:user).where("users.id <> ? AND (users.skill_level_id = ? OR users.skill_level_id = ?)", user.id, user.skill_level.id, user.skill_level.lower_tier.id).order(order_by)
     @projects - self.get_mentoring(order_by, user)
-
-    # Convert array into a relation
-    ids = @projects.map(&:id)
-    @projects = Project.where(:id => ids)
   end
 
   def self.get_by_user(order_by, user)
