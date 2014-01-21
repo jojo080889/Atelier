@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140120174836) do
+ActiveRecord::Schema.define(:version => 20140121053533) do
 
   create_table "badges_sashes", :force => true do |t|
     t.integer  "badge_id"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(:version => 20140120174836) do
     t.text     "paintover_snapshot"
     t.string   "guest_name"
     t.datetime "started_at"
+    t.integer  "skill_level_id"
   end
 
   create_table "folders", :force => true do |t|

@@ -49,8 +49,7 @@ class ProjectsController < ApplicationController
           end
         end
 
-        @next_project = Project.get_recommended(Project.get_order_clause("lowcritiques"), current_user).first
-        format.html { redirect_to new_project_critique_path(@next_project), notice: 'Project was successfully created.' }
+        format.html { redirect_to rate_critiques_path, notice: 'Project was successfully created.' }
       else
         format.html { render action: "new" }
         format.json { render json: @project.errors, status: :unprocessable_entity }

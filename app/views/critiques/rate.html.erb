@@ -1,0 +1,26 @@
+<%= render 'projects/new_steps', active_step: 2 %>
+
+<h1>Rate Feedback</h1>
+<p class="lead">
+  To begin receiving feedback on your project, you need to rate feedback written by others.
+<p>
+<div>
+  <% if @critiques.count == 0 %>
+    <em>
+      Huh, looks like there isn't any feedback available for you to rate yet! Go ahead and click Next below to skip this step.
+    </em>
+  <% else %>
+    <p>
+      Select whether these pieces of feedback are <strong>fair</strong> or <strong>unfair</strong>.
+    </p>
+    <% @critiques.each do |c| %>
+      <%= render "critiques/critique", critique: c %>
+    <% end %>
+  <% end %>
+</div>
+
+<hr />
+
+<%= link_to new_project_critique_path(@next_project), class: "btn btn-primary" do %>
+  Next <%= fa_icon "angle-right" %>
+<% end %>

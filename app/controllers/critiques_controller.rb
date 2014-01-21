@@ -92,6 +92,13 @@ class CritiquesController < ApplicationController
     end
   end
 
+  def rate
+    @next_project = Project.get_recommended(Project.get_order_clause("lowcritiques"), current_user).first
+
+    # Get a few random critiques by people of the same level as the user
+    @critiques = Critique.where("skill_level_id = ? AND user_id <> ?", current_user.skill_level.id, current_user.id).order("RANDOM()").limit(3)
+  end
+
   # Used when a user is prompted to create a critique after they
   # create their own project
   def new
