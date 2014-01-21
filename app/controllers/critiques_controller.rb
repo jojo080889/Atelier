@@ -83,9 +83,9 @@ class CritiquesController < ApplicationController
     end
   end
 
-  def unlike
+  def dislike
     @critique = Critique.find(params[:critique_id])
-    @critique.unliked_by current_user
+    @critique.disliked_by current_user
 
     respond_to do |format|
       format.js
@@ -97,6 +97,7 @@ class CritiquesController < ApplicationController
 
     # Get a few random critiques by people of the same level as the user
     @critiques = Critique.where("skill_level_id = ? AND user_id <> ?", current_user.skill_level.id, current_user.id).order("RANDOM()").limit(3)
+    @critiques = @critiques.select { |c| !current_user.voted_for? c }
   end
 
   # Used when a user is prompted to create a critique after they

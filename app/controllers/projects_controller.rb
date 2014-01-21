@@ -15,7 +15,6 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     @folder = @project.folder
     @critique = Critique.new
-    @helpful_crits = @project.get_voted Critique
   end
 
   def new
@@ -35,20 +34,6 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
-        
-        # Like the critiques that were picked
-        @picked_crits = params[:critique]
-        if !@picked_crits.nil?
-          @picked_crits.each_key do |key|
-            crit = Critique.find(key)
-            crit.liked_by @project
-          
-            if (current_user.id != crit.user.id)
-              NotificationMailer.crit_marked_email(crit, @project).deliver
-            end
-          end
-        end
-
         format.html { redirect_to rate_critiques_path, notice: 'Project was successfully created.' }
       else
         format.html { render action: "new" }
@@ -63,23 +48,6 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.update_attributes(params[:project])
-        # Reset the critiques liked by this project
-        @crits = @project.get_voted Critique
-        @crits.each {|c| c.unliked_by @project}
-
-        # Like the critiques that were picked
-        @picked_crits = params[:critique]
-        if !@picked_crits.nil? 
-          @picked_crits.each_key do |key|
-            crit = Critique.find(key)
-            crit.liked_by @project
-            
-            if (current_user.id != crit.user.id)
-              NotificationMailer.crit_marked_email(crit, @project).deliver
-            end
-          end
-        end
-
         format.html { redirect_to project_path(@project), notice: 'Project was successfully updated.' }
         format.json { head :no_content }
       else
@@ -98,24 +66,6 @@ class ProjectsController < ApplicationController
       destination = @folder.nil? ? current_user : @folder
       format.html { redirect_to destination, notice: "Project was successfully deleted." }
       format.json { head :no_content }
-    end
-  end
-
-  def like
-    @project = Project.find(params[:project_id])
-    @project.liked_by current_user
-
-    respond_to do |format|
-      format.js
-    end
-  end
-
-  def unlike
-    @project = Project.find(params[:project_id])
-    @project.unliked_by current_user
-
-    respond_to do |format|
-      format.js
     end
   end
 

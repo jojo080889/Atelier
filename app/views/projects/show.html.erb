@@ -2,32 +2,6 @@
 
 <%= render 'projects/body' %>
 
-<% if !(@helpful_crits.nil? || @helpful_crits.count <= 0) %>
-<div class="helpful-critiques panel panel-info">
-  <div class="panel-heading">
-    The user thought the following feedback was helpful for this project:
-  </div>
-  <div class="panel-body critiques-select">
-    <table>
-      <% @helpful_crits.each do |crit| %>
-        <tr>
-          <td class="critique-select">
-            <%= truncate(crit.text, length: 50) %>
-          </td>
-          <td class="critique-link">
-            <%= link_to "See full feedback", project_path(crit.project, anchor: "critique_#{crit.id}") %>
-          </td>
-          <td class="critiquer">
-            by <%= link_to crit.user.username, crit.user  %>
-            <%= skill_level_badge(crit.user.skill_level) %>
-          </td>
-        </tr>
-      <% end %>
-    </table>
-  </div>
-</div>
-<% end %>
-
 <h3><%= pluralize @project.critiques.count, "Feedback" %></h3>
 
 <% if @project.critiques.count <= 0 %>

@@ -13,12 +13,9 @@ Atelier::Application.routes.draw do
   resources :projects do
     resources :critiques do
       post "/like" => "critiques#like", :as => "like"
-      post "/unlike" => "critiques#unlike", :as => "unlike"
+      post "/dislike" => "critiques#dislike", :as => "dislike"
       resources :responses 
     end
-
-    post "/like" => "projects#like", :as => "like"
-    post "/unlike" => "projects#unlike", :as => "unlike"
     post "/sort" => "projects#sort", on: :collection, as: :sort
   end
   get "/critiques/new/none" => "critiques#new_none", as: "new_none_critiques"

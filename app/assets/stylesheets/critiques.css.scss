@@ -15,7 +15,7 @@
   cursor: pointer;
 }
 
-.critique {
+.critique, .rate-critique {
   border: 1px solid #ccc;
   border-radius: 5px;
   margin: 10px 0;
@@ -30,10 +30,12 @@
     line-height: 20px;
   }
 
-  .liked-message {
-    font-size: smaller;
-    border-radius: 0;
-    margin: 0;
+  .rate-critique-header {
+    background: #eee;
+
+    .pull-left {
+      font-size: larger;
+    }
   }
 
   hr {
@@ -59,6 +61,11 @@
   .critique-actions {
     color: #aaa;
   }
+}
+
+.rate-critique {
+  margin: 10px auto 30px auto;
+  width: 80%;
 }
 
 .new_critique, .edit_critique {

@@ -11,9 +11,6 @@ class Project < ActiveRecord::Base
   has_attached_file :image
   validates_attachment_content_type :image, :content_type => /^image\/(jpg|jpeg|pjpeg|png|x-png|gif)$/, :message => 'Your attachment is the wrong file type. Only jpeg/jpg/png/gif images are allowed.'
 
-  acts_as_votable
-  acts_as_voter
-
   after_save :check_for_user_level
 
   def self.get_order_clause(order_by)
@@ -70,9 +67,9 @@ class Project < ActiveRecord::Base
   # When a critique is created and a user gives and overall rating,
   # check to see if that rating will increase the level of the receiving user.
   def check_for_user_level
-    @helpful_crits = self.get_voted Critique
-    @helpful_crits.each do |c|
-      c.user.check_for_user_level!
-    end
+    #@helpful_crits = self.get_voted Critique
+    #@helpful_crits.each do |c|
+    #  c.user.check_for_user_level!
+    #end
   end
 end

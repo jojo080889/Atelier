@@ -1,2 +1,4 @@
-$("#critique_<%= @critique.id %> .like-link").replaceWith("<%= escape_javascript(critique_like_link(@critique)) %>");
-$("#critique_<%= @critique.id %> .critique-likes").html(parseInt($("#critique_<%= @critique.id %> .critique-likes").html()) + 1);
+$("#rate-critique-<%= @critique.id %> .vote-buttons").addClass("hidden");
+$("#rate-critique-<%= @critique.id %> .fair-message").removeClass("hidden");
+$("#rate-critique-<%= @critique.id %> .rate-critique-likes").html(parseInt($("#rate-critique-<%= @critique.id %> .rate-critique-likes").html()) + 1);
+$("#rate-critique-<%= @critique.id %> .rate-critique-votes").html(parseInt($("#rate-critique-<%= @critique.id %> .rate-critique-votes").html()) + 1);

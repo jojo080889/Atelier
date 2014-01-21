@@ -1,2 +1,0 @@
-$("#critique_<%= @critique.id %> .unlike-link").replaceWith("<%= escape_javascript(critique_like_link(@critique)) %>");
-$("#critique_<%= @critique.id %> .critique-likes").html(parseInt($("#critique_<%= @critique.id %> .critique-likes").html()) - 1);
