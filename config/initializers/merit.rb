@@ -30,38 +30,24 @@ Merit::Badge.create!({
 })
 Merit::Badge.create!({
   id: 3,
-  name: 'weekly-prompt',
+  name: 'post-project',
   level: 1,
-  description: "Participated in one Weekly Prompt",
+  description: "Posted first project",
   custom_fields: { skill_level: :beginner }
 })
 Merit::Badge.create!({
   id: 4, 
-  name: "weekly-prompt",
+  name: "post-project",
   level: 2,
-  description: "Participated in two Weekly Prompts",
+  description: "Posted 2 projects",
   custom_fields: { skill_level: :beginner }
 })
 Merit::Badge.create!({
   id: 5,
-  name: "weekly-prompt",
-  level: 3, 
-  description: "Participated in three Weekly Prompts",
+  name: "post-project",
+  level: 4, 
+  description: "Posted 4 projects",
   custom_fields: { skill_level: :intermediate }
-})
-Merit::Badge.create!({
-  id: 6,
-  name: "weekly-prompt",
-  level: 4,
-  description: "Participated in four Weekly Prompts",
-  custom_fields: { skill_level: :intermediate }
-})
-Merit::Badge.create!({
-  id: 7,
-  name: "weekly-prompt",
-  level: 5,
-  description: "Participated in five Weekly Prompts",
-  custom_fields: { skill_level: :advanced }
 })
 Merit::Badge.create!({
   id: 8,

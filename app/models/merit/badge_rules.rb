@@ -37,6 +37,18 @@ module Merit
         critique.project.user.tier_ratings(:advanced, true) == 2 && critique.project.user.critiquers(:advanced) == 2
       end
 
+      grant_on ['project#create'], badge: 'post-project', level: 1 do |project|
+        project.user.projects.count == 1
+      end
+      
+      grant_on ['project#create'], badge: 'post-project', level: 2 do |project|
+        project.user.projects.count == 2
+      end
+
+      grant_on ['project#create'], badge: 'post-project', level: 4 do |project|
+        project.user.projects.count == 4
+      end
+
       # If it creates user, grant badge
       # Should be "current_user" after registration for badge to be granted.
       # grant_on 'users#create', :badge => 'just-registered', :to => :itself
