@@ -1,3 +1,11 @@
 <%= render "critiques/feedback_header" %>
 
-You've gone through all the projects we've recommended you give feedback on! You can always view the <%= link_to "list of projects", projects_path %> to find something more to your liking.
+<div class="new-none-message">
+  <p>
+  You've gone through all the projects we've recommended you give feedback on! You can always view the <%= link_to "list of projects", projects_path %> to find something more to your liking.
+  </p>
+  <div class="actions">
+    <%= link_to "Go through recommended projects again", new_project_critique_path(@project), class: "btn btn-primary" %>
+    <%= link_to "Pick from a list", projects_path, class: "btn btn-default" %>
+  </div>
+</div>

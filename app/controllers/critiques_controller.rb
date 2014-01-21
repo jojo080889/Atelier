@@ -112,5 +112,6 @@ class CritiquesController < ApplicationController
 
   # When the user reaches the end of their recommended list
   def new_none
+    @project = Project.get_recommended(Project.get_order_clause("lowcritiques"), current_user).first
   end
 end

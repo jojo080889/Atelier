@@ -67,7 +67,7 @@ class User < ActiveRecord::Base
   # critiques)
   def tier_ratings(skill_level, unique = false)
     if unique
-      Critique.select("count(critiques.id)").joins(:project).where("projects.user_id = ? AND rating = ?", self.id, SkillLevel.find_by_namekey(skill_level).id).group("projects.id").length
+      Critique.select("count(critiques.id)").joins(:project).where("projects.user_id = ? AND rating = ?", self.id, SkillLevel.find_by_name_key(skill_level).id).group("projects.id").length
     else
       Critique.joins(:project).where("projects.user_id = ? AND rating = ?", self.id, SkillLevel.find_by_name_key(skill_level).id).count
     end
