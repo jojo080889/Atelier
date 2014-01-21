@@ -49,6 +49,12 @@ class User < ActiveRecord::Base
     (self.is_guest? || (self.id != project.user.id && (SkillLevel.compare(self.skill_level, project.user.skill_level) || SkillLevel.compare(self.skill_level.lower_tier, project.user.skill_level))))
   end
 
+  # Users can rate projects if they are a logged in user with a higher level than
+  # the person posting the project
+  def can_rate?(project)
+    (!self.is_guest? && (self.id != project.user.id && (SkillLevel.compare_strict(self.skill_level, project.user.skill_level) || SkillLevel.compare_strict(self.skill_level.lower_tier, project.user.skill_level))))
+  end
+
   # Gets the number of unique users that gave this user a rating of the
   # given skill level on any project
   def critiquers(skill_level)
@@ -117,7 +123,6 @@ class User < ActiveRecord::Base
   end
 
   def check_for_user_level!
-    debugger
     if (self.helpful_critiques_needed <= 0 && self.next_tier_ratings_needed <= 0)
       self.change_skill_level!(self.skill_level.higher_tier.name_key.to_sym)   
     end

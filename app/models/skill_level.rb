@@ -22,6 +22,10 @@ class SkillLevel < ActiveRecord::Base
     SkillLevel.levels[current_level.name_key.to_sym] >= SkillLevel.levels[level.name_key.to_sym]
   end
 
+  def self.compare_strict(current_level, level)
+    SkillLevel.levels[current_level.name_key.to_sym] > SkillLevel.levels[level.name_key.to_sym]
+  end
+
   def self.compare_exact(level, other_level)
     SkillLevel.levels[level.name_key.to_sym] == SkillLevel.levels[other_level.name_key.to_sym]
   end
