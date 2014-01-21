@@ -1,4 +1,4 @@
-$("#rate-critique-<%= @critique.id %> .vote-buttons").addClass("hidden");
-$("#rate-critique-<%= @critique.id %> .fair-message").removeClass("hidden");
-$("#rate-critique-<%= @critique.id %> .rate-critique-likes").html(parseInt($("#rate-critique-<%= @critique.id %> .rate-critique-likes").html()) + 1);
-$("#rate-critique-<%= @critique.id %> .rate-critique-votes").html(parseInt($("#rate-critique-<%= @critique.id %> .rate-critique-votes").html()) + 1);
+$("#critique_<%= @critique.id %> .vote-buttons").addClass("hidden");
+$("#critique_<%= @critique.id %> .fair-message").removeClass("hidden");
+$("#critique_<%= @critique.id %> .rate-critique-likes").html(parseInt($("#critique_<%= @critique.id %> .rate-critique-likes").html()) + 1);
+$("#critique_<%= @critique.id %> .rate-critique-votes").html(parseInt($("#critique_<%= @critique.id %> .rate-critique-votes").html()) + 1);

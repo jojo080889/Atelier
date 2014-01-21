@@ -1,0 +1,23 @@
+<div class="rate-critique-actions clearfix">
+  <div class="pull-left">
+    <% if critique.project.user.liked? critique %>
+      The artist thought this critique was fair.<br />
+    <% end %>
+    <span class="rate-critique-likes"><%= critique.likes.size %></span> out of <span class="rate-critique-votes"><%= critique.votes.size %></span> users thought this critique was fair.
+  </div>
+  <% if current_or_guest_user.id != critique.user.id %>
+    <div class="pull-right">
+      <strong>What do you think?</strong>
+      <span class="fair-message text-muted <%= 'hidden' if !current_user.voted_for?(critique) || current_user.disliked?(critique) %>">
+        You thought this was <strong>fair.</strong>
+      </span>
+      <span class="unfair-message text-muted <%= 'hidden' if !current_user.voted_for?(critique) || current_user.liked?(critique) %>">
+        You thought this was <strong>unfair.</strong>
+      </span>
+      <span class="vote-buttons <%= 'hidden' if current_user.voted_for? critique %>">
+        <%= link_to "Fair", project_critique_like_path(critique.project, critique), method: :post, remote: true, class: "btn btn-success" %>
+        <%= link_to "Unfair", project_critique_dislike_path(critique.project, critique), method: :post, remote: true, class: "btn btn-danger" %>
+      </span>
+    </div>
+  <% end %>
+</div>
