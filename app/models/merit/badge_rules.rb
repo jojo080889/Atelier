@@ -22,19 +22,19 @@ module Merit
 
     def initialize
       grant_on ['critiques#create', 'critiques#update'], badge: 'rating-intermediate', level: 1 do |critique|
-        critique.project.user.tier_ratings(:intermediate) == 1
+        critique.project.user.tier_ratings(:intermediate, true) == 1
       end
 
       grant_on ['critiques#create', 'critiques#update'], badge: 'rating-intermediate', level: 2 do |critique|
-        critique.project.user.tier_ratings(:intermediate) == 2
+        critique.project.user.tier_ratings(:intermediate, true) == 2 && critique.project.user.critiquers(:intermediate) == 2
       end
 
       grant_on ['critiques#create', 'critiques#update'], badge: 'rating-advanced', level: 1 do |critique|
-        critique.project.user.tier_ratings(:advanced) == 1
+        critique.project.user.tier_ratings(:advanced, true) == 1
       end
 
       grant_on ['critiques#create', 'critiques#update'], badge: 'rating-advanced', level: 2 do |critique|
-        critique.project.user.tier_ratings(:advanced) == 2
+        critique.project.user.tier_ratings(:advanced, true) == 2 && critique.project.user.critiquers(:advanced) == 2
       end
 
       # If it creates user, grant badge

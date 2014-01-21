@@ -49,9 +49,22 @@ class User < ActiveRecord::Base
     (self.is_guest? || (self.id != project.user.id && (SkillLevel.compare(self.skill_level, project.user.skill_level) || SkillLevel.compare(self.skill_level.lower_tier, project.user.skill_level))))
   end
 
+  # Gets the number of unique users that gave this user a rating of the
+  # given skill level on any project
+  def critiquers(skill_level)
+    Critique.select("COUNT(critiques.id)").joins(:project).where("projects.user_id = ? AND rating = ?", self.id, SkillLevel.find_by_name_key(skill_level).id).group("critiques.user_id").length
+  end
+
   # Gets number of ratings for the given skill level
-  def tier_ratings(skill_level)
-    Critique.joins(:project).where("projects.user_id = ? AND rating = ?", self.id, SkillLevel.find_by_name_key(skill_level).id).count
+  # If unique is true, gets the number of projects with at least
+  # one rating of the given skill level (rather than the number of
+  # critiques)
+  def tier_ratings(skill_level, unique = false)
+    if unique
+      Critique.select("count(critiques.id)").joins(:project).where("projects.user_id = ? AND rating = ?", self.id, SkillLevel.find_by_namekey(skill_level).id).group("projects.id").length
+    else
+      Critique.joins(:project).where("projects.user_id = ? AND rating = ?", self.id, SkillLevel.find_by_name_key(skill_level).id).count
+    end
   end
 
   # Gets the number of ratings contributing to the next tier
