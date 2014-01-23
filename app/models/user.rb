@@ -122,9 +122,39 @@ class User < ActiveRecord::Base
     self.save!
   end
 
-  def check_for_user_level!
-    if (self.helpful_critiques_needed <= 0 && self.next_tier_ratings_needed <= 0)
-      self.change_skill_level!(self.skill_level.higher_tier.name_key.to_sym)   
+  # Check all requirements for badges manually.
+  # Make sure this matches up with the badge rules.
+  def check_for_badges!
+    skill_level = self.skill_level.name_key.to_sym
+
+    # BEGINNER
+    if skill_level == :beginner && self.tier_ratings(:intermediate, true) >= 1
+      self.add_badge(8)
     end
+
+    if skill_level == :beginner && (self.tier_ratings(:intermediate, true) >= 2 && self.critiquers(:intermediate) >= 2)
+      self.add_badge(9)
+    end
+
+    if skill_level == :beginner && self.projects.count >= 1
+      self.add_badge(3)
+    end
+
+    if skill_level == :beginner && self.projects.count >= 2
+      self.add_badge(4)
+    end
+
+    # INTERMEDIATE BADGES
+    if skill_level == :intermediate && self.projects.count >= 4
+      self.add_badge(5)
+    end
+
+    if skill_level == :intermediate && self.tier_ratings(:advanced, true) >= 1
+      self.add_badge(10)
+    end
+
+    if skill_level == :intermediate && (self.tier_ratings(:advanced, true) >= 2 && self.critiquers(:advanced) >= 2)
+      self.add_badge(11)
+    end 
   end
 end

@@ -22,31 +22,35 @@ module Merit
 
     def initialize
       grant_on ['critiques#create', 'critiques#update'], badge: 'rating-intermediate', level: 1 do |critique|
-        critique.project.user.tier_ratings(:intermediate, true) == 1
+        user = critique.project.user
+        user.skill_level.name_key.to_sym == :beginner && user.tier_ratings(:intermediate, true) == 1
       end
 
       grant_on ['critiques#create', 'critiques#update'], badge: 'rating-intermediate', level: 2 do |critique|
-        critique.project.user.tier_ratings(:intermediate, true) == 2 && critique.project.user.critiquers(:intermediate) == 2
+        user = critique.project.user
+        user.skill_level.name_key.to_sym == :beginner && user.tier_ratings(:intermediate, true) >= 2 && user.critiquers(:intermediate) >= 2
       end
 
       grant_on ['critiques#create', 'critiques#update'], badge: 'rating-advanced', level: 1 do |critique|
-        critique.project.user.tier_ratings(:advanced, true) == 1
+        user = critique.project.user
+        user.skill_level.name_key.to_sym == :intermediate && user.tier_ratings(:advanced, true) == 1
       end
 
       grant_on ['critiques#create', 'critiques#update'], badge: 'rating-advanced', level: 2 do |critique|
-        critique.project.user.tier_ratings(:advanced, true) == 2 && critique.project.user.critiquers(:advanced) == 2
+        user = critique.project.user
+        user.skill_level.name_key.to_sym == :intermediate && user.tier_ratings(:advanced, true) >= 2 && user.critiquers(:advanced) >= 2
       end
 
       grant_on ['project#create'], badge: 'post-project', level: 1 do |project|
-        project.user.projects.count == 1
+        project.user.skill_level.name_key.to_sym == :beginner && project.user.projects.count == 1
       end
       
       grant_on ['project#create'], badge: 'post-project', level: 2 do |project|
-        project.user.projects.count == 2
+        project.user.skill_level.name_key.to_sym == :beginner && project.user.projects.count == 2
       end
 
       grant_on ['project#create'], badge: 'post-project', level: 4 do |project|
-        project.user.projects.count == 4
+        project.user.skill_level.name_key.to_sym == :intermediate && project.user.projects.count == 4
       end
 
       # If it creates user, grant badge

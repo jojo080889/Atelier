@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>
+    You've earned the <em>"<%= @badge.description %>"</em> badge! You're on your way to becoming a <%= @user.skill_level.higher_tier %> user.
+    </p>
+    <p>
+    To view your progress so far, <%= link_to "go view your profile page", @user %>.
+    </p>
+    <%= render :partial => "notification_mailer/footer" %>
+  </body>
+</html>
