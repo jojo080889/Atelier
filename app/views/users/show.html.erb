@@ -19,6 +19,7 @@
 
 <div class="clearfix"></div>
 
+<% if !@available_badges.empty? %>
 <div class="badges panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">
@@ -40,6 +41,7 @@
     <% end %>
   </div>
 </div>
+<% end %>
 
 <div class="user-show">
   <ul class="nav nav-pills nav-stacked col-md-3">
