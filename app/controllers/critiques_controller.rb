@@ -21,7 +21,12 @@ class CritiquesController < ApplicationController
     respond_to do |format|
       if @critique.save
         NotificationMailer.critique_received_email(@project).deliver
-        format.html { redirect_to project_path(@project), notice: 'Critique was successfully created.' }
+        if URI(request.referer).path == new_project_critique_path(@project)
+          destination = current_user
+        else
+          destination = project_path(@project)
+        end
+        format.html { redirect_to destination, notice: 'Critique was successfully created.' }
       else
         format.html { redirect_to project_path(@project), notice: 'There were errors creating your critique. Please try again.' }
         format.json { render json: @critique.errors, status: :unprocessable_entity }
@@ -91,6 +96,12 @@ class CritiquesController < ApplicationController
 
   def rate
     @next_project = Project.get_recommended(Project.get_order_clause("lowcritiques"), current_user).first
+    @next_project = nil
+    if @next_project.nil?
+      @destination = new_none_critiques_path
+    else
+      @destination = new_project_critique_path(@next_project)
+    end
 
     # Get a few random critiques by people of the same level as the user
     @critiques = Critique.where("skill_level_id = ? AND user_id <> ?", current_user.skill_level.id, current_user.id).order("RANDOM()").limit(3)

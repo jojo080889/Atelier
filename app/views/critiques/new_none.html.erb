@@ -1,11 +1,17 @@
 <%= render "critiques/feedback_header" %>
 
 <div class="new-none-message">
-  <p>
-  You've gone through all the projects we've recommended you give feedback on! You can always view the <%= link_to "list of projects", projects_path %> to find something more to your liking.
-  </p>
-  <div class="actions">
-    <%= link_to "Go through recommended projects again", new_project_critique_path(@project), class: "btn btn-primary" %>
-    <%= link_to "Pick from a list", projects_path, class: "btn btn-default" %>
-  </div>
+  <% if @project.nil? %>
+    <p>
+    It looks like there aren't any projects available for you to give feedback on right now. You're off the hook! Your project can start receiving feedback now.
+    </p>
+  <% else %>
+    <p>
+    You've gone through all the projects we've recommended you give feedback on! You can always view the <%= link_to "list of projects", projects_path %> to find something more to your liking.
+    </p>
+    <div class="actions">
+      <%= link_to "Go through recommended projects again", new_project_critique_path(@project), class: "btn btn-primary" %>
+      <%= link_to "Pick from a list", projects_path, class: "btn btn-default" %>
+    </div>
+  <% end %>
 </div>

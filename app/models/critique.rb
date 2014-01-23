@@ -12,7 +12,6 @@ class Critique < ActiveRecord::Base
 
   after_create :increment_folder_critiques_counter
   after_destroy :decrement_folder_critiques_counter
-  after_save :check_for_user_level
 
   acts_as_votable
 
@@ -35,11 +34,5 @@ class Critique < ActiveRecord::Base
     if !self.project.folder.nil?
       Folder.decrement_counter(:critiques_count, self.project.folder.id)
     end
-  end
-
-  # When a critique is created and a user gives and overall rating,
-  # check to see if that rating will increase the level of the receiving user.
-  def check_for_user_level
-    self.project.user.check_for_user_level!
   end
 end

@@ -11,8 +11,6 @@ class Project < ActiveRecord::Base
   has_attached_file :image
   validates_attachment_content_type :image, :content_type => /^image\/(jpg|jpeg|pjpeg|png|x-png|gif)$/, :message => 'Your attachment is the wrong file type. Only jpeg/jpg/png/gif images are allowed.'
 
-  after_save :check_for_user_level
-
   def self.get_order_clause(order_by)
     case order_by
     when "alphabetical"
@@ -62,14 +60,5 @@ class Project < ActiveRecord::Base
   def is_mentored_by?(user) 
     @projects = Project.joins(:critiques).where("critiques.user_id = ?", user.id).uniq
     @projects.include? self
-  end
-  
-  # When a critique is created and a user gives and overall rating,
-  # check to see if that rating will increase the level of the receiving user.
-  def check_for_user_level
-    #@helpful_crits = self.get_voted Critique
-    #@helpful_crits.each do |c|
-    #  c.user.check_for_user_level!
-    #end
   end
 end
