@@ -18,6 +18,7 @@ Atelier::Application.routes.draw do
     end
     post "/sort" => "projects#sort", on: :collection, as: :sort
   end
+  get "projects/tagged/:tag" => "projects#tag_index", as: :tag
   get "/critiques/new/none" => "critiques#new_none", as: "new_none_critiques"
   get "/critiques/rate" => "critiques#rate", as: "rate_critiques"
   devise_for :users

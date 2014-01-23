@@ -16,6 +16,9 @@
     ["Highest to Lowest Feedback", "highcritiques"]
   ], order_by), class: "form-control" %>
   <%= hidden_field_tag :scope, scope %>
+  <% if @tag %>
+    <%= hidden_field_tag :tag, @tag %>
+  <% end %>
   <% if scope == "users" %>
     <%= hidden_field_tag :username, @user.username %> 
   <% end %>

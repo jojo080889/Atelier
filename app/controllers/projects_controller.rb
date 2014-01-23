@@ -64,6 +64,12 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def tag_index
+    @order_clause = "critiques_count"
+    @tag = params[:tag]
+    @projects = Project.order(@order_clause).tagged_with(@tag)
+  end
+
   def sort
     @scope = params[:scope]
     @order_by = params[:order_by]
@@ -79,6 +85,9 @@ class ProjectsController < ApplicationController
       @projects = Project.get_recommended(@order_clause, current_user)
     elsif @scope == "users"
       @projects = Project.get_by_user(@order_clause, @user)
+    elsif @scope == "tagged"
+      @tag = params[:tag]
+      @projects = Project.order(@order_clause).tagged_with(params[:tag])
     end
 
     respond_to do |format|

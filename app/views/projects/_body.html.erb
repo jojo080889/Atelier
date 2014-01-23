@@ -33,6 +33,13 @@
     <%= Format.markdown @project.content %>
   <% end %>
 </div>
+<p class="project-tags text-muted">
+<% @project.tag_list.each do |tag| %>
+  <span class="tag">
+    <%= link_to "##{tag}", tag_path(tag) %>
+  </span>
+<% end %>
+</p>
 
 <script>
   $(document).ready(function() {

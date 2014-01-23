@@ -29,6 +29,9 @@
   <div class="field form-group">
     <%= f.text_area :content, size: "20x10", placeholder: "Write about progress you've made on your project...", data: {provide: "markdown"} %>
   </div>
+  <div class="field form-group">
+    <%= f.text_field :tag_list, placeholder: "Tags (separated by commas)", class: "form-control" %>
+  </div>
   <div class="actions">
     <%= f.submit button_name, class: "btn btn-primary" %>
   </div>

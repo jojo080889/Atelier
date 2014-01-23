@@ -4,12 +4,14 @@ class Project < ActiveRecord::Base
   belongs_to :user
   belongs_to :folder, :counter_cache => true, :touch => true
   has_many :critiques, :dependent => :destroy
-  attr_accessible :title, :content, :user_id, :folder_id, :image
+  attr_accessible :title, :content, :user_id, :folder_id, :image, :tag_list
 
   validates_presence_of :title
 
   has_attached_file :image
   validates_attachment_content_type :image, :content_type => /^image\/(jpg|jpeg|pjpeg|png|x-png|gif)$/, :message => 'Your attachment is the wrong file type. Only jpeg/jpg/png/gif images are allowed.'
+
+  acts_as_taggable
 
   def self.get_order_clause(order_by)
     case order_by
