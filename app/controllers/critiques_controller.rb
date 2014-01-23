@@ -4,7 +4,6 @@ class CritiquesController < ApplicationController
 
   def create
     @project = Project.find(params[:project_id])
-    @folder = @project.folder
     @critique = @project.critiques.new(params[:critique])
     if current_or_guest_user.is_guest?
       @critique.rating = nil
@@ -32,7 +31,6 @@ class CritiquesController < ApplicationController
 
   def edit
     @project = Project.find(params[:project_id])
-    @folder = @project.folder
     @critique = Critique.find(params[:id])
 
     respond_to do |format|
@@ -42,7 +40,6 @@ class CritiquesController < ApplicationController
  
   def update
     @project = Project.find(params[:project_id])
-    @folder = @project.folder
     @critique = Critique.find(params[:id])
     if (params[:paintover_data] == "none" || params[:paintover_data].nil?)
       @critique.paintover = nil
@@ -64,7 +61,6 @@ class CritiquesController < ApplicationController
 
   def destroy
     @project = Project.find(params[:project_id])
-    @folder = @project.folder
     @critique = Critique.find(params[:id])
     @critique.destroy
 

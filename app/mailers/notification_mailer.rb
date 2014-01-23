@@ -4,7 +4,6 @@ class NotificationMailer < ActionMailer::Base
   def critique_received_email(project)
     @user = project.user
     @project = project
-    @folder = project.folder
     mail(
       to: @user.email,
       subject: "[Atelier] You've received a critique!" 
@@ -25,7 +24,6 @@ class NotificationMailer < ActionMailer::Base
     @user = critique.user
     @critique = critique
     @project = critique.project
-    @folder = @project.folder
     mail(
       to: @user.email,
       subject: "[Atelier] You've received a reply to your critique!"

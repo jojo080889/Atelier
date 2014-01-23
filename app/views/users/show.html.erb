@@ -10,11 +10,6 @@
 
 <div class="pull-right user-actions">
   <% if @user.id == current_user.id %>
-    <%= link_to new_folder_path, class: "btn btn-default" do %>
-      <%= fa_icon "folder" %>
-      New Folder
-    <% end %>
-
     <%= link_to new_project_path, class: "btn btn-primary" do %>
       <%= fa_icon "plus" %>
       New Project
@@ -52,9 +47,6 @@
     <a href="#projects" data-toggle="tab"><%= pluralize @user.projects.count, "Project" %></a>
     </li>
     <li>
-    <a href="#folders" data-toggle="tab"><%= pluralize @user.folders.count, "Folder" %></a>
-    </li>
-    <li>
     <a href="#critiques" data-toggle="tab"><%= pluralize @user.critiques.count, "Feedback" %> Written</a>
     </li>
     <li>
@@ -70,15 +62,6 @@
         </p>
       <% else %>
         <%= render "projects/project_list", projects: @projects, scope: "users", show_name: false %>
-      <% end %>
-    </div>
-    <div class="tab-pane" id="folders">
-      <% if @user.folders.count <= 0 %>
-        <p class="text-muted">
-        <em>This user has no folders.</em>
-        </p>
-      <% else %>
-        <%= render "folders/folder_list", folders: @user.folders, show_name: false %>
       <% end %>
     </div>
     <div class="tab-pane" id="critiques">

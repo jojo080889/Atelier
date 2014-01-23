@@ -6,7 +6,6 @@ class ResponsesController < ApplicationController
   def new
     @response = Response.new
     @project = Project.find(params[:project_id])
-    @folder = @project.folder
     @critique = Critique.find(params[:critique_id])
 
     respond_to do |format|
@@ -34,7 +33,6 @@ class ResponsesController < ApplicationController
 
   def edit
     @project = Project.find(params[:project_id])
-    @folder = @project.folder
     @critique = Critique.find(params[:critique_id])
     @response = Response.find(params[:id])
 

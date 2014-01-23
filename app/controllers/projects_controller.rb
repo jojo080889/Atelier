@@ -13,7 +13,6 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
-    @folder = @project.folder
     @critique = Critique.new
   end
 
@@ -24,7 +23,6 @@ class ProjectsController < ApplicationController
 
   def edit
     @project = Project.find(params[:id])
-    @folder = @project.folder
     @critique_options = @project.critique_options
   end
 
@@ -44,7 +42,6 @@ class ProjectsController < ApplicationController
 
   def update
     @project = Project.find(params[:id])
-    @folder = @project.folder
 
     respond_to do |format|
       if @project.update_attributes(params[:project])
@@ -59,12 +56,10 @@ class ProjectsController < ApplicationController
 
   def destroy
     @project = Project.find(params[:id])
-    @folder = @project.folder
     @project.destroy
 
     respond_to do |format|
-      destination = @folder.nil? ? current_user : @folder
-      format.html { redirect_to destination, notice: "Project was successfully deleted." }
+      format.html { redirect_to current_user, notice: "Project was successfully deleted." }
       format.json { head :no_content }
     end
   end
