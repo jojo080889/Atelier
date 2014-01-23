@@ -77,6 +77,7 @@ class CritiquesController < ApplicationController
   def like
     @critique = Critique.find(params[:critique_id])
     @critique.liked_by current_user
+    NotificationMailer.critique_rated_email(@critique).deliver
 
     respond_to do |format|
       format.js

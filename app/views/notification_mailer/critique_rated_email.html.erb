@@ -5,10 +5,10 @@
   </head>
   <body>
     <p>
-      Your feedback has been marked as helpful!
+      You have received a rating on your critique!
     </p>
     <p>
-      To view the project your feedback was helpful for, <%= link_to "go to the project page", project_url(@project) %>.
+    To view it, <%= link_to "go view your critique", project_url(@project, anchor: "critique_#{@critique.id}") %>.
     </p>
     <%= render :partial => "notification_mailer/footer" %>
   </body>
