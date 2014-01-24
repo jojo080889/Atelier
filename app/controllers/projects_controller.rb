@@ -70,6 +70,10 @@ class ProjectsController < ApplicationController
     @projects = Project.order(@order_clause).tagged_with(@tag)
   end
 
+  def search
+    @projects = Project.search(params[:search])
+  end
+
   def sort
     @scope = params[:scope]
     @order_by = params[:order_by]
