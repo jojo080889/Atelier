@@ -71,7 +71,8 @@ class ProjectsController < ApplicationController
   end
 
   def search
-    @projects = Project.search(params[:search])
+    @query = params[:search]
+    @projects = Project.tagged_with(@query, :any => true)
   end
 
   def sort
@@ -92,6 +93,9 @@ class ProjectsController < ApplicationController
     elsif @scope == "tagged"
       @tag = params[:tag]
       @projects = Project.order(@order_clause).tagged_with(params[:tag])
+    elsif @scope == "search"
+      @query = params[:search]
+      @projects = Project.order(@order_clause).tagged_with(@query, :any => true)
     end
 
     respond_to do |format|

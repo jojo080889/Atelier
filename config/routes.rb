@@ -10,6 +10,8 @@ Atelier::Application.routes.draw do
   resources :folders do
     post "/sort" => "folders#sort", on: :collection, as: :sort
   end
+  get "projects/search" => "projects#search", as: :search_projects
+  get "projects/tagged/:tag" => "projects#tag_index", as: :tag
   resources :projects do
     resources :critiques do
       post "/like" => "critiques#like", :as => "like"
@@ -18,8 +20,6 @@ Atelier::Application.routes.draw do
     end
     post "/sort" => "projects#sort", on: :collection, as: :sort
   end
-  get "projects/tagged/:tag" => "projects#tag_index", as: :tag
-  get "projects/search" => "projects#search", as: :search_projects
   get "/critiques/new/none" => "critiques#new_none", as: "new_none_critiques"
   get "/critiques/rate" => "critiques#rate", as: "rate_critiques"
   devise_for :users

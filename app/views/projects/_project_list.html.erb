@@ -19,6 +19,9 @@
   <% if @tag %>
     <%= hidden_field_tag :tag, @tag %>
   <% end %>
+  <% if @query %>
+    <%= hidden_field_tag :search, @query %>
+  <% end %>
   <% if scope == "users" %>
     <%= hidden_field_tag :username, @user.username %> 
   <% end %>
