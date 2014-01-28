@@ -1,0 +1,3 @@
+$("#critique_<%= @critique.id %> .rating-container").addClass("hidden");
+$("#critique_<%= @critique.id %> .critique-rating-message").removeClass("hidden");
+$("#critique_<%= @critique.id %> .critique-rating-rating").html("<%= SkillLevel.find(@cr.rating_id) %>");

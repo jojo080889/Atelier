@@ -108,6 +108,16 @@ class CritiquesController < ApplicationController
     @critiques = @critiques.select { |c| !current_user.voted_for? c }
   end
 
+  def rating
+    @critique = Critique.find(params[:critique_id])
+    @cr = CritiqueRating.new(:user_id => current_user.id, :critique_id => params[:critique_id], :rating_id => params[:rating])
+    @cr.save
+    
+    respond_to do |format|
+      format.js
+    end
+  end
+
   # Used when a user is prompted to create a critique after they
   # create their own project
   def new

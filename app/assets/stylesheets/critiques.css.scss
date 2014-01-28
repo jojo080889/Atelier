@@ -71,6 +71,16 @@
   width: 80%;
 }
 
+.rate-critique-actions {
+  .pull-right {
+    text-align: right;
+
+    & > div {
+      margin-bottom: 5px;
+    }
+  }
+}
+
 .new_critique, .edit_critique {
   margin-bottom: 10px;
 

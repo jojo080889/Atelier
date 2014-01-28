@@ -5,19 +5,31 @@
     <% end %>
     <span class="rate-critique-likes"><%= critique.likes.size %></span> out of <span class="rate-critique-votes"><%= critique.votes.size %></span> users thought this critique was fair.
   </div>
-  <% if current_or_guest_user.id != critique.user.id %>
+  <% if !current_or_guest_user.is_guest? && !critique.user.nil? && current_or_guest_user.id != critique.user.id %>
     <div class="pull-right">
-      <strong>What do you think?</strong>
-      <span class="fair-message text-muted <%= 'hidden' if !current_user.voted_for?(critique) || current_user.disliked?(critique) %>">
-        You thought this was <strong>fair.</strong>
-      </span>
-      <span class="unfair-message text-muted <%= 'hidden' if !current_user.voted_for?(critique) || current_user.liked?(critique) %>">
-        You thought this was <strong>unfair.</strong>
-      </span>
-      <span class="vote-buttons <%= 'hidden' if current_user.voted_for? critique %>">
-        <%= link_to "Fair", project_critique_like_path(critique.project, critique), method: :post, remote: true, class: "btn btn-success" %>
-        <%= link_to "Unfair", project_critique_dislike_path(critique.project, critique), method: :post, remote: true, class: "btn btn-danger" %>
-      </span>
+      <div>
+        <strong>Rate the overall quality of the critique:</strong>
+        <% cr = CritiqueRating.where(:user_id => current_user.id, :critique_id => critique.id) %>
+        <% if cr.empty? %>
+          <%= critique_rating_buttons(critique.user, current_user, true, critique.project, critique) %> 
+        <% end %>
+        <div class="critique-rating-message <%= 'hidden' if cr.empty? %>">
+          You rated this critique at <span class="critique-rating-rating"><%= SkillLevel.find(cr.first.rating_id) if !cr.empty? %></span>
+        </div>
+      </div>
+      <div>
+        <strong>What do you think?</strong>
+        <span class="fair-message text-muted <%= 'hidden' if !current_user.voted_for?(critique) || current_user.disliked?(critique) %>">
+          You thought this was <strong>fair.</strong>
+        </span>
+        <span class="unfair-message text-muted <%= 'hidden' if !current_user.voted_for?(critique) || current_user.liked?(critique) %>">
+          You thought this was <strong>unfair.</strong>
+        </span>
+        <span class="vote-buttons <%= 'hidden' if current_user.voted_for? critique %>">
+          <%= link_to "Fair", project_critique_like_path(critique.project, critique), method: :post, remote: true, class: "btn btn-success" %>
+          <%= link_to "Unfair", project_critique_dislike_path(critique.project, critique), method: :post, remote: true, class: "btn btn-danger" %>
+        </span>
+      </div>
     </div>
   <% end %>
 </div>

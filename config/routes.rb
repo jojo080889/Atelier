@@ -16,6 +16,7 @@ Atelier::Application.routes.draw do
     resources :critiques do
       post "/like" => "critiques#like", :as => "like"
       post "/dislike" => "critiques#dislike", :as => "dislike"
+      post "/rate/:rating" => "critiques#rating", :as => "rating"
       resources :responses 
     end
     post "/sort" => "projects#sort", on: :collection, as: :sort

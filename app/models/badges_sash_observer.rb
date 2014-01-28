@@ -9,7 +9,6 @@ class BadgesSashObserver < ActiveRecord::Observer
 
     # Check if they're eligible for advancing to the next
     # skill level
-    debugger
     @available_badges = Merit::Badge.find { |b| b.custom_fields[:skill_level] == user.skill_level.name_key.to_sym }
     @available = @available_badges.keys
     @earned = user.badges.map {|b| b.id}.uniq

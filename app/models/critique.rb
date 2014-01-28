@@ -4,6 +4,7 @@ class Critique < ActiveRecord::Base
   belongs_to :user
   belongs_to :project, :counter_cache => true
   has_many :responses, :dependent => :destroy
+  has_many :critique_ratings, :dependent => :destroy
   has_attached_file :paintover
   attr_accessible :user_id, :project_id, :text, :rating, :started_at, :skill_level_id, :paintover, :paintover_snapshot, :guest_name
 

@@ -1,4 +1,62 @@
 module CritiquesHelper
+  def critique_rating_buttons(recipient, rater, remote = false, project = nil, critique = nil)
+    html = "<div class='rating-container btn-group'>"
+    
+    if recipient.has_skill_level?(:beginner)
+      html += "<a class='rating beginner btn btn-default"
+      html += " btn-warning" if recipient.has_skill_level?(:beginner) && !remote
+      if remote
+        html += "' "
+        html += "data-method='post' "
+        html += "data-remote='true' "
+        html += "href='#{project_critique_rating_path(project, critique, SkillLevel.find_by_name_key(:beginner))}"
+      end
+      html += "'>"
+      if !remote
+        html += fa_icon "star"
+      else
+        html += fa_icon "o-star"
+      end
+      html += " Beginner"
+      html += "</a>"
+    end
+
+    if rater.has_skill_level?(:intermediate) || rater.has_skill_level?(:advanced)
+      html += "<a class='rating intermediate btn btn-default"
+      html += " btn-warning" if recipient.has_skill_level?(:intermediate) && !remote
+      if remote
+        html += "' "
+        html += "data-method='post' "
+        html += "data-remote='true' "
+        html += "href='#{project_critique_rating_path(project, critique, SkillLevel.find_by_name_key(:intermediate))}"
+      end
+      html += "'>"
+      if !remote && recipient.has_skill_level?(:intermediate)
+        html += fa_icon "star"
+      else
+        html += fa_icon "star-o"
+      end
+      html += " Intermediate"
+      html += "</a>"
+    end
+
+    if rater.has_skill_level?(:advanced)
+      html += "<a class='rating advanced btn btn-default"
+      if remote
+        html += "' "
+        html += "data-method='post' "
+        html += "data-remote='true' "
+        html += "href='#{project_critique_rating_path(project, critique, SkillLevel.find_by_name_key(:advanced))}"
+      end
+      html += "'>"
+      html += fa_icon "star-o"
+      html += " Advanced"
+      html += "</a>"
+    end
+
+    html += "</div>"
+    html.html_safe
+  end
   
   def critique_like_link(critique)
     html = ""

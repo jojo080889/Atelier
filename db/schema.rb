@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140128064852) do
+ActiveRecord::Schema.define(:version => 20140128173231) do
 
   create_table "badges_sashes", :force => true do |t|
     t.integer  "badge_id"
@@ -39,6 +39,12 @@ ActiveRecord::Schema.define(:version => 20140128064852) do
 
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], :name => "idx_ckeditor_assetable"
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], :name => "idx_ckeditor_assetable_type"
+
+  create_table "critique_ratings", :force => true do |t|
+    t.integer "user_id"
+    t.integer "critique_id"
+    t.integer "rating_id"
+  end
 
   create_table "critiques", :force => true do |t|
     t.integer  "user_id"

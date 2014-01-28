@@ -57,36 +57,7 @@
           <div class="rating-label">
             Rate the overall quality of the project:
           </div>
-          <div class="rating-container btn-group">
-            <% if @project.user.has_skill_level?(:beginner) %>
-              <a class="rating beginner btn btn-default <%= "btn-warning" if @project.user.has_skill_level?(:beginner) %>">
-                <% if @project.user.has_skill_level?(:beginner) %>
-                  <%= fa_icon "star" %>
-                <% else %>
-                  <%= fa_icon "star-o" %>
-                <% end %>
-                Beginner
-              </a>
-            <% end %>
-
-            <% if current_user.has_skill_level?(:intermediate) || current_user.has_skill_level?(:advanced) %>
-              <a class="rating intermediate btn btn-default <%= "btn-warning" if @project.user.has_skill_level?(:intermediate) %>">
-                <% if @project.user.has_skill_level?(:intermediate) %>
-                  <%= fa_icon "star" %>
-                <% else %>
-                  <%= fa_icon "star-o" %>
-                <% end %>
-                Intermediate
-              </a>
-            <% end %>
-
-            <% if current_user.has_skill_level?(:advanced) %>
-              <a class="rating advanced btn btn-default">
-                <%= fa_icon "star-o" %>
-                Advanced
-              </a>
-            <% end %>
-          </div>
+          <%= critique_rating_buttons(@project.user, current_user) %>
           <%= f.hidden_field :rating, :value => @project.user.skill_level.id %>
         </div>
       <% else %>

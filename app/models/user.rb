@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :folders
   has_many :projects
   has_many :critiques
+  has_many :critique_ratings
 
   acts_as_voter
 
