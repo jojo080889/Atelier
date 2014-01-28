@@ -1,7 +1,7 @@
 Atelier::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
   # Skill Level Config
-  config.skill_levels = false
+  config.skill_levels = true
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development

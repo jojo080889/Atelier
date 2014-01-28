@@ -45,14 +45,14 @@
     <% end %>
 
     <% if !current_or_guest_user.is_guest? && !@project.user.has_skill_level?(:advanced) && Atelier::Application.config.skill_levels %>
-      <div class="rating-info">
-        <%= link_to @project.user.username, @project.user %> has <%= pluralize(@project.user.next_tier_ratings, "project rating") %> of <%= @project.user.skill_level.higher_tier %>
-        <% if @project.user.next_tier_ratings_needed > 0 %>
-          -- needs <%= @project.user.next_tier_ratings_needed %> more to become a <%= @project.user.skill_level.higher_tier %> user
-        <% end %>
-      </div>
-
       <% if current_or_guest_user.can_rate? @project %>
+        <div class="rating-info">
+          <%= link_to @project.user.username, @project.user %> has <%= pluralize(@project.user.next_tier_ratings, "project rating") %> of <%= @project.user.skill_level.higher_tier %>
+          <% if @project.user.next_tier_ratings_needed > 0 %>
+            -- needs <%= @project.user.next_tier_ratings_needed %> more to become a <%= @project.user.skill_level.higher_tier %> user
+          <% end %>
+        </div>
+
         <div class="field nominate">
           <div class="rating-label">
             Rate the overall quality of the project:
@@ -60,7 +60,7 @@
           <%= critique_rating_buttons(@project.user, current_user) %>
           <%= f.hidden_field :rating, :value => @project.user.skill_level.id %>
         </div>
-      <% else %>
+        <% else %>
         <%= f.hidden_field :rating, :value => nil %>
       <% end %>
     <% end %>
