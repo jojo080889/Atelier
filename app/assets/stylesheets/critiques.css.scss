@@ -148,3 +148,28 @@
   margin: auto;
   padding: 20px;
 }
+
+/* Critiquing Tutorial */
+.tutorial-project {
+  img {
+    display: block;
+    margin: 0 auto;
+    height: 500px;
+  }
+}
+
+.tutorial-questions {
+  table {
+    width: 100%;
+
+    td {
+      padding: 5px;
+    }
+
+    .tutorial-answer {
+      width: 50%;
+      font-size: smaller;
+      display: none;
+    }
+  }
+}

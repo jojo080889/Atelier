@@ -21,6 +21,8 @@ Atelier::Application.routes.draw do
     post "/sort" => "projects#sort", on: :collection, as: :sort
   end
   get "/critiques/new/none" => "critiques#new_none", as: "new_none_critiques"
+  get "/critiques/tutorial" => "critiques#tutorial", as: "tutorial_critiques"
+  post "/critiques/tutorial_check" => "critiques#tutorial_check", as: "tutorial_check_critiques"
   get "/critiques/rate" => "critiques#rate", as: "rate_critiques"
   devise_for :users
   resources :users

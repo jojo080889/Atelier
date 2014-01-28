@@ -1,0 +1,189 @@
+<h1>Beginner's Critiquing Tutorial</h1>
+<p class="lead">
+  New to giving critique, or want to brush up on your feedback skills? Try your hand at critiquing the example project below.
+</p>
+
+<% if current_user.tutorial_done? %>
+  <div class="alert alert-info">
+    You've already completed this tutorial, but feel free to try it as many times as you like.
+  </div>
+<% end %>
+
+<div class="tutorial-project">
+  <%= image_tag "tutorial_project_example.png" %>
+  <p>
+    I was a camp counselor in high school at a science camp for 5th and 6th graders. My camp name was "Sketch", and this was the nametag I wore around my neck during my time as a counselor.
+    It has a lot of interesting textures, so I decided to use it for drawing practice.
+  </p>
+  <p>
+    This is an attempt at realistic ink drawing. One of my goals was to vary line thickness and value throughout the drawing, which I think I did a reasonable job at. One thing I found myself stuck on was very light shading -- there are a couple places where I do some sparse hatching as an attempt at this, but it still looks jarring (to me, at least).
+  </p>
+</div>
+<hr />
+<div class="tutorial-questions">
+  <!-- Question 1 -->
+  <div class="tut-question question1 panel panel-primary">
+    <div class="panel-heading">Pick the statement that would be most appropriate to include in a critique for this project.</div>
+    <div class="panel-body">
+      <table>
+        <tr>
+          <td>
+            <input type="radio" name="question1" value="a"> 
+          </td>
+          <td>
+            The skills you've developed through your pencil drawings are really showing through here! One difference between ink and pencil drawing is that you have to be bold with your black.
+          </td>
+          <td class="tutorial-answer">
+            <div class="alert alert-success">
+              <%= fa_icon "check" %>
+              <strong>Correct!</strong> This statement makes a suggestion in a respectful and encouraging way.
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="radio" name="question1" value="b">
+          </td>
+          <td>
+            This is terrible!
+          </td>
+          <td class="tutorial-answer">
+            <div class="alert alert-danger">
+              <%= fa_icon "times" %>
+              <strong>Incorrect.</strong> This is blatantly disrespectful to the artist and unconstructive.
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="radio" name="question1" value="c"> 
+          </td>
+          <td>
+            You've done much better in the past. Why don't you try using pencils like in your previous drawings?
+          </td>
+          <td class="tutorial-answer">
+            <div class="alert alert-danger">
+              <%= fa_icon "times" %>
+              <strong>Incorrect.</strong> Though this statement is a roundabout compliment of the artist's other work, it gives no constructive criticism for the current project.
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Question 2 -->
+  <div class="tut-question question2 panel panel-primary">
+    <div class="panel-heading">Pick the statement that would be most appropriate to include in a critique for this project.</div>
+    <div class="panel-body">
+      <table>
+        <tr>
+          <td>
+            <input type="radio" name="question2" value="b">
+          </td>
+          <td>
+            I love this drawing! The way you drew the string is awesome and the name tag part is just beautiful.
+          </td>
+          <td class="tutorial-answer">
+            <div class="alert alert-danger">
+              <%= fa_icon "times" %>
+              <strong>Incorrect.</strong> While these are nice things to say, the feedback needs to be more specific to be helpful.
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="radio" name="question2" value="c"> 
+          </td>
+          <td>
+            I feel like the way the string is arranged is a bit awkward. That being said, I do like the curvy shape that the string makes.
+          </td>
+          <td class="tutorial-answer">
+            <div class="alert alert-danger">
+              <%= fa_icon "times" %>
+              <strong>Incorrect.</strong> This critique needs to be more specific about how they think the artist can improve on this project (for example, it's not clear what makes the string awkward, or why the critiquer likes the curvey shape).
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="radio" name="question2" value="a"> 
+          </td>
+          <td>
+            You did a great job creating high-contrast light and shadow, especially at the edges of the nametag. I think there are a couple of other places you could have done more of this -- for example, there would probably be a dark shadow where the beads touch the string, so you could use thicker ink lines there.
+          </td>
+          <td class="tutorial-answer">
+            <div class="alert alert-success">
+              <%= fa_icon "check" %>
+              <strong>Correct!</strong> This statement is specific in both its praise and criticism.
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Question 3 -->
+  <div class="tut-question question3 panel panel-primary">
+    <div class="panel-heading">Pick the statement that would be most appropriate to include in a critique for this project.</div>
+    <div class="panel-body">
+      <table>
+        <tr>
+          <td>
+            <input type="radio" name="question3" value="b">
+          </td>
+          <td>
+            This is way better than I could have done!
+            It looks so real and is absolutely flawless.
+          </td>
+          <td class="tutorial-answer">
+            <div class="alert alert-danger">
+              <%= fa_icon "times" %>
+              <strong>Incorrect.</strong> This is not a very constructive piece of feedback, and highlights the difference between the critiquer and the artist rather than focusing on the artist.
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="radio" name="question3" value="a"> 
+          </td>
+          <td>
+            I'm actually working on ink drawng myself, and I can give you a couple of links that I've found useful for practicing this.
+          </td>
+          <td class="tutorial-answer">
+            <div class="alert alert-success">
+              <%= fa_icon "check" %>
+              <strong>Correct!</strong>
+              If you can't think of anything to say directly about a project, one way to help another artist is to share resources that you've found useful in the past.
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="radio" name="question3" value="c"> 
+          </td>
+          <td>
+            I really like the line quality and the story behind the drawing. I don't really know what else I can say here.
+          </td>
+          <td class="tutorial-answer">
+            <div class="alert alert-danger">
+              <%= fa_icon "times" %>
+              <strong>Incorrect.</strong>
+              There's no need to create a critique if you can't think of anything to say.
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<%= link_to "Check answers", tutorial_check_critiques_path, disabled: true, class: "check-answers btn btn-primary", method: :post, remote: true %>
+
+<script>
+  $("input[type=radio]").on("click", function() {
+    if ($('input[type=radio]:checked').length == 3) {
+      $(".check-answers").removeAttr("disabled");
+    } 
+  });
+</script>

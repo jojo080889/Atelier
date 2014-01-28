@@ -122,4 +122,16 @@ class CritiquesController < ApplicationController
   def new_none
     @project = Project.get_recommended(Project.get_order_clause("lowcritiques"), current_user).first
   end
+
+  def tutorial
+  end
+
+  def tutorial_check
+    current_user.tutorial_done = true  
+    current_user.save
+    
+    respond_to do |format|
+      format.js
+    end
+  end
 end
