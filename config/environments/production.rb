@@ -2,7 +2,7 @@ Atelier::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # Skill Level config for Heroku
-  config.skill_levels = ENV['SKILL_LEVELS_ENABLED']
+  config.skill_levels = ENV['SKILL_LEVELS_ENABLED'] == "false" ? false : true
 
   # Code is not reloaded between requests
   config.cache_classes = true
