@@ -129,6 +129,7 @@ class CritiquesController < ApplicationController
   def tutorial_check
     current_user.tutorial_done = true  
     current_user.save
+    current_user.add_badge(1)
     
     respond_to do |format|
       format.js

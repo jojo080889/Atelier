@@ -128,6 +128,10 @@ class User < ActiveRecord::Base
     skill_level = self.skill_level.name_key.to_sym
 
     # BEGINNER
+    if skill_level == :beginner && self.tutorial_done?
+      self.add_badge(1)
+    end
+    
     if skill_level == :beginner && self.tier_ratings(:intermediate, true) >= 1
       self.add_badge(8)
     end
