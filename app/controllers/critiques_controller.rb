@@ -95,17 +95,26 @@ class CritiquesController < ApplicationController
   end
 
   def rate
-    @next_project = Project.get_recommended(Project.get_order_clause("lowcritiques"), current_user).first
-    @next_project = nil
+    # Check if there are recommended projects for the next page
+    # and set the next button destination accordingly
+    if Atelier::Application.config.skill_levels
+      @next_project = Project.get_recommended(Project.get_order_clause("lowcritiques"), current_user).first
+    else
+      @next_project = Project.order(Project.get_order_clause("lowcritiques")).first
+    end
     if @next_project.nil?
       @destination = new_none_critiques_path
     else
       @destination = new_project_critique_path(@next_project)
     end
 
-    # Get a few random critiques by people of the same level as the user
-    @critiques = Critique.where("skill_level_id = ? AND user_id <> ?", current_user.skill_level.id, current_user.id).order("RANDOM()").limit(3)
-    @critiques = @critiques.select { |c| !current_user.voted_for? c }
+    if Atelier::Application.config.skill_levels
+      # Get a few random critiques by people of the same level as the user
+      @critiques = Critique.where("skill_level_id = ? AND user_id <> ? AND guest_name IS NULL", current_user.skill_level.id, current_user.id).order("RANDOM()").limit(3)
+      @critiques = @critiques.select { |c| !current_user.voted_for? c }
+    else
+      @critiques = Critique.where("user_id <> ? AND guest_name IS NULL", current_user.id).order("RANDOM()").limit(3)
+    end
   end
 
   def rating
@@ -121,7 +130,11 @@ class CritiquesController < ApplicationController
   # Used when a user is prompted to create a critique after they
   # create their own project
   def new
-    @projects = Project.get_recommended(Project.get_order_clause("lowcritiques"), current_user)
+    if Atelier::Application.config.skill_levels
+      @projects = Project.get_recommended(Project.get_order_clause("lowcritiques"), current_user)
+    else
+      @projects = Project.order(Project.get_order_clause("lowcritiques"))
+    end
     @project = Project.find(params[:project_id])
     if @projects.index(@project).nil?
       redirect_to root_path, notice: "You are not able to access that page. Sorry!"

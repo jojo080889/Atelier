@@ -44,7 +44,7 @@
       <%= f.hidden_field :paintover_snapshot %>
     <% end %>
 
-    <% if !current_or_guest_user.is_guest? && !@project.user.has_skill_level?(:advanced) %>
+    <% if !current_or_guest_user.is_guest? && !@project.user.has_skill_level?(:advanced) && Atelier::Application.config.skill_levels %>
       <div class="rating-info">
         <%= link_to @project.user.username, @project.user %> has <%= pluralize(@project.user.next_tier_ratings, "project rating") %> of <%= @project.user.skill_level.higher_tier %>
         <% if @project.user.next_tier_ratings_needed > 0 %>

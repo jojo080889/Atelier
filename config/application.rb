@@ -61,5 +61,9 @@ module Atelier
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+  
+    # Skill Level Configuration
+    # Turn off to disable any mention of skill levels or tiers.
+    config.skill_levels = true
   end
 end

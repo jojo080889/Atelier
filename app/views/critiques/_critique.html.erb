@@ -21,7 +21,7 @@
         <% end %>
       </div>
     </div>
-    <% if !critique.rating.nil? %>
+    <% if !critique.rating.nil? && Atelier::Application.config.skill_levels %>
       <div class="liked-message alert alert-warning">
         <%= fa_icon "star" %> This mentor rated this project at <strong><%= SkillLevel.find(critique.rating) %></strong> 
       </div>
