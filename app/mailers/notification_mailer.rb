@@ -1,9 +1,10 @@
 class NotificationMailer < ActionMailer::Base
   default from: "atelier@cs.stanford.edu"
 
-  def critique_received_email(project)
+  def critique_received_email(project, critique)
     @user = project.user
     @project = project
+    @critique = critique
     mail(
       to: @user.email,
       subject: "[Atelier] You've received a critique!" 
@@ -20,9 +21,10 @@ class NotificationMailer < ActionMailer::Base
     )
   end
 
-  def response_received_email(critique)
+  def response_received_email(critique, response)
     @user = critique.user
     @critique = critique
+    @response = response
     @project = critique.project
     mail(
       to: @user.email,

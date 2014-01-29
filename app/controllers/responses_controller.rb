@@ -22,7 +22,7 @@ class ResponsesController < ApplicationController
     respond_to do |format|
       if @response.save
         if (!@critique.user.nil? && current_or_guest_user.id != @critique.user.id)
-          NotificationMailer.response_received_email(@critique).deliver
+          NotificationMailer.response_received_email(@critique, @response).deliver
         end
         format.html { redirect_to project_path(@project), notice: 'Reply was successfully created.' }
       else

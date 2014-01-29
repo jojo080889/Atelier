@@ -5,7 +5,12 @@
   </head>
   <body>
     <p>
-      You have received a reply to your feedback!
+    You have received a reply to your feedback:
+    </p>
+    <p>
+      <em>
+        <%= truncate(@response.text, length: 30) %>
+      </em>
     </p>
     <p>
     To view it, <%= link_to "go view your feedback", project_url(@project, anchor: "critique_#{@critique.id}") %>.

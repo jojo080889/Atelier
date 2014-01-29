@@ -5,10 +5,15 @@
   </head>
   <body>
     <p>
-      You have received feedback on your project!
+    You have received a critique on your project:
     </p>
     <p>
-      To view it, <%= link_to "go to your project page", project_url(@project) %>.
+      <em>
+        <%= truncate(@critique.text, length: 30) %>
+      </em>
+    </p>
+    <p>
+      To view the rest, <%= link_to "go to your project page", project_url(@project) %>.
     </p>
     <%= render :partial => "notification_mailer/footer" %>
   </body>

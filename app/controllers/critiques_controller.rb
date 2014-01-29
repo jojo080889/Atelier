@@ -20,7 +20,7 @@ class CritiquesController < ApplicationController
 
     respond_to do |format|
       if @critique.save
-        NotificationMailer.critique_received_email(@project).deliver
+        NotificationMailer.critique_received_email(@project, @critique).deliver
         if URI(request.referer).path == new_project_critique_path(@project)
           destination = current_user
         else
