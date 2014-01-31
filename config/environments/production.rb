@@ -69,7 +69,7 @@ Atelier::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   
   # For Devise
-  config.action_mailer.default_url_options = { :host => 'atelier-stanford.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => ENV['POSTMARK_DOMAIN'] }
 
   # Google Analytics
   GA.tracker = "UA-45891308-1"
