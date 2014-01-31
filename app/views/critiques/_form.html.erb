@@ -57,7 +57,9 @@
           <div class="rating-label">
             Rate the overall quality of the project:
           </div>
-          <%= critique_rating_buttons(@project.user, current_user) %>
+          <% if SkillLevel.compare_strict(current_user.skill_level, @project.user.skill_level) %>
+            <%= critique_rating_buttons(@project.user.skill_level.name_key.to_sym, current_user.skill_level.name_key.to_sym, @project.user.skill_level.name_key.to_sym) %>
+          <% end %>
           <%= f.hidden_field :rating, :value => @project.user.skill_level.id %>
         </div>
         <% else %>

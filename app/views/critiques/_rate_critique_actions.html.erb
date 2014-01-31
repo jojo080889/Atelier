@@ -7,12 +7,12 @@
   </div>
   <% if !current_or_guest_user.is_guest? && !critique.user.nil? && current_or_guest_user.id != critique.user.id %>
     <div class="pull-right">
-      <% if Atelier::Application.config.skill_levels %>
+      <% if Atelier::Application.config.skill_levels && SkillLevel.compare(current_user.skill_level, critique.user.skill_level) %>
         <div>
           <strong>Rate the overall quality of the critique:</strong>
           <% cr = CritiqueRating.where(:user_id => current_user.id, :critique_id => critique.id) %>
           <% if cr.empty? %>
-            <%= critique_rating_buttons(critique.user, current_user, true, critique.project, critique) %> 
+            <%= critique_rating_buttons(SkillLevel.find(critique.skill_level_id).name_key.to_sym, SkillLevel.find(critique.skill_level_id).higher_tier.name_key.to_sym, nil, true, critique.project, critique) %> 
           <% end %>
           <div class="critique-rating-message <%= 'hidden' if cr.empty? %>">
             You rated this critique at <span class="critique-rating-rating"><%= SkillLevel.find(cr.first.rating_id) if !cr.empty? %></span>

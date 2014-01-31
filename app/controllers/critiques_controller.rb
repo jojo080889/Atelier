@@ -8,6 +8,9 @@ class CritiquesController < ApplicationController
     if current_or_guest_user.is_guest?
       @critique.rating = nil
     end
+    if !current_or_guest_user.is_guest?
+      @critique.skill_level_id = current_user.skill_level_id
+    end
     @critique.user_id = current_or_guest_user.id
     if (params[:paintover_data] == "none" || params[:paintover_data].nil?)
       @critique.paintover = nil
