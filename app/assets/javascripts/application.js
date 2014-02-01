@@ -15,6 +15,7 @@
 //= require jquery.ui.datepicker
 //= require bootstrap-markdown
 //= require forem
+//= require rails.validations
 //= require_tree .
 
 /* Initialize tooltips */

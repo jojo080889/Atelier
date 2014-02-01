@@ -8,7 +8,7 @@ class Critique < ActiveRecord::Base
   has_attached_file :paintover
   attr_accessible :user_id, :project_id, :text, :rating, :started_at, :skill_level_id, :paintover, :paintover_snapshot, :guest_name
 
-  validates :guest_name, presence: true, if: "user.is_guest?"
+  validates :guest_name, presence: true, length: { maximum: 50 }, if: "user_is_guest?"
   validates :text, presence: true
 
   after_create :increment_folder_critiques_counter
@@ -24,6 +24,10 @@ class Critique < ActiveRecord::Base
   end
 
   private
+
+  def user_is_guest?
+    self.user.nil?
+  end
 
   def increment_folder_critiques_counter
     if !self.project.folder.nil?

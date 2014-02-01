@@ -83,6 +83,10 @@
 .new_critique, .edit_critique {
   margin-bottom: 10px;
 
+  .critique-error {
+    display: none;
+  }
+
   .text {
     margin-bottom: 10px;
     
@@ -135,6 +139,27 @@
   .guest-name {
     .guest-notice {
       line-height: 34px;
+    }
+  }
+
+  /* Custom styling to accommodate error messages */
+  .md-editor {
+    border: 0;
+
+    .md-header.btn-toolbar {
+      border: 1px solid #ddd;
+      border-bottom: 0;
+    }
+
+    #critique_text {
+      border: 1px solid #ddd;
+    }
+  }
+
+  .field_with_errors {
+    label.message {
+      padding: 5px;
+      color: red;
     }
   }
 }

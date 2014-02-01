@@ -32,6 +32,11 @@ class ApplicationController < ActionController::Base
     guest_user
   end
 
+  # For creating error messages on object save/create.
+  def error_msgs(obj)
+    obj.errors.to_a.each { |e| e.capitalize }.join(". ")
+  end
+
   private
 
   # Called once when the user logs in. 
