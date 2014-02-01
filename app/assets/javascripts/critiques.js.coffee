@@ -4,8 +4,8 @@ $(document).ready ->
   # This only works in chrome with the --disable-web-security flag on localhost.
   if $(".project-image img").length != 0
     originalImg = new Image()
-    originalImg.src = $(".project-image img").attr("src")
     originalImg.crossOrigin = "anonymous"
+    originalImg.src = $(".project-image img").attr("src")
     originalImg.onload = ->
       originalShape = new LC.ImageShape(0,0, originalImg)
       $(".literally").literallycanvas({
