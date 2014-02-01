@@ -11,7 +11,7 @@
         <div>
           <strong>Rate the overall quality of the critique:</strong>
           <% cr = CritiqueRating.where(:user_id => current_user.id, :critique_id => critique.id) %>
-          <% if cr.empty? %>
+          <% if cr.empty? && !critique.skill_level_id.nil? %>
             <%= critique_rating_buttons(SkillLevel.find(critique.skill_level_id).name_key.to_sym, SkillLevel.find(critique.skill_level_id).higher_tier.name_key.to_sym, nil, true, critique.project, critique) %> 
           <% end %>
           <div class="critique-rating-message <%= 'hidden' if cr.empty? %>">
