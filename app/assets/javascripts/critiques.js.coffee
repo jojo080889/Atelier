@@ -5,7 +5,7 @@ $(document).ready ->
   if $(".project-image img").length != 0
     originalImg = new Image()
     originalImg.src = $(".project-image img").attr("src")
-    originalImg.crossOrigin = "use-credentials"
+    originalImg.crossOrigin = "anonymous"
     originalImg.onload = ->
       originalShape = new LC.ImageShape(0,0, originalImg)
       $(".literally").literallycanvas({
