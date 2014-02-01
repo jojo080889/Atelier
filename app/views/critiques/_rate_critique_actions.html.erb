@@ -7,7 +7,7 @@
   </div>
   <% if !current_or_guest_user.is_guest? && !critique.user.nil? && current_or_guest_user.id != critique.user.id %>
     <div class="pull-right">
-      <% if Atelier::Application.config.skill_levels && !critique.skill_level.id.nil? && SkillLevel.compare(current_user.skill_level, critique.user.skill_level) %>
+      <% if Atelier::Application.config.skill_levels && !critique.skill_level_id.nil? && SkillLevel.compare(current_user.skill_level, critique.user.skill_level) %>
         <div>
           <strong>Rate the overall quality of the critique:</strong>
           <% cr = CritiqueRating.where(:user_id => current_user.id, :critique_id => critique.id) %>
