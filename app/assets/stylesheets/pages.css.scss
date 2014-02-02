@@ -1,0 +1,52 @@
+/* Dashboard Page */
+.dashboard {
+  width: 80%;
+  margin: 0 auto;
+
+  h1 {
+    padding-bottom: 10px;
+  }
+
+  .actions {
+    & > a {
+      display: block;
+    
+      &:hover {
+        text-decoration: none;
+      }
+    }
+    
+    & > a .inner {
+      opacity: 0.8;
+      transition: opacity 0.3s;
+      text-align: center;
+      border-radius: 10px;
+      padding: 10px;
+      font-weight: bold;
+      color: #fff;
+      font-size: 1.5em;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    .fa {
+      display: block;
+      font-size: 3em;
+      padding-top: 5px;
+    }
+
+    .post-project .inner {
+      background-color: #f0ad4e; 
+    }
+
+    .mentor-project .inner {
+      background-color: #5bc0de;
+    }
+
+    .view-profile .inner {
+      background-color: #5cb85c;
+    }
+  }
+}

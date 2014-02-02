@@ -1,0 +1,26 @@
+<div class="dashboard">
+  <h1>
+    Welcome, <%= current_user.username %>!
+    <small>What would you like to do?</small>
+  </h1>
+  <div class="row actions">
+    <%= link_to new_project_path, class: "col-md-4 post-project" do %>
+      <div class="inner">
+        <%= fa_icon "plus" %>
+        Post a Project
+      </div>
+    <% end %>
+    <%= link_to projects_path, class: "col-md-4 mentor-project" do %>
+      <div class="inner">
+        <%= fa_icon "comments" %>
+        Mentor a Project
+      </div>
+    <% end %>
+    <%= link_to current_user, class: "col-md-4 view-profile" do %>
+      <div class="inner">
+        <%= fa_icon "user" %>
+        View Profile
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -29,8 +29,9 @@ Atelier::Application.routes.draw do
   resources :users
 
   get "/about", to: "pages#about"
+  get "/dashboard", to: "pages#dashboard"
 
-  root :to => "projects#index"
+  root :to => "pages#dashboard"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
