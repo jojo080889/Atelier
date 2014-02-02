@@ -1,4 +1,4 @@
-<%= form_for(@project) do |f| %>
+<%= form_for @project, validate: false do |f| %>
   <% if @project.errors.any? %>
     <div id="error_explanation" class="alert alert-danger">
       <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
@@ -15,7 +15,7 @@
     <%= f.text_field :title, placeholder: "Project Title", class: "largely" %>
   </div>
   <div class="field form-group">
-    <%= f.label :image %><br />
+    <%= f.label :image, class: "image-label" %>
     <%= f.file_field :image, class: "hidden" %>
     <button class="project-browse-image btn btn-default">Choose file</button>
     <span id="project-file-name">

@@ -86,6 +86,14 @@
   .actions {
     margin-top: 10px;
   }
+
+  .image-label {
+    display: block;
+  }
+
+  .field_with_errors label.message {
+    display: none;
+  }
 }
 
 .new-project-progress {

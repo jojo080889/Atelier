@@ -10,6 +10,7 @@ class Project < ActiveRecord::Base
 
   has_attached_file :image
   validates_attachment_content_type :image, :content_type => /^image\/(jpg|jpeg|pjpeg|png|x-png|gif)$/, :message => 'Your attachment is the wrong file type. Only jpeg/jpg/png/gif images are allowed.'
+  validates_attachment_presence :image
 
   acts_as_taggable
 
