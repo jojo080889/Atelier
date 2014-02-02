@@ -12,7 +12,10 @@ $(document).ready ->
 
   $("#project_image").change ->
     string = $("#project_image").val()
-    filename = string.match(/\\([^\\]*\..*$)/)[1]
+    if string.match(/\\([^\\]*\..*$)/)
+      filename = string.match(/\\([^\\]*\..*$)/)[1]
+    else
+      filename = string
     $("#project-file-name").html(filename)
 
 sortProjectsHandler = (element = "all") ->
