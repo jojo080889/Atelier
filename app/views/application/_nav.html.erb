@@ -1,9 +1,6 @@
 <div class="metanav">
   <% if user_signed_in? %>
     Welcome, <%= current_user.username %>!
-    <%= link_to main_app.user_path(current_user) do %> 
-      My Projects
-    <% end %>
     <% if current_user.forem_admin? %>
       <%= link_to "Forem Admin Area", forem.admin_root_path %>
     <% end %>
@@ -20,10 +17,10 @@
   </div>
   <div class="collapse navbar-collapse">
     <ul class="nav navbar-nav navbar-right">
-      <li><%= link_to "About", main_app.about_path %></li>
-      <li><%= link_to "Post Project", main_app.new_project_path %></li>
+      <li><%= link_to "Post a Project", main_app.new_project_path %></li>
       <li><%= link_to "Mentor a Project", main_app.projects_path %></li>
       <% if user_signed_in? %>
+        <li><%= link_to "Profile", main_app.user_path(current_user) %></li>
         <li><%= link_to "Forums", main_app.forem_path %></li>
         <%= form_tag main_app.search_projects_path, method: :get, class: "navbar-form navbar-left", role: "search" do %>
           <div class="form-group">
