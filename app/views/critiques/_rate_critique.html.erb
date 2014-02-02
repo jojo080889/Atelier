@@ -1,18 +1,27 @@
-<div class="rate-critique" id="critique_<%= critique.id %>">
-  <div class="rate-critique-header clearfix">
+<div class="rate-critique clearfix <%= "with-image" if !critique.project.image_file_name.nil? %>" id="critique_<%= critique.id %>">
+  <% if !critique.project.image_file_name.nil? %>
     <div class="pull-left">
-      Critique by <%= link_to critique.user.username, critique.user %> <%= skill_level_badge(critique.user.skill_level) %> on <%= link_to critique.project.title, critique.project %>
+    <%= link_to critique.project, target: "_blank" do %>
+      <%= image_tag(critique.project.image.url) %>
+    <% end %>
     </div>
-    <div class="pull-right">
-      <%= link_to critique.project, target: "_blank", class: "btn btn-default" do %>
-        <%= fa_icon "external-link" %>
-        Open project in new window
-      <% end %>
+  <% end %>
+  <div class="pull-right">
+    <div class="rate-critique-header clearfix">
+      <div class="pull-left">
+        Critique by <%= link_to critique.user.username, critique.user %> <%= skill_level_badge(critique.user.skill_level) %> on <%= link_to critique.project.title, critique.project %>
+      </div>
+      <div class="pull-right">
+        <%= link_to critique.project, target: "_blank", class: "btn btn-default" do %>
+          <%= fa_icon "external-link" %>
+          Open project in new window
+        <% end %>
+      </div>
     </div>
+    <div class="rate-critique-body clearfix">
+      <%= Format.markdown critique.text %>
+    </div>
+    <hr />
+    <%= render "critiques/rate_critique_actions", critique: critique %>
   </div>
-  <div class="rate-critique-body clearfix">
-    <%= Format.markdown critique.text %>
-  </div>
-  <hr />
-  <%= render "critiques/rate_critique_actions", critique: critique %>
 </div>
