@@ -1,9 +1,9 @@
 <div class="critique-actions">
   <div class="pull-left">
     <p>
-    You are giving feedback on <strong><%= @project.title %></strong> by <strong><%= @project.user %></strong> <%= skill_level_badge(@project.user.skill_level) %>
+    You are critiquing <strong><%= @project.title %></strong> by <strong><%= @project.user %></strong> <%= skill_level_badge(@project.user.skill_level) %>
     <br />
-    This project has <strong><%= pluralize @project.critiques.count, "piece" %> of feedback</strong>
+    This project has <strong><%= pluralize @project.critiques.count, "critique" %></strong>
     </p>
   </div>
   <div class="pull-right">

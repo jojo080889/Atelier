@@ -5,7 +5,7 @@
   </head>
   <body>
     <p>
-    You have received a reply to your feedback:
+    You have received a reply to your critique:
     </p>
     <p>
       <em>
@@ -13,7 +13,7 @@
       </em>
     </p>
     <p>
-    To view it, <%= link_to "go view your feedback", project_url(@project, anchor: "critique_#{@critique.id}") %>.
+    To view it, <%= link_to "go view your critique", project_url(@project, anchor: "critique_#{@critique.id}") %>.
     </p>
     <%= render :partial => "notification_mailer/footer" %>
   </body>

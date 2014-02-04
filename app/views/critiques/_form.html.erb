@@ -15,12 +15,12 @@
     <% end %>
 
     <div class="alert alert-info">
-      Some advice for writing feedback: <br />
+      Some advice for writing critiques: <br />
       <%= critique_hints(current_or_guest_user) %>   
     </div>
 
     <div class="field text">
-      <%= f.text_area :text, size: "20x6", placeholder: "Write feedback for this project here...", data: {provide: "markdown"} %>
+      <%= f.text_area :text, size: "20x6", placeholder: "Write your critique for this project here...", data: {provide: "markdown"} %>
 
       <%= f.hidden_field :started_at %>
     </div>
@@ -63,7 +63,7 @@
   <% end %>
 <% elsif current_user && current_user.id != @project.user.id %>
   <div class="alert alert-info">
-    You are not yet at a high enough skill level (or too high of a skill level) to give feedback on this project.
+    You are not yet at a high enough skill level (or too high of a skill level) to write critiques for this project.
   </div>
 <% end %>
 

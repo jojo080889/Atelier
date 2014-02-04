@@ -1,17 +1,17 @@
 <%= render 'projects/new_steps', active_step: 2 %>
 
-<h1>Rate Feedback</h1>
+<h1>Rate Critiques</h1>
 <p class="lead">
-  To begin receiving feedback on your project, you need to rate feedback written by others.
+  To begin receiving critiques on your project, you need to rate critiques written by others.
 <p>
 <div>
   <% if @critiques.count == 0 %>
     <em>
-      It looks like there isn't any feedback available for you to rate right now! Go ahead and click Next below to skip this step.
+      It looks like there aren't any critiques available for you to rate right now! Go ahead and click Next below to skip this step.
     </em>
   <% else %>
     <p>
-      Select whether these pieces of feedback are <strong>fair</strong> or <strong>unfair</strong>.
+      Select whether these critiques are <strong>fair</strong> or <strong>unfair</strong>.
     </p>
     <% @critiques.each do |c| %>
       <%= render "critiques/rate_critique", critique: c %>
