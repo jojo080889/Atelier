@@ -106,6 +106,14 @@
       margin-bottom: 5px;
     }
   }
+
+  .btn.rating {
+    line-height: 15px;
+
+    small {
+      font-size: 75%;
+    }
+  }
 }
 
 .new_critique, .edit_critique {

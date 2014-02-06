@@ -17,7 +17,11 @@ module CritiquesHelper
       else
         html += fa_icon "star-o"
       end
-      html += " Beginner"
+      if remote && start_level == :beginner
+        html += " Same<br /><small>(Beginner)</small>"
+      else
+        html += " Beginner"
+      end
       html += "</a>"
     end
 
@@ -36,7 +40,13 @@ module CritiquesHelper
       else
         html += fa_icon "star-o"
       end
-      html += " Intermediate"
+      if remote && start_level == :intermediate
+        html += " Same<br /><small>(Intermediate)</small>"
+      elsif remote && end_level == :intermediate
+        html += " Better<br /><small>(Intermediate)</small>"
+      else
+        html += " Intermediate"
+      end
       html += "</a>"
     end
 
@@ -50,7 +60,11 @@ module CritiquesHelper
       end
       html += "'>"
       html += fa_icon "star-o"
-      html += " Advanced"
+      if remote && end_level == :advanced
+        html += "Better<br /><small>(Advanced)</small>"
+      else
+        html += " Advanced"
+      end
       html += "</a>"
     end
 
