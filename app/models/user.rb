@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
 
   validates :username, presence: true
   validates_presence_of :birthday, :on => :create
-  validate :birthday_older_than_13
+  validate :birthday_older_than_18
   validates :consented, :acceptance => true
 
   # Setup accessible (or protected) attributes for your model
@@ -36,13 +36,13 @@ class User < ActiveRecord::Base
     name
   end
 
-  # A custom validation to check that all users are 13 or older
-  def birthday_older_than_13
+  # A custom validation to check that all users are 18 or older
+  def birthday_older_than_18
     now = Time.now.utc.to_date
     if !birthday.nil? 
       age = now.year - birthday.year - ((now.month > birthday.month || (now.month == birthday.month && now.day >= birthday.day)) ? 0 : 1)
     end
-    errors.add(:birthday, "must show that you are 13 or older.") if birthday.nil? || age < 13
+    errors.add(:birthday, "must show that you are 18 or older.") if birthday.nil? || age < 18
   end
 
   # Users can critique if they are a guest or if they are a logged in user with the right
