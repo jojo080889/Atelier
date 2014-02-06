@@ -18,7 +18,7 @@ Merit::Badge.create!({
   id: 1,
   name: 'feedback-tutorial',
   level: 1,
-  description: "Completed the <a href='/critiques/tutorial'>Beginner feedback tutorial</a>".html_safe,
+  description: "Completed the <a href='/critiques/tutorial'>Beginner's critiquing tutorial</a>".html_safe,
   custom_fields: { skill_level: :beginner }
 })
 Merit::Badge.create!({

@@ -11,4 +11,9 @@ Receive mentoring by creating projects you want help with. A project should repr
 <strong>Example Project:</strong> <a href="http://atelier-stanford.herokuapp.com/projects/8">Improve my figure drawing skills</a>
 </p>
 <hr />
-<%= render 'form', button_name: "Create" %>
+
+<% if current_user.skill_level.lowest? && !current_user.tutorial_done? %>
+  <em>You have not yet completed the <%= link_to "Beginner's critiquing tutorial", tutorial_critiques_path %>. You need to complete the tutorial before you're able to post projects.</em>
+<% else %>
+  <%= render 'form', button_name: "Create" %>
+<% end %>

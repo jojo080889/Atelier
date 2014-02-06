@@ -17,6 +17,13 @@
   <% flash.each do |name, msg| %>
     <%= content_tag :div, msg, :class => "alert alert-info", :id => "flash_#{name}" if msg.is_a?(String) %>
   <% end %>  
+  
+  <% if current_user.skill_level.lowest? && !current_user.tutorial_done? && !current_page?(tutorial_critiques_path) %>
+    <div class="alert alert-warning">
+      You have not yet completed the <%= link_to "Beginner's critiquing tutorial", tutorial_critiques_path %>. You need to complete the tutorial before you're able to post projects. 
+    </div>
+  <% end %>
+
   <%= yield %>
 
   <footer>
