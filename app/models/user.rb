@@ -19,9 +19,10 @@ class User < ActiveRecord::Base
   validates :username, presence: true
   validates_presence_of :birthday, :on => :create
   validate :birthday_older_than_13
+  validates :consented, :acceptance => true
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :username, :skill_level_id, :email, :password, :password_confirmation, :birthday, :remember_me
+  attr_accessible :consented, :username, :skill_level_id, :email, :password, :password_confirmation, :birthday, :remember_me
   
   def to_param
     username

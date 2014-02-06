@@ -36,6 +36,15 @@
     <%= f.hidden_field :skill_level_id, :value => SkillLevel.find_by_name_key(:beginner).id %>
   </div>
 
+  <div class="form-group">
+    <label>Consent Form</label>
+    <iframe src="<%= consent_path %>"></iframe>
+  </div>
+  <div class="checkbox">
+    <%= f.check_box :consented %>
+    <%= f.label :consented, "I have read and agree to the consent form above and acknowledge my participation on Atelier will be studied for research purposes." %>
+  </div>
+
   <div><%= f.submit "Sign up", class: "btn btn-default" %></div>
 <% end %>
 

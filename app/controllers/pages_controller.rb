@@ -11,4 +11,8 @@ class PagesController < ApplicationController
 
   def about
   end
+
+  def consent
+    render :layout => false
+  end
 end

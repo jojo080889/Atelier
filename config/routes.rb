@@ -30,6 +30,7 @@ Atelier::Application.routes.draw do
 
   get "/about", to: "pages#about"
   get "/dashboard", to: "pages#dashboard"
+  get "/consent", to: "pages#consent"
 
   root :to => "pages#dashboard"
 
