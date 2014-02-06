@@ -8,8 +8,11 @@
   }
 
   .actions {
+    margin-bottom: 20px; 
+    
     & > a {
       display: block;
+      margin-bottom: 10px;
     
       &:hover {
         text-decoration: none;
@@ -47,6 +50,13 @@
 
     .view-profile .inner {
       background-color: #5cb85c;
+    }
+  }
+
+  .badges-container {
+    h3 {
+      margin: 0;
+      margin-bottom: 20px;
     }
   }
 }

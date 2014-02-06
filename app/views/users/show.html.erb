@@ -19,7 +19,24 @@
 
 <div class="clearfix"></div>
 
-<%= render :partial => "users/badges", locals: { available_badges: @available_badges, earned_badges: @earned_badges } %>
+<% if Atelier::Application.config.skill_levels %>
+  <% if !@available_badges.empty? %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        Level-up Progress
+        
+        <span class="tooltip-element" data-toggle="tooltip" title="These are the tasks the user needs to complete to advance to the next skill level.">
+          <%= fa_icon "question-circle" %>
+        </span>
+      </h3>
+    </div>
+    <div class="panel-body">
+      <%= render :partial => "users/badges", locals: { available_badges: @available_badges, earned_badges: @earned_badges } %>
+    </div>
+  </div>
+  <% end %>
+<% end %>
 
 <div class="user-show">
   <ul class="nav nav-pills nav-stacked col-md-3">

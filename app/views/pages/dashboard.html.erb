@@ -23,4 +23,14 @@
       </div>
     <% end %>
   </div>
+
+  <% if Atelier::Application.config.skill_levels %>
+    <% if !@available_badges.empty? %>
+    <hr />
+    <div class="badges-container">
+      <h3>Level-up Progress</h3>
+      <%= render :partial => "users/badges", locals: { available_badges: @available_badges, earned_badges: @earned_badges } %>
+    </div>
+    <% end %>
+  <% end %>
 </div>
