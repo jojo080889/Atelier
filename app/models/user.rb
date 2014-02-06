@@ -105,6 +105,15 @@ class User < ActiveRecord::Base
     [10 - self.critiques_likes.count, 0].max
   end
 
+  # Returns a count of critique ratings received
+  # at a certain level. If unique is true, only includes
+  # one rating of that level per critique.
+  def critique_ratings_count(skill_level, unique = true)
+    result = self.critiques.joins(:critique_ratings).where('critique_ratings.rating_id = ?', SkillLevel.find_by_name_key(skill_level).id)
+    result = result.uniq if unique
+    result.count
+  end
+
   def is_guest?
     self.username == "guest"
   end
@@ -150,6 +159,10 @@ class User < ActiveRecord::Base
       self.add_badge(4)
     end
 
+    if skill_level == :beginner && self.critique_ratings_count(:intermediate, true) >= 3
+      self.add_badge(12)
+    end
+
     # INTERMEDIATE BADGES
     if skill_level == :intermediate && self.projects.count >= 4
       self.add_badge(5)
@@ -162,5 +175,9 @@ class User < ActiveRecord::Base
     if skill_level == :intermediate && (self.tier_ratings(:advanced, true) >= 2 && self.critiquers(:advanced) >= 2)
       self.add_badge(11)
     end 
+    
+    if skill_level == :intermediate && self.critique_ratings_count(:advanced, true) >= 3
+      self.add_badge(13)
+    end
   end
 end

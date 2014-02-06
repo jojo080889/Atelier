@@ -70,7 +70,20 @@ Merit::Badge.create!({
   description: "Received a rating of Advanced on two projects",
   custom_fields: { skill_level: :intermediate }
 })
-
+Merit::Badge.create!({
+  id: 12,
+  name: "critique-intermediate",
+  level: 3,
+  description: "Receive 'Better' ratings on three Beginner critiques",
+  custom_fields: { skill_level: :beginner }
+})
+Merit::Badge.create!({
+  id: 13,
+  name: "critique-advanced",
+  level: 3,
+  description: "Receive 'Better' ratings on three Intermediate critiques",
+  custom_fields: { skill_level: :intermediate }
+})
 
 # Merit::Badge.create!({
 #   id: 1,

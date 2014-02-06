@@ -23,6 +23,10 @@ class Critique < ActiveRecord::Base
     self.save
   end
 
+  def project_user
+    self.project.user
+  end
+
   private
 
   def user_is_guest?

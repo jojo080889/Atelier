@@ -21,36 +21,44 @@ module Merit
     include Merit::BadgeRulesMethods
 
     def initialize
-      grant_on ['critiques#create', 'critiques#update'], badge: 'rating-intermediate', level: 1 do |critique|
+      grant_on ['critiques#create', 'critiques#update'], badge: 'rating-intermediate', to: :project_user, level: 1 do |critique|
         user = critique.project.user
         user.skill_level.name_key.to_sym == :beginner && user.tier_ratings(:intermediate, true) == 1
       end
 
-      grant_on ['critiques#create', 'critiques#update'], badge: 'rating-intermediate', level: 2 do |critique|
+      grant_on ['critiques#create', 'critiques#update'], badge: 'rating-intermediate', to: :project_user, level: 2 do |critique|
         user = critique.project.user
         user.skill_level.name_key.to_sym == :beginner && user.tier_ratings(:intermediate, true) >= 2 && user.critiquers(:intermediate) >= 2
       end
 
-      grant_on ['critiques#create', 'critiques#update'], badge: 'rating-advanced', level: 1 do |critique|
+      grant_on ['critiques#create', 'critiques#update'], badge: 'rating-advanced', to: :project_user, level: 1 do |critique|
         user = critique.project.user
         user.skill_level.name_key.to_sym == :intermediate && user.tier_ratings(:advanced, true) == 1
       end
 
-      grant_on ['critiques#create', 'critiques#update'], badge: 'rating-advanced', level: 2 do |critique|
+      grant_on ['critiques#create', 'critiques#update'], badge: 'rating-advanced', to: :project_user, level: 2 do |critique|
         user = critique.project.user
         user.skill_level.name_key.to_sym == :intermediate && user.tier_ratings(:advanced, true) >= 2 && user.critiquers(:advanced) >= 2
       end
 
-      grant_on ['project#create'], badge: 'post-project', level: 1 do |project|
+      grant_on ['projects#create'], badge: 'post-project', level: 1 do |project|
         project.user.skill_level.name_key.to_sym == :beginner && project.user.projects.count == 1
       end
       
-      grant_on ['project#create'], badge: 'post-project', level: 2 do |project|
+      grant_on ['projects#create'], badge: 'post-project', level: 2 do |project|
         project.user.skill_level.name_key.to_sym == :beginner && project.user.projects.count == 2
       end
 
-      grant_on ['project#create'], badge: 'post-project', level: 4 do |project|
+      grant_on ['projects#create'], badge: 'post-project', level: 4 do |project|
         project.user.skill_level.name_key.to_sym == :intermediate && project.user.projects.count == 4
+      end
+
+      grant_on ['critiques#rating'], badge: 'critique-intermediate', to: :user, level: 3 do |critique|
+        critique.user.critique_ratings_count(:intermediate, true) == 3
+      end
+
+      grant_on ['critiques#rating'], badge: 'critique-advanced', to: :user, level: 3 do |critique|
+        critique.user.critique_ratings_count(:advanced, true) == 3
       end
 
       # If it creates user, grant badge
