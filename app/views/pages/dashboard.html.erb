@@ -24,6 +24,26 @@
     <% end %>
   </div>
 
+  <hr />
+  <h3>Notifications</h3>
+  <ul class="notifications">
+    <% if @tutorial_not_done %>
+      <li>
+      You have not yet completed the <%= link_to "Beginner's critiquing tutorial", tutorial_critiques_path %>. You need to complete the tutorial before you're able to post projects. 
+      </li>
+    <% end %>
+
+    <% if @too_many_projects %>
+      <li>
+      Looks like you've posted more projects than you've written critiques! <%= link_to "Go mentor some more projects", projects_path %> to balance things out.
+      </li>
+    <% end %>
+
+    <% if !@tutorial_not_done && !@too_many_projects %>
+      <em>No notifications.</em>
+    <% end %>
+  </ul>
+
   <% if Atelier::Application.config.skill_levels %>
     <% if !@available_badges.empty? %>
     <hr />
