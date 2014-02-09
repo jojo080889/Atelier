@@ -3,10 +3,10 @@ require_dependency 'skill_level'
 class User < ActiveRecord::Base
   has_merit
 
-  has_many :folders
-  has_many :projects
-  has_many :critiques
-  has_many :critique_ratings
+  has_many :folders, :dependent => :destroy
+  has_many :projects, :dependent => :destroy
+  has_many :critiques, :dependent => :destroy
+  has_many :critique_ratings, :dependent => :destroy
 
   acts_as_voter
 

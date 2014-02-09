@@ -2,7 +2,7 @@ require 'format'
 
 class Folder < ActiveRecord::Base
   belongs_to :user
-  has_many :projects, :dependent => :destroy
+  has_many :projects
   has_many :critiques, through: :projects
   attr_accessible :name, :description, :user_id
 
