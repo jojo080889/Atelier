@@ -39,7 +39,18 @@
       </li>
     <% end %>
 
-    <% if !@tutorial_not_done && !@too_many_projects %>
+    <% if !current_prompt.nil? %>
+      <li>
+      The prompt for this week is:
+      <strong>
+        <%= current_prompt[:text].html_safe %>
+      </strong>
+      <br />
+      Post projects for this prompt by <%= current_prompt[:time].to_s(:long) %> PST.
+      </li>
+    <% end %>
+
+    <% if current_prompt.nil? && !@tutorial_not_done && !@too_many_projects %>
       <em>No notifications.</em>
     <% end %>
   </ul>
