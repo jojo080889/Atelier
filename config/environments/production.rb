@@ -72,7 +72,7 @@ Atelier::Application.configure do
   config.action_mailer.default_url_options = { :host => ENV['POSTMARK_DOMAIN'] }
 
   # Google Analytics
-  GA.tracker = "UA-45891308-1"
+  GA.tracker = ENV['ANALYTICS_TRACKING_ID']
 
   # For paperclip
   config.paperclip_defaults = {
