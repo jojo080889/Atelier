@@ -8,6 +8,7 @@ $(document).ready ->
     originalImg.src = $(".project-image img").attr("src")
     originalImg.onload = ->
       originalShape = new LC.ImageShape(0,0, originalImg)
+      $(".literally").css("height", Math.max(1000, (originalShape.image.height * 0.6) + 100))
       $(".literally").literallycanvas({
         imageURLPrefix: '/assets/literallycanvas',
         backgroundShapes: [originalShape],
