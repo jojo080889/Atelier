@@ -10,6 +10,11 @@
         <span class="critique-time">
           posted <%= time_ago_in_words critique.created_at %> ago
         </span>
+        <% if critique.user.skill_level_id != critique.skill_level_id %>
+          <small>
+            (written when <%= critique.user.username %> was a <%= SkillLevel.find(critique.skill_level_id) %> user)
+          </small>
+        <% end %>
       </div>
       <div class="pull-right">
         <%= link_to "Reply", new_project_critique_response_path(critique.project, critique), remote: true %>

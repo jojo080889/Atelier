@@ -10,6 +10,11 @@
     <div class="rate-critique-header clearfix">
       <div class="pull-left">
         Critique by <%= link_to critique.user.username, critique.user %> <%= skill_level_badge(critique.user.skill_level) %> on <%= link_to critique.project.title, critique.project %>
+        <% if critique.user.skill_level_id != critique.skill_level_id %>
+          <small>
+            (written when <%= critique.user.username %> was a <%= SkillLevel.find(critique.skill_level_id) %> user)
+          </small>
+        <% end %>
       </div>
       <div class="pull-right">
         <%= link_to critique.project, target: "_blank", class: "btn btn-default" do %>

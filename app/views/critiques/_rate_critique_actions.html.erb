@@ -9,7 +9,7 @@
     <div class="pull-right">
       <% if Atelier::Application.config.skill_levels && !critique.skill_level_id.nil? && SkillLevel.compare_exact(current_user.skill_level, critique.user.skill_level) %>
         <div>
-          <strong>Compared to critiques by other <%= critique.user.skill_level %> users, this is: </strong>
+          <strong>Compared to critiques by other <%= SkillLevel.find(critique.skill_level_id) %> users, this is: </strong>
           <% cr = CritiqueRating.where(:user_id => current_user.id, :critique_id => critique.id) %>
           <% if cr.empty? %>
             <%= critique_rating_buttons(SkillLevel.find(critique.skill_level_id).name_key.to_sym, SkillLevel.find(critique.skill_level_id).higher_tier.name_key.to_sym, nil, true, critique.project, critique) %> 

@@ -8,7 +8,7 @@
     You've earned the <em>"<%= @badge.description %>"</em> badge! You're on your way to becoming a <%= @user.skill_level.higher_tier %> user.
     </p>
     <p>
-    To view your progress so far, <%= link_to "go view your profile page", @user %>.
+    To view your progress so far, <%= link_to "go view your profile page", user_url(@user) %>.
     </p>
     <%= render :partial => "notification_mailer/footer" %>
   </body>

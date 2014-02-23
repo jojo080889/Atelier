@@ -8,7 +8,7 @@
     Congratulations! You've completed the requirements to become a <%= @user.skill_level %> user on Atelier.
     </p>
     <p>
-    <%= link_to "Go view your profile page", @user %>.
+    <%= link_to "Go view your profile page", user_url(@user) %>.
     </p>
     <%= render :partial => "notification_mailer/footer" %>
   </body>
