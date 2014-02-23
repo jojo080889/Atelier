@@ -1,10 +1,11 @@
-<div class="badges row">
+<div class="badges">
   <% available_badges.each do |b| %>
-    <div class="task-badge col-md-2 <%= "achieved" if earned_badges.include? b %> ">
+    <div class="task-badge <%= "achieved" if earned_badges.include? b %> ">
       <div class="task-badge-inner">
         <%= fa_icon "bookmark" %>
         <%= b.description %>
       </div>
     </div>
   <% end %>
+  <div class="clearfix"></div>
 </div>

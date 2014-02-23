@@ -68,8 +68,22 @@
   margin-top: 20px;
 }
 
+.badges-panel {
+  .panel-body {
+    margin-bottom: -40px;
+  }
+}
+
 .badges {
+  & > .clearfix {
+    margin-bottom: -40px;
+  }
+
   .task-badge {
+    float: left;
+    margin-bottom: 40px;
+    margin-right: 40px;
+
     .task-badge-inner {
       text-align: center;
       display: table-cell;
