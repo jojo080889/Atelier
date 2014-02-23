@@ -64,6 +64,7 @@
 <% elsif current_user && current_user.id != @project.user.id %>
   <div class="alert alert-info">
     You are not yet at a high enough skill level (or too high of a skill level) to write critiques for this project.
+    To gain skill levels, collect the badges you see on <strong><%= link_to "your dashboard!", dashboard_path %></strong>
   </div>
 <% end %>
 
