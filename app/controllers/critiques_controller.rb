@@ -45,6 +45,11 @@ class CritiquesController < ApplicationController
       format.js
     end
   end
+
+  def redline
+    @project = Project.find(params[:project_id])
+    @critique = Critique.find(params[:critique_id])
+  end
  
   def update
     @project = Project.find(params[:project_id])

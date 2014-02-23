@@ -3,18 +3,20 @@ $("#critique_<%= @critique.id %>").after('<%= escape_javascript(render "critique
 $("#edit_critique_<%= @critique.id %>").enableClientSideValidations();
 $("#edit_critique_<%= @critique.id %> textarea").markdown();
 
-var originalImg = new Image();
-originalImg.src = $(".project-image img").attr("src");
-originalImg.crossOrigin = "use-credentials";
-originalImg.onload = function() {
-  var originalShape = new LC.ImageShape(0,0, originalImg);
-  $("#edit_critique_<%= @critique.id %> .literally").literallycanvas({
-    imageURLPrefix: '/assets/literallycanvas',
-    backgroundShapes: [originalShape],
-    toolClasses: [LC.PencilWidget, LC.EraserWidget, LC.LineWidget, LC.RectangleWidget, LC.TextWidget, LC.PanWidget],
-    onInit: function(lc) {
-      window.literallyCanvasInit(lc, $("#edit_critique_<%= @critique.id %>"));
-      lc.loadSnapshotJSON('<%= @critique.paintover_snapshot.html_safe if !@critique.paintover_snapshot.nil? %>');
-    }
-  });
-};
+if ($(".project-image img").length != 0) {
+  var originalImg = new Image();
+  originalImg.crossOrigin = "anonymous";
+  originalImg.src = $(".project-image img").attr("src");
+  originalImg.onload = function() {
+    var originalShape = new LC.ImageShape(0,0, originalImg);
+    $("#edit_critique_<%= @critique.id %> .literally").literallycanvas({
+      imageURLPrefix: '/assets/literallycanvas',
+      backgroundShapes: [originalShape],
+      toolClasses: [LC.PencilWidget, LC.EraserWidget, LC.LineWidget, LC.RectangleWidget, LC.TextWidget, LC.PanWidget],
+      onInit: function(lc) {
+        window.literallyCanvasInit(lc, $("#edit_critique_<%= @critique.id %>"));
+        lc.loadSnapshotJSON('<%= @critique.paintover_snapshot.html_safe if !@critique.paintover_snapshot.nil? %>');
+      }
+    });
+  };
+}

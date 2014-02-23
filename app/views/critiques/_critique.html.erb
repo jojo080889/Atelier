@@ -37,7 +37,7 @@
       </div>
       <% if !critique.paintover_file_name.nil? %>
         <div class="pull-right">
-          <%= link_to critique.paintover.url, target: "_blank" do %>
+          <%= link_to project_critique_redline_path(critique.project, critique), target: "_blank" do %>
             <%= image_tag critique.paintover.url %>
           <% end %>
         </div>

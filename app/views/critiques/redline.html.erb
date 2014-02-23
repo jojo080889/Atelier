@@ -1,0 +1,34 @@
+<div class="back-to-project">
+  <%= link_to @project do %>
+    &larr;
+    Back to project
+  <% end %>
+</div>
+
+<hr />
+
+<p class="text-muted">
+<em>You're viewing this paintover/redline in <strong>view-only mode.</strong> Any changes you make will not be permanent. If you need to reset, just refresh the page.</em>
+</p>
+
+<div class="literally redline-view"><canvas></canvas></div>
+
+<script>
+<% if @project.image.url %>
+  var originalImg = new Image();
+  originalImg.crossOrigin = "anonymous";
+  originalImg.src = "<%= @project.image.url %>";
+  originalImg.onload = function() {
+    var originalShape = new LC.ImageShape(0,0, originalImg);
+    $(".literally").literallycanvas({
+      imageURLPrefix: '/assets/literallycanvas',
+      backgroundShapes: [originalShape],
+      toolClasses: [LC.PanWidget],
+      onInit: function(lc) {
+        window.literallyCanvasInit(lc, $(".redline"));
+        lc.loadSnapshotJSON('<%= @critique.paintover_snapshot.html_safe if !@critique.paintover_snapshot.nil? %>');
+      }
+    });
+  };
+<% end %>
+</script>
