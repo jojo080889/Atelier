@@ -178,6 +178,13 @@
   </div>
 </div>
 
+<div class="next-step">
+  <p>
+  <strong>You've completed the tutorial!</strong> You're now able to post projects for others to give feedback on.
+  </p>
+  <%= link_to "Post a Project", new_project_path, class: "btn btn-primary" %>
+</div>
+
 <%= link_to "Check answers", tutorial_check_critiques_path, disabled: true, class: "check-answers btn btn-primary", method: :post, remote: true %>
 
 <script>
