@@ -77,12 +77,12 @@ class User < ActiveRecord::Base
 
   # Gets the number of ratings contributing to the next tier
   def next_tier_ratings
-    self.tier_ratings(self.skill_level.higher_tier.name_key)
+    self.tier_ratings(self.skill_level.higher_tier.name_key, true)
   end
 
   # Gets the number of ratings needed to get to the next tier
   def next_tier_ratings_needed
-    [5 - self.next_tier_ratings, 0].max
+    [2 - self.next_tier_ratings, 0].max
   end
 
   def critiques_received
