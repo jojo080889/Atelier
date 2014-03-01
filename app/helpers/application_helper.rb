@@ -8,7 +8,7 @@ module ApplicationHelper
       {:text => "Illustrate a line from a song.",
        :time => Time.new(2014, 2, 28, 23, 59, 0)}
     elsif Time.now() < Time.new(2014, 3, 7, 23, 59, 0)
-      {:text => "Draw somewhere new. Go somewhere new to you and draw what you find.",
+      {:text => "Draw somewhere new. Go somewhere new to you and draw what you find. Alternative for those in cold weather or otherwise can't get outside: Draw your artspace -- your desk, coffee table, kitchen counter, or wherever it is you create.",
        :time => Time.new(2014, 3, 7, 23, 59, 0)}
     elsif Time.now() < Time.new(2014, 3, 14, 23, 59, 0)
       {:text => "Draw something inspired by the word <i>bridge</i>.",
