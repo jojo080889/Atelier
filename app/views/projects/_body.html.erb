@@ -1,5 +1,12 @@
 <div class="project-info pull-left">
   <h1><%= @project.title %></h1>
+  <% if !@project.doneness.nil? %>
+    <p>
+    <em>
+      <%= doneness_text(@project.doneness) %>
+    </em>
+    </p>
+  <% end %>
   <p>
     by <%= link_to @project.user.username, @project.user %> <%= skill_level_badge(@project.user.skill_level) %>
   </p>

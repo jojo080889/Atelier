@@ -1,4 +1,19 @@
 module ProjectsHelper
+  def doneness_text(doneness)
+    case doneness
+    when "study-exercise"
+      "Study/Exercise"
+    when "sketch"
+      "Quick Sketch"
+    when "wip"
+      "Work-in-progress"
+    when "finished"
+      "Finished Work"
+    else
+      ""
+    end
+  end
+  
   def skill_level_badge(skill_level)
     if Atelier::Application.config.skill_levels
       case skill_level.name_key.to_sym

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140304203755) do
+ActiveRecord::Schema.define(:version => 20140305064651) do
 
   create_table "badges_sashes", :force => true do |t|
     t.integer  "badge_id"
@@ -237,6 +237,7 @@ ActiveRecord::Schema.define(:version => 20140304203755) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.integer  "critiques_count",    :default => 0
+    t.string   "doneness"
   end
 
   create_table "responses", :force => true do |t|

@@ -18,6 +18,11 @@
       Some advice for writing critiques: <br />
       <%= critique_hints(current_or_guest_user) %>   
     </div>
+    <% if !@project.doneness.nil? %>
+      <div class="alert alert-info">
+        The artist says this is a <strong><%= doneness_text @project.doneness %></strong>. Please keep this in mind when writing your critique.
+      </div>
+    <% end %>
 
     <div class="field text">
       <%= f.text_area :text, size: "20x6", placeholder: "Write your critique for this project here...", data: {provide: "markdown"} %>

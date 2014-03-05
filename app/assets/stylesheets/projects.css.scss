@@ -104,6 +104,10 @@
   .field_with_errors label.message {
     display: none;
   }
+
+  label small {
+    font-weight: normal;
+  }
 }
 
 .new-project-progress {

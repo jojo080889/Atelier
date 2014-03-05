@@ -27,7 +27,16 @@
     </span>
   </div>
   <div class="field form-group">
-    <%= f.text_area :content, size: "20x10", placeholder: "Write about progress you've made on your project...", data: {provide: "markdown"} %>
+    <label for="project_doneness">How finished is your project? <small class="text-muted">This will let others know what kind of feedback you want.</small></label>
+    <select id="project_doneness" name="project[doneness]" class="form-control">
+      <option value="study-exercise"><%= doneness_text "study-exercise" %></option>
+      <option value="sketch"><%= doneness_text "sketch" %></option>
+      <option value="wip"><%= doneness_text "wip" %></option>
+      <option value="finished"><%= doneness_text "finished" %></option>
+    </select>
+  </div>
+  <div class="field form-group">
+    <%= f.text_area :content, size: "20x10", placeholder: "Describe your project, point out what you're struggling with,  and give yourself a critique to give others something to base their critiques on...", data: {provide: "markdown"} %>
   </div>
   <div class="field form-group">
     <%= f.text_field :tag_list, placeholder: "Tags (separated by commas)", class: "form-control" %>

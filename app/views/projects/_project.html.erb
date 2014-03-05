@@ -18,6 +18,9 @@
         <span class="<%= 'text-danger' if project.critiques.count == 0 %>">
           <strong><%= pluralize project.critiques.count, "critique" %></strong>
         </span> &sdot;
+        <% if !project.doneness.nil? %>
+          <%= doneness_text project.doneness %> &sdot;
+        <% end %>
         last updated <%= time_ago_in_words project.updated_at %> ago
         <% if show_name %>
           <br />

@@ -4,7 +4,7 @@ class Project < ActiveRecord::Base
   belongs_to :user
   belongs_to :folder, :counter_cache => true, :touch => true
   has_many :critiques, :dependent => :destroy
-  attr_accessible :title, :content, :user_id, :folder_id, :image, :tag_list
+  attr_accessible :title, :content, :user_id, :folder_id, :image, :doneness, :tag_list
 
   validates_presence_of :title
 
