@@ -1,6 +1,6 @@
 <div class="metanav">
   <% if user_signed_in? %>
-    Welcome, <%= link_to current_user.username, current_user, class: "profile-link" %>!
+    Welcome, <%= link_to current_user.username, main_app.user_path(current_user), class: "profile-link" %>!
     <% if current_user.forem_admin? %>
       <%= link_to "Forem Admin Area", forem.admin_root_path %>
     <% end %>
