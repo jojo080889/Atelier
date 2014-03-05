@@ -2,6 +2,13 @@
 
 <tr class="project">
   <td>
+    <div class="project-thumbnail pull-left">
+      <% if !project.image_file_name.nil? %>
+        <%= link_to project do %>
+          <%= image_tag project.image.url %>
+        <% end %>
+      <% end %>
+    </div>
     <div class="pull-left">
       <div class="project-link">
         <h3><%= link_to project.title, project  %></h3>

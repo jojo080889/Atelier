@@ -32,6 +32,16 @@
   tr.header {
     background-color: #eee;
   }
+
+  .project-thumbnail {
+    width: 170px; /* min-width of img + margin */
+
+    img {
+      max-height: 150px;
+      max-width: 150px;
+      margin: 10px;
+    }
+  }
 }
 
 .sort-projects {
