@@ -13,6 +13,7 @@ class Project < ActiveRecord::Base
   validates_attachment_presence :image
 
   acts_as_taggable
+  is_impressionable
 
   def self.get_order_clause(order_by)
     case order_by

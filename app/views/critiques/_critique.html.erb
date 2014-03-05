@@ -10,7 +10,7 @@
         <span class="critique-time">
           posted <%= time_ago_in_words critique.created_at %> ago
         </span>
-        <% if critique.user.skill_level_id != critique.skill_level_id %>
+        <% if critique.user.skill_level_id != critique.skill_level_id && !critique.skill_level_id.nil? %>
           <small>
             (written when <%= critique.user.username %> was a <%= SkillLevel.find(critique.skill_level_id) %> user)
           </small>

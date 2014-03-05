@@ -3,6 +3,7 @@ class ProjectsController < ApplicationController
   skip_before_filter :authenticate_user!, :only => :show
   load_and_authorize_resource
   skip_authorize_resource :only => :show
+  impressionist
 
   def index
     @order_clause = "critiques_count"
@@ -14,6 +15,10 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
     @critique = Critique.new
+    
+    @project.critiques.each do |c|
+      impressionist(c, "critique-project-view")
+    end
   end
 
   def new

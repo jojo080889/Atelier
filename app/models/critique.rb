@@ -15,6 +15,7 @@ class Critique < ActiveRecord::Base
   after_destroy :decrement_folder_critiques_counter
 
   acts_as_votable
+  is_impressionable
 
   def save_paintover(data)
     data = data.split(',').pop

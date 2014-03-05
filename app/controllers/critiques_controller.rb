@@ -1,6 +1,7 @@
 class CritiquesController < ApplicationController
   load_and_authorize_resource
   skip_authorize_resource :only => :create
+  impressionist
 
   def create
     @project = Project.find(params[:project_id])
@@ -23,6 +24,7 @@ class CritiquesController < ApplicationController
 
     respond_to do |format|
       if @critique.save
+        impressionist(@critique)
         NotificationMailer.critique_received_email(@project, @critique).deliver
         if URI(request.referer).path == new_project_critique_path(@project)
           destination = current_user
@@ -86,6 +88,7 @@ class CritiquesController < ApplicationController
   def like
     @critique = Critique.find(params[:critique_id])
     @critique.liked_by current_user
+    impressionist(@critique)
     NotificationMailer.critique_rated_email(@critique).deliver
 
     respond_to do |format|
@@ -96,6 +99,7 @@ class CritiquesController < ApplicationController
   def dislike
     @critique = Critique.find(params[:critique_id])
     @critique.disliked_by current_user
+    impressionist(@critique)
 
     respond_to do |format|
       format.js
@@ -123,10 +127,15 @@ class CritiquesController < ApplicationController
     else
       @critiques = Critique.where("user_id <> ? AND guest_name IS NULL", current_user.id).order("RANDOM()").limit(3)
     end
+
+    @critiques.each do |c|
+      impressionist(c, "critique-rate")
+    end
   end
 
   def rating
     @critique = Critique.find(params[:critique_id])
+    impressionist(@critique)
     @cr = CritiqueRating.new(:user_id => current_user.id, :critique_id => params[:critique_id], :rating_id => params[:rating])
     @cr.save
     
