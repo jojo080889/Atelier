@@ -1,0 +1,34 @@
+<h1>Member List</h1>
+<table class="table user-list table-bordered">
+  <tr class="header">
+    <th>
+      User
+    </th>
+    <th>
+      Projects
+    </th>
+    <th>
+      Critiques
+    </th>
+    <th>
+      Date Joined
+    </th>
+  </tr>
+  <% @users.each do |u| %>
+    <tr>
+      <td>
+        <%= link_to u.username, u %>
+        <%= skill_level_badge(u.skill_level) %>
+      </td>
+      <td>
+        <%= u.projects.count %>
+      </td>
+      <td>
+        <%= u.critiques.count %>
+      </td>
+      <td>
+        <%= u.created_at.to_date %>
+      </td>
+    </tr>
+  <% end %>
+</table>
