@@ -16,6 +16,10 @@
   a {
     display: block-inline;
     margin-left: 20px;
+
+    &.profile-link {
+      margin: 0;
+    }
   }
 }
 

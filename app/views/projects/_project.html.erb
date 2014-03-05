@@ -21,7 +21,7 @@
         last updated <%= time_ago_in_words project.updated_at %> ago
         <% if show_name %>
           <br />
-          by <%= project.user.username %> <%= skill_level_badge(project.user.skill_level) %>
+          by <%= link_to project.user.username, project.user %> <%= skill_level_badge(project.user.skill_level) %>
         <% end %>
       </div>
     </div>
