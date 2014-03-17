@@ -1,7 +1,9 @@
 <h2><%= @question_group.name %></h2>
 <hr/>
 
-<% if Rapidfire::AnswerGroup.where(:user_id => current_user.id).empty? %>
+<% if !user_signed_in? %>
+  You need to sign in to take this survey. Please <%= link_to "sign in", main_app.new_user_session_path %> then return to this URL to take the survey. Thanks!
+<% elsif Rapidfire::AnswerGroup.where(:user_id => current_user.id).empty? %>
   <%= form_for([@question_group, @answer_group_builder]) do |f| %>
     <% if !current_user.critiques_received.empty? %>
       <h3>About Critiques You Received</h3>
