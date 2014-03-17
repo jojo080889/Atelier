@@ -51,6 +51,7 @@ gem 'client_side_validations'
 gem 'impressionist'
 
 gem 'rapidfire'
+gem 'airbrake'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
