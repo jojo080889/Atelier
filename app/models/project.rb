@@ -48,7 +48,11 @@ class Project < ActiveRecord::Base
   # Gets the project after this one in the list of recommended projects for the
   # current user. Returns nil if it reaches the end of the list.
   def recommended_next(user)
-    @recommended = Project.get_recommended(Project.get_order_clause("lowcritiques"), user)
+    if Atelier::Application.config.skill_levels
+      @recommended = Project.get_recommended(Project.get_order_clause("lowcritiques"), user)
+    else
+      @recommended = Project.order(Project.get_order_clause("lowcritiques"))
+    end
     index = @recommended.index(self)
     @recommended[index + 1]
   end
