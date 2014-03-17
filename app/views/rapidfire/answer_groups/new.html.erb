@@ -6,7 +6,7 @@
     <% if !current_user.critiques_received.empty? %>
       <h3>About Critiques You Received</h3>
       <table class="table critiques-received">
-        <% current_user.critiques_received.each do |critique| %>
+        <% current_user.critiques_received.shuffle.each do |critique| %>
           <tr>
             <td>
               <p>
