@@ -1,0 +1,9 @@
+<%= render partial: "rapidfire/answers/errors", locals: {answer: answer} %>
+
+<%= label_tag "critique_answer_text_#{critique.id}", answer.question.question_text, class: "question-text" %>
+<%- answer.question.options.each do |option| %>
+  <%= label_tag "critique_answer_text_#{critique.id}_#{option}", option, class: "answer-text" do %>
+    <%= radio_button_tag "critique_answer_text_#{critique.id}", option, params["critique_answer_text_#{critique.id}"] == option %>
+    <%= option %>
+  <% end %>
+<% end %>

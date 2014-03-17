@@ -117,6 +117,10 @@ class User < ActiveRecord::Base
   def is_guest?
     self.username == "guest"
   end
+  
+  def admin?
+    self.forem_admin
+  end
 
   def skill_level
     SkillLevel.find(self.skill_level_id)

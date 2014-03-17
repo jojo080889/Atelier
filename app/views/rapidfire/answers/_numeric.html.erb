@@ -1,0 +1,4 @@
+<%= render partial: "rapidfire/answers/errors", locals: {answer: answer} %>
+
+<%= f.label :answer_text, "#{answer.question.question_text} (Enter a whole number.) ".html_safe, class: "question-text numeric" %>
+<%= f.text_field :answer_text, size: 10, class: "form-control numeric" %>

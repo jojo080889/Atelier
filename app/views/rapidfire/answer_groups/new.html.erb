@@ -1,0 +1,59 @@
+<h2><%= @question_group.name %></h2>
+<hr/>
+
+<% if Rapidfire::AnswerGroup.where(:user_id => current_user.id).empty? %>
+  <%= form_for([@question_group, @answer_group_builder]) do |f| %>
+    <% if !current_user.critiques_received.empty? %>
+      <h3>About Critiques You Received</h3>
+      <table class="table critiques-received">
+        <% current_user.critiques_received.each do |critique| %>
+          <tr>
+            <td>
+              <p>
+              <em>
+                "<%= critique.text %>"
+              </em>
+              </p>
+              <p class="text-muted">
+              You received this critique from 
+              <% if critique.user.nil? %>
+                Guest 
+              <% else %>
+                <%= link_to critique.user.username, main_app.user_path(critique.user) %> 
+              <% end %>
+              <% if critique.project.nil? %>
+                on one of your projects.
+              <% else %>
+                on your project <%= link_to critique.project.title, main_app.project_path(critique.project) %>.
+              <% end %>
+              </p>
+            </td>
+            <td>
+              <%
+                answer = OpenStruct.new
+                answer.errors = [];
+                answer.question = OpenStruct.new
+                answer.question.question_text = "How helpful was this critique?"
+                answer.question.options = ["Very helpful", "Helpful", "Neutral", "Unhelpful", "Very unhelpful"]
+              %>
+              <%= render "rapidfire/answers/radio_custom", critique: critique, answer: answer %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    <% end %>
+
+    <h3>About Your Experience & You</h3>
+    <% answers = @answer_group_builder.answers.sort {|a, b| a.question_id - b.question_id } %>
+    <%- answers.each do |answer| %>
+      <% if answer.question_id != 14 || Atelier::Application.config.skill_levels  %>
+        <%= f.fields_for("#{answer.question.id}", answer) do |answer_form| %>
+          <%= render_answer_form_helper(answer, answer_form) %>
+        <% end %>
+      <% end %>
+    <% end %>
+    <%= f.submit "Save", class: "btn btn-default" %>
+  <% end %>
+<% else %>
+  <em>You've already taken this survey! If you need to make any corrections, please email <%= link_to "atelier@cs.stanford.edu", "mailto:atelier@cs.stanford.edu" %></em>
+<% end %>

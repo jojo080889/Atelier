@@ -38,6 +38,8 @@ GEM
       rack-cache (~> 1.2)
       rack-test (~> 0.6.1)
       sprockets (~> 2.2.1)
+    active_model_serializers (0.8.1)
+      activemodel (>= 3.0)
     activemodel (3.2.13)
       activesupport (= 3.2.13)
       builder (~> 3.0.0)
@@ -175,6 +177,9 @@ GEM
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
     rake (10.1.1)
+    rapidfire (1.2.0)
+      active_model_serializers (~> 0.8.1)
+      rails (>= 3.2.13)
     rdoc (3.12.2)
       json (~> 1.4)
     redcarpet (3.0.0)
@@ -243,6 +248,7 @@ DEPENDENCIES
   rails (= 3.2.13)
   rails-bootstrap-markdown
   rails_12factor
+  rapidfire
   redcarpet
   sass-rails (~> 3.2.3)
   uglifier (>= 1.0.3)

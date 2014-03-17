@@ -1,0 +1,10 @@
+<%- if answer.errors.any? %>
+  <div class="text-danger answer-errors">
+    <strong class="text-danger">There were errors with the question below:</strong>
+    <ul class="text-danger">
+      <%- answer.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

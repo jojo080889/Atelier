@@ -7,6 +7,11 @@ Atelier::Application.routes.draw do
   # We ask that you don't use the :as option here, as Forem relies on it being the default of "forem"
   mount Forem::Engine, :at => '/forums'
 
+  # mount survey gem routes
+  # Custom route for atelier feedback survey
+  post "/surveys/question_groups/:question_group_id/answer_groups" => "custom_answer_groups#create", :as => nil
+  mount Rapidfire::Engine => "/surveys"
+
   resources :folders do
     post "/sort" => "folders#sort", on: :collection, as: :sort
   end

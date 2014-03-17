@@ -50,4 +50,8 @@ class ApplicationController < ActionController::Base
     session[:guest_user_id] = u.id
     u
   end
+
+  def can_administer?
+    current_user.admin?
+  end
 end
